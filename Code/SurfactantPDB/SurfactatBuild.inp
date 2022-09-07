@@ -1,0 +1,53 @@
+#
+# Cation surfactants interface of water and carbon tetrachloride
+#
+
+
+# All atoms from different molecules will be at least 2.0 Angstroms apart
+# from each other at the solution.
+
+tolerance 2.0
+
+# The files are in the pdb format
+
+filetype pdb
+
+# The name of the output file.
+
+output DDS100.pdb
+
+# Water molecules will be inside a box that has 39 x 39 x 40 Å beginning at 0, 0, 20 Å
+
+structure ../pdb_Files/h2o.pdb 
+  number 2128
+  inside box 0. 0. 20. 39. 39. 60. 
+end structure
+
+# CCl4 molecules will be inside a box that has 39 x 39 x 40 Å beginning at 0, 0, 60 Å
+
+structure  ../pdb_Files/ctc.pdb
+  number 336
+  inside box 0. 0. 60. 39. 39. 100.
+end structure
+
+
+# sodium ions in the aqueous layer
+
+structure  ../pdb_Files/Na.pdb
+  number 24
+  inside box 0. 0. 20. 39. 39. 60. 
+end structure
+
+
+# Interfacial Surfactant molecules constrain head near interface and tail ~60 degrees.
+structure  ../pdb_Files/DDS.pdb
+  number 24
+  inside box 0. 0. 60. 39. 39. 100.
+  atoms 4
+    below plane 0 0 1 61.
+  end atoms
+  atoms 38
+    over plane 0 0 1 70
+  end atoms
+end structure
+

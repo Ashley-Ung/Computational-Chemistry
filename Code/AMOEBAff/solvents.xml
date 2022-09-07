@@ -1,0 +1,91 @@
+<ForceField>
+ <Info>
+  <Source> for wateramoebapro13.prm</Source>
+  <DateGenerated>2015-02-19</DateGenerated>
+  <Reference>Yue Shi, Zhen Xia, Jiajing Zhang, Robert Best, Chuanjie Wu, Jay W. Ponder, and Pengyu Ren. Polarizable Atomic Multipole-Based AMOEBA Force Field for Proteins. Journal of Chemical Theory and Computation, 9(9):4046–4063, 2013.</Reference>
+  
+    <source> CTC source: Modeling Organochlorine Compounds and the σ‑Hole Effect Using a Polarizable Multipole Force Field. Xiaojiao Mu, Qiantao Wang, Lee-Ping Wang, Stephen D. Fried, Jean-Philip Piquemal, Kevin N. Dalby, Pengyu Ren The Journal of Physical Chemistry B 2014 https://dx.doi.org/10.1021/jp411671a
+    </source>
+ </Info>
+ <AtomTypes>
+  <!-- water=HOH -->
+    <Type name="1001" class="1001" element="O" mass="15.999"/>
+    <Type name="1002" class="1002" element="H" mass="1.008"/>
+    <!-- CCl4 - CTC -->
+    <Type name="1003" class="1003" element="C" mass="12.011"/>
+    <Type name="1004" class="1004" element="Cl" mass="35.453"/>
+
+ </AtomTypes>
+
+ <Residues>
+  <Residue name="HOH">
+  <Atom name="H1" type="1002"/>
+  <Atom name="H2" type="1002"/>
+  <Atom name="O" type="1001"/>
+  <Bond from="0" to="2"/>
+  <Bond from="1" to="2"/>
+ </Residue>
+    
+    <Residue name="CTC">
+      <Atom name="Cl1" type="1004"/>
+      <Atom name="Cl2" type="1004"/>
+      <Atom name="Cl3" type="1004"/>
+      <Atom name="Cl4" type="1004"/>
+      <Atom name="C" type="1003"/>
+      <Bond from="0" to="4"/>
+      <Bond from="1" to="4"/>
+      <Bond from="2" to="4"/>
+      <Bond from="3" to="4"/>
+    </Residue>
+
+ </Residues>
+
+ <AmoebaBondForce bond-cubic="-25.5" bond-quartic="379.3125">
+  <Bond class1="1001" class2="1002" length="0.09572" k="232986.04"/>
+    <Bond class1="1003" class2="1004" length=".17657" k="146440"/>
+ </AmoebaBondForce>
+
+ <AmoebaAngleForce angle-cubic="-0.014" angle-quartic="5.6e-05" angle-pentic="-7.0e-07" angle-sextic="2.2e-08">
+  <Angle class1="1002" class2="1001" class3="1002" k="0.0620690891499" angle1="108.50"  /> 
+    <Angle class1="1004" class2="1003" class3="1004" k="0.07647116" angle1="109.449"/>
+ </AmoebaAngleForce>
+
+ <AmoebaStretchBendForce stretchBendUnit="1.0">
+    <StretchBend class1="1004" class2="1003" class3="1004" k1="13.6556" k2="13.6556"/>
+
+  </AmoebaStretchBendForce>
+
+ <AmoebaOutOfPlaneBendForce type="ALLINGER" opbend-cubic="-0.014" opbend-quartic="5.6e-05" opbend-pentic="-7.0e-07" opbend-sextic="2.2e-08">
+  <!-- LPW: Mark's force field parsing code requires AmoebaOutOfPlaneBendForce in order to read AmoebaAngleForce, even if the clause is empty -->
+ </AmoebaOutOfPlaneBendForce>
+
+ <AmoebaVdwForce type="BUFFERED-14-7" radiusrule="CUBIC-MEAN" radiustype="R-MIN" radiussize="DIAMETER" epsilonrule="HHG" vdw-13-scale="0.0" vdw-14-scale="1.0" vdw-15-scale="1.0" >
+  <Vdw class="1001" sigma="0.3405" epsilon="0.46024" reduction="1.0" /> 
+  <Vdw class="1002" sigma="0.2655" epsilon="0.056484" reduction="0.910" /> 
+  
+    <Vdw class="1003" sigma="0.36" epsilon="0.435136" reduction="1.0"/> 
+    <Vdw class="1004" sigma="0.3898" epsilon="1.334696" reduction="1.0"/>
+
+ </AmoebaVdwForce>
+
+ <AmoebaMultipoleForce  direct11Scale="0.0"  direct12Scale="1.0"  direct13Scale="1.0"  direct14Scale="1.0"  mpole12Scale="0.0"  mpole13Scale="0.0"  mpole14Scale="0.4"  mpole15Scale="0.8"  mutual11Scale="1.0"  mutual12Scale="1.0"  mutual13Scale="1.0"  mutual14Scale="1.0"  polar12Scale="0.0"  polar13Scale="0.0"  polar14Intra="0.5"  polar14Scale="1.0"  polar15Scale="1.0"  > 
+  <Multipole type="1001" kz="1002" kx="-1002" c0="-0.51966" d1="0.0" d2="0.0" d3="0.00755612136146" q11="0.000354030721139" q21="0.0" q22="-0.000390257077096" q31="0.0" q32="0.0" q33="3.62263559571e-05"  />
+  <Multipole type="1002" kz="1001" kx="1002" c0="0.25983" d1="-0.00204209484795" d2="0.0" d3="-0.00307875299958" q11="-3.42848248983e-05" q21="0.0" q22="-0.000100240875193" q31="-1.89485963908e-06" q32="0.0" q33="0.000134525700091"  />
+  
+    <Multipole type="1004" kz="1003" kx="1004" c0="-0.07475" d1="0.0" d2="0.0" d3="0.00069111" q11="-0.0006408" q21="0.0" q22="-0.0006409" q31="0.0" q32="0.0" q33="0.00128163"/>
+    <Multipole type="1003" kz="-1004" kx="-1004" c0="0.29898" d1="0.0" d2="0.0" d3="8.4668e-06" q11="7.4657e-08" q21="0.0" q22="7.4657e-08" q31="0.0" q32="0.0" q33="-1.493e-07"/>
+    
+
+  
+  <Polarize type="1001" polarizability="0.000837" thole="0.3900" pgrp1="1002" />
+  <Polarize type="1002" polarizability="0.000496" thole="0.3900" pgrp1="1001" />
+  
+    <Polarize type="1003" polarizability="1.3340e-03" thole="3.9000e-01" pgrp1="1004"/>
+    <Polarize type="1004" polarizability="2.5000e-03" thole="3.9000e-01" pgrp1="1003"/>
+
+  </AmoebaMultipoleForce>
+
+ <AmoebaUreyBradleyForce cubic="0.0" quartic="0.0"  >
+  <UreyBradley class1="1002" class2="1001" class3="1002" k="-3179.84" d="0.15326" /> 
+ </AmoebaUreyBradleyForce>
+</ForceField>

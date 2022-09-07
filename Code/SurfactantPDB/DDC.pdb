@@ -1,0 +1,76 @@
+REMARK   1 File created by GaussView 5.0.9
+HETATM    1  C1  DDC     0      -5.555   0.344  -0.000                       C
+HETATM    2  H1  DDC     0      -5.200  -0.665  -0.001                       H
+HETATM    3  H2  DDC     0      -5.198   0.848  -0.874                       H
+HETATM    4  H3  DDC     0      -6.625   0.346   0.001                       H
+HETATM    5  C2  DDC     0      -5.040   1.068   1.257                       C
+HETATM    6  H4  DDC     0      -3.970   1.067   1.257                       H
+HETATM    7  H5  DDC     0      -5.395   2.078   1.258                       H
+HETATM    8  C3  DDC     0      -5.554   0.343   2.515                       C
+HETATM    9  H6  DDC     0      -5.199  -0.667   2.514                       H
+HETATM   10  H7  DDC     0      -6.624   0.344   2.515                       H
+HETATM   11  C4  DDC     0      -5.038   1.067   3.772                       C
+HETATM   12  H8  DDC     0      -5.393   2.077   3.773                       H
+HETATM   13  H9  DDC     0      -3.968   1.066   3.771                       H
+HETATM   14  C5  DDC     0      -5.552   0.341   5.030                       C
+HETATM   15  H10 DDC     0      -5.197  -0.668   5.029                       H
+HETATM   16  H11 DDC     0      -6.622   0.343   5.030                       H
+HETATM   17  C6  DDC     0      -5.037   1.066   6.287                       C
+HETATM   18  H12 DDC     0      -5.392   2.075   6.288                       H
+HETATM   19  H13 DDC     0      -3.967   1.064   6.286                       H
+HETATM   20  C7  DDC     0      -5.550   0.340   7.544                       C
+HETATM   21  H14 DDC     0      -5.195  -0.669   7.544                       H
+HETATM   22  H15 DDC     0      -6.620   0.342   7.545                       H
+HETATM   23  C8  DDC     0      -5.035   1.065   8.802                       C
+HETATM   24  H16 DDC     0      -5.390   2.074   8.802                       H
+HETATM   25  H17 DDC     0      -3.965   1.063   8.801                       H
+HETATM   26  C9  DDC     0      -5.549   0.339  10.059                       C
+HETATM   27  H18 DDC     0      -5.194  -0.670  10.058                       H
+HETATM   28  H19 DDC     0      -6.619   0.341  10.060                       H
+HETATM   29  C10 DDC     0      -5.033   1.064  11.317                       C
+HETATM   30  H20 DDC     0      -5.388   2.073  11.317                       H
+HETATM   31  H21 DDC     0      -3.963   1.062  11.316                       H
+HETATM   32  C11 DDC     0      -5.547   0.338  12.574                       C
+HETATM   33  H22 DDC     0      -5.192  -0.672  12.573                       H
+HETATM   34  H23 DDC     0      -6.617   0.340  12.575                       H
+HETATM   35  C12 DDC     0      -5.032   1.062  13.831                       C
+HETATM   36  O1  DDC     0      -5.733   2.021  14.364                       O
+HETATM   37  O2  DDC     0      -3.895   0.716  14.362                       O
+END
+CONECT    1    2    3    4    5
+CONECT    2    1
+CONECT    3    1
+CONECT    4    1
+CONECT    5    6    7    1    8
+CONECT    6    5
+CONECT    7    5
+CONECT    8    9   10    5   11
+CONECT    9    8
+CONECT   10    8
+CONECT   11   12   13    8   14
+CONECT   12   11
+CONECT   13   11
+CONECT   14   15   16   11   17
+CONECT   15   14
+CONECT   16   14
+CONECT   17   18   19   14   20
+CONECT   18   17
+CONECT   19   17
+CONECT   20   21   22   17   23
+CONECT   21   20
+CONECT   22   20
+CONECT   23   24   25   20   26
+CONECT   24   23
+CONECT   25   23
+CONECT   26   27   28   23   29
+CONECT   27   26
+CONECT   28   26
+CONECT   29   30   31   26   32
+CONECT   30   29
+CONECT   31   29
+CONECT   32   33   34   29   35
+CONECT   33   32
+CONECT   34   32
+CONECT   35   32   36   37
+CONECT   36   35
+CONECT   37   35

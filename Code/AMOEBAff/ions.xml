@@ -1,0 +1,141 @@
+<ForceField>
+# Ions XML
+# Starts at 1000 type and class, so it is compatible with any amoeba file.
+# All ions were taken from amoeba2018.xml
+# 
+ <AtomTypes>
+    <Type name="2000" class="2000" element="LI" mass="6.941"/>
+    <Type name="2001" class="2001" element="NA" mass="22.990"/>
+    <Type name="2002" class="2002" element="K" mass="39.098"/>
+    <Type name="2003" class="2003" element="RB" mass="85.468"/>
+    <Type name="2004" class="2004" element="CS" mass="132.905"/>
+    <Type name="2005" class="2005" element="BE" mass="9.012"/>
+    <Type name="2006" class="2006" element="MG" mass="24.305"/>
+    <Type name="2007" class="2007" element="CA" mass="40.078"/>
+    <Type name="2008" class="2008" element="ZN" mass="65.390"/>
+    
+    <Type name="2100" class="2100" element="F" mass="18.998"/>
+    <Type name="2101" class="2101" element="Cl" mass="35.453"/>
+    <Type name="2102" class="2102" element="Br" mass="79.904"/>
+    <Type name="2103" class="2103" element="I" mass="126.904"/>
+  
+ </AtomTypes>
+ <Residues>
+    <Residue name="LI">
+      <Atom name="LI" type="2000"/>
+    </Residue>
+    <Residue name="NA">
+      <Atom name="Na" type="2001"/>
+    </Residue>
+    <Residue name="K">
+      <Atom name="K" type="2002"/>
+    </Residue>
+    <Residue name="RB">
+      <Atom name="RB" type="2003"/>
+    </Residue>
+    <Residue name="CS">
+      <Atom name="CS" type="2004"/>
+    </Residue>
+    <Residue name="BE">
+      <Atom name="BE" type="2005"/>
+    </Residue>
+    <Residue name="MG">
+      <Atom name="MG" type="2006"/>
+    </Residue>
+    <Residue name="CA">
+      <Atom name="CA" type="2007"/>
+    </Residue>
+    <Residue name="ZN">
+      <Atom name="ZN" type="2008"/>
+    </Residue>
+
+    <Residue name="F">
+      <Atom name="F" type="2100"/>
+    </Residue>
+    <Residue name="Cl">
+      <Atom name="Cl" type="2101"/>
+    </Residue>
+    <Residue name="Br">
+      <Atom name="Br" type="2102"/>
+    </Residue>
+    <Residue name="I">
+      <Atom name="I" type="2103"/>
+    </Residue>
+
+ </Residues>
+  <AmoebaBondForce bond-cubic="-25.5" bond-quartic="379.3125">
+   
+ </AmoebaBondForce>
+  <AmoebaAngleForce angle-cubic="-0.014" angle-quartic="5.6e-05" angle-pentic="-7.0e-07" angle-sextic="2.2e-08">
+  </AmoebaAngleForce>
+
+ <AmoebaStretchBendForce stretchBendUnit="1.0">
+    
+  </AmoebaStretchBendForce>
+   
+  <AmoebaOutOfPlaneBendForce type="ALLINGER" opbend-cubic="-0.014" opbend-quartic="5.6e-05" opbend-pentic="-7.0e-07" opbend-sextic="2.2e-08">
+    <!-- LPW: Mark's force field parsing code requires AmoebaOutOfPlaneBendForce in order to read AmoebaAngleForce, even if the clause is empty-->
+ </AmoebaOutOfPlaneBendForce>
+  <AmoebaVdwForce type="BUFFERED-14-7" radiusrule="CUBIC-MEAN" radiustype="R-MIN" radiussize="DIAMETER" epsilonrule="HHG" vdw-13-scale="0.0" vdw-14-scale="1.0" vdw-15-scale="1.0">
+
+  
+    <Vdw class="2000" sigma="0.22" epsilon="0.276144" reduction="1.0"/>
+    <Vdw class="2001" sigma="0.2955" epsilon="1.17152" reduction="1.0"/>
+    <Vdw class="2002" sigma="0.368" epsilon="1.4644" reduction="1.0"/>
+    <Vdw class="2003" sigma="0.39" epsilon="1.58992" reduction="1.0"/>
+    <Vdw class="2004" sigma="0.414" epsilon="1.75728" reduction="1.0"/>
+    <Vdw class="2005" sigma="0.188" epsilon="0.380744" reduction="1.0"/>
+    <Vdw class="2006" sigma="0.29" epsilon="1.17152" reduction="1.0"/>
+    <Vdw class="2007" sigma="0.359" epsilon="1.4644" reduction="1.0"/>
+    <Vdw class="2008" sigma="0.268" epsilon="0.928848" reduction="1.0"/>
+    <Vdw class="2100" sigma="0.343" epsilon="1.046" reduction="1.0"/>
+    <Vdw class="2101" sigma="0.412" epsilon="1.4225600000000003" reduction="1.0"/>
+    <Vdw class="2102" sigma="0.432" epsilon="1.79912" reduction="1.0"/>
+    <Vdw class="2103" sigma="0.461" epsilon="2.17568" reduction="1.0"/>
+    
+    <Pair class1="2002" class2="2101" sigma="0.4236" epsilon="0.6326208"/>
+    <Pair class1="2002" class2="2102" sigma="0.43789999999999996" epsilon="0.6962176"/>
+    <Pair class1="2002" class2="2103" sigma="0.4636" epsilon="0.719648"/>
+    <Pair class1="2003" class2="2101" sigma="0.43150000000000005" epsilon="0.7778056000000001"/>
+    <Pair class1="2003" class2="2102" sigma="0.4448000000000001" epsilon="0.8652512000000001"/>
+    <Pair class1="2003" class2="2103" sigma="0.4690000000000001" epsilon="0.897468"/>
+    <Pair class1="2004" class2="2101" sigma="0.4345" epsilon="1.2108496"/>
+    <Pair class1="2004" class2="2102" sigma="0.4475" epsilon="1.3836488"/>
+    <Pair class1="2004" class2="2103" sigma="0.4711000000000001" epsilon="1.4501744"/>
+
+
+ </AmoebaVdwForce>
+  <AmoebaMultipoleForce direct11Scale="0.0" direct12Scale="1.0" direct13Scale="1.0" direct14Scale="1.0" mpole12Scale="0.0" mpole13Scale="0.0" mpole14Scale="0.4" mpole15Scale="0.8" mutual11Scale="1.0" mutual12Scale="1.0" mutual13Scale="1.0" mutual14Scale="1.0" polar12Scale="0.0" polar13Scale="0.0" polar14Intra="0.5" polar14Scale="1.0" polar15Scale="1.0"> 
+  
+    <Multipole type="2000" kz="0" kx="0" c0="1.00000" d1="0.0" d2="0.0" d3="0.0" q11="0.0" q21="0.0" q22="0.0" q31="0.0" q32="0.0" q33="0.0"  />
+    <Multipole type="2001" kz="0" kx="0" c0="1.00000" d1="0.0" d2="0.0" d3="0.0" q11="0.0" q21="0.0" q22="0.0" q31="0.0" q32="0.0" q33="0.0"  />
+    <Multipole type="2002" kz="0" kx="0" c0="1.00000" d1="0.0" d2="0.0" d3="0.0" q11="0.0" q21="0.0" q22="0.0" q31="0.0" q32="0.0" q33="0.0"  />
+    <Multipole type="2003" kz="0" kx="0" c0="1.00000" d1="0.0" d2="0.0" d3="0.0" q11="0.0" q21="0.0" q22="0.0" q31="0.0" q32="0.0" q33="0.0"  />
+    <Multipole type="2004" kz="0" kx="0" c0="1.00000" d1="0.0" d2="0.0" d3="0.0" q11="0.0" q21="0.0" q22="0.0" q31="0.0" q32="0.0" q33="0.0"  />
+    <Multipole type="2005" kz="0" kx="0" c0="2.00000" d1="0.0" d2="0.0" d3="0.0" q11="0.0" q21="0.0" q22="0.0" q31="0.0" q32="0.0" q33="0.0"  />
+    <Multipole type="2006" kz="0" kx="0" c0="2.00000" d1="0.0" d2="0.0" d3="0.0" q11="0.0" q21="0.0" q22="0.0" q31="0.0" q32="0.0" q33="0.0"  />
+    <Multipole type="2007" kz="0" kx="0" c0="2.00000" d1="0.0" d2="0.0" d3="0.0" q11="0.0" q21="0.0" q22="0.0" q31="0.0" q32="0.0" q33="0.0"  />
+    <Multipole type="2008" kz="0" kx="0" c0="2.00000" d1="0.0" d2="0.0" d3="0.0" q11="0.0" q21="0.0" q22="0.0" q31="0.0" q32="0.0" q33="0.0"  />
+    <Multipole type="2100" kz="0" kx="0" c0="-1.00000" d1="0.0" d2="0.0" d3="0.0" q11="0.0" q21="0.0" q22="0.0" q31="0.0" q32="0.0" q33="0.0"  />
+    <Multipole type="2101" kz="0" kx="0" c0="-1.00000" d1="0.0" d2="0.0" d3="0.0" q11="0.0" q21="0.0" q22="0.0" q31="0.0" q32="0.0" q33="0.0"  />
+    <Multipole type="2102" kz="0" kx="0" c0="-1.00000" d1="0.0" d2="0.0" d3="0.0" q11="0.0" q21="0.0" q22="0.0" q31="0.0" q32="0.0" q33="0.0"  />
+    <Multipole type="2103" kz="0" kx="0" c0="-1.00000" d1="0.0" d2="0.0" d3="0.0" q11="0.0" q21="0.0" q22="0.0" q31="0.0" q32="0.0" q33="0.0"  />
+
+    
+    <Polarize type="2000" polarizability="2.8e-05" thole="0.3900" />
+    <Polarize type="2001" polarizability="0.00012" thole="0.3900" />
+    <Polarize type="2002" polarizability="0.00078" thole="0.3900" />
+    <Polarize type="2003" polarizability="0.00135" thole="0.3900" />
+    <Polarize type="2004" polarizability="0.00026" thole="0.3900" />
+    <Polarize type="2005" polarizability="1e-05" thole="0.0650" />
+    <Polarize type="2006" polarizability="8e-05" thole="0.1150" />
+    <Polarize type="2007" polarizability="0.00055" thole="0.18" />
+    <Polarize type="2008" polarizability="0.00026" thole="0.2096" />
+    <Polarize type="2100" polarizability="0.00135" thole="0.3900" />
+    <Polarize type="2101" polarizability="0.004" thole="0.3900" />
+    <Polarize type="2102" polarizability="0.0056500000000000005" thole="0.3900" />
+    <Polarize type="2103" polarizability="0.00725" thole="0.3900" />
+    
+    
+ </AmoebaMultipoleForce>
+</ForceField>

@@ -1,0 +1,15 @@
+TITLE      Carbon Tetrachloride Optimization
+REMARK   1 File created by GaussView 5.0.9
+HETATM    1 Cl1  CTC     0       1.021   1.021   1.021  1.00  0.00         
+HETATM    2 Cl2  CTC     0      -1.021  -1.021   1.021  1.00  0.00         
+HETATM    3 Cl3  CTC     0      -1.021   1.021  -1.021  1.00  0.00         
+HETATM    4 Cl4  CTC     0       1.021  -1.021  -1.021  1.00  0.00         
+HETATM    5 C    CTC     0       0.000   0.000   0.000  1.00  0.00         
+TER
+END
+
+CONECT    1    5
+CONECT    2    5
+CONECT    3    5
+CONECT    4    5
+CONECT    5    1    2    3    4

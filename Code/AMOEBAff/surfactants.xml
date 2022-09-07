@@ -1,0 +1,868 @@
+<ForceField>
+<!--> dodecanoate xml file
+Sources: Amoeba2009 from Tinker + poltype calculation wi MP2 6-31G* Gaussian and DMA -->
+ <AtomTypes>
+     <!--Backbone-->
+     <Type name="3001" class="3001" element="C" mass="12.011"/>  <!-- Methyl terminal group C -->
+     <Type name="3002" class="3002" element="H" mass="1.008"/>    <!-- Methyl terminal group H -->
+     <Type name="3003" class="3003" element="C" mass="12.011"/>    <!-- Methylene chain  C -->
+     <Type name="3004" class="3004" element="H" mass="1.008"/>   <!-- Methylene chain  H -->
+   <!-- DDC Adjacent methylene -->
+     <Type name="3005" class="3005" element="C" mass="12.011"/>    <!-- Methylene adjacent  C -->
+     <Type name="3006" class="3006" element="H" mass="1.008"/>   <!-- Methylene adjacent  H -->
+     <!--Headgroup of DDC, dodecanoate-->
+     <Type name="3007" class="3007" element="C" mass="12.011"/>
+     <Type name="3008" class="3008" element="O" mass="15.999"/>
+      
+   <!-- DDS Adjacent methylene -->
+   <Type name="3031" class="3031" element="C" mass="12.011"/>    <!-- Methylene adjacent  C -->
+   <Type name="3032" class="3032" element="H" mass="1.008"/>   <!-- Methylene adjacent  H -->
+   <!--Headgroup of DDS, sulfonate SO3^-1 -->
+   <Type name="3033" class="3033" element="S" mass="32.066"/>  
+   <Type name="3034" class="3034" element="O" mass="15.999"/>    
+   
+   <!-- Note the benzene ring class is used instead of type = class for other atoms.  benzen C is 3101 and H is 3102 -->
+   
+   
+   <!-- DBC connection + BZ + HG -->
+   <!-- connecting CH2 -->
+   <Type name="3011" class="3011" element="C" mass="12.011"/>
+   <Type name="3012" class="3012" element="H" mass="1.008"/>
+   <!-- benzene ring -->
+   <Type name="3013" class="3101" element="C" mass="12.011"/>
+   <Type name="3015" class="3101" element="C" mass="12.011"/>
+   <Type name="3016" class="3102" element="H" mass="1.008"/> 
+   <Type name="3017" class="3101" element="C" mass="12.011"/>
+   <Type name="3018" class="3102" element="H" mass="1.008"/>
+   <Type name="3019" class="3101" element="C" mass="12.011"/>
+   <!-- COO- head group -->
+   <Type name="3021" class="3021" element="C" mass="12.011"/>
+   <Type name="3022" class="3022" element="O" mass="15.999"/>
+   
+   <!-- DBS connection + BZ + HG -->
+   <!-- connecting CH2 -->
+   <Type name="3041" class="3041" element="C" mass="12.011"/>
+   <Type name="3042" class="3042" element="H" mass="1.008"/>
+   <!-- benzene ring -->
+   <Type name="3043" class="3101" element="C" mass="12.011"/>
+   <Type name="3045" class="3101" element="C" mass="12.011"/>
+   <Type name="3046" class="3102" element="H" mass="1.008"/>
+   <Type name="3047" class="3101" element="C" mass="12.011"/>
+   <Type name="3048" class="3102" element="H" mass="1.008"/>
+   <Type name="3049" class="3101" element="C" mass="12.011"/>
+   <!-- SO3- head group -->
+   <Type name="3052" class="3052" element="O" mass="15.999"/>
+   <Type name="3051" class="3051" element="S" mass="32.066"/>
+   
+ </AtomTypes>
+
+ <Residues>
+ <Residue name="DDC">  <!-- Dodecanoate   negative ion -->
+   <Atom name="C1" type="3001"/>
+   <Atom name="H1" type="3002"/>
+   <Atom name="H2" type="3002"/>
+   <Atom name="H3" type="3002"/>
+   <Atom name="C2" type="3003"/>
+   <Atom name="H4" type="3004"/>
+   <Atom name="H5" type="3004"/>
+   <Atom name="C3" type="3003"/>
+   <Atom name="H6" type="3004"/>
+   <Atom name="H7" type="3004"/>
+   <Atom name="C4" type="3003"/>
+   <Atom name="H8" type="3004"/>
+   <Atom name="H9" type="3004"/>
+   <Atom name="C5" type="3003"/>
+   <Atom name="H10" type="3004"/>
+   <Atom name="H11" type="3004"/>
+   <Atom name="C6" type="3003"/>
+   <Atom name="H12" type="3004"/>
+   <Atom name="H13" type="3004"/>
+   <Atom name="C7" type="3003"/>
+   <Atom name="H14" type="3004"/>
+   <Atom name="H15" type="3004"/>
+   <Atom name="C8" type="3003"/>
+   <Atom name="H16" type="3004"/>
+   <Atom name="H17" type="3004"/>
+   <Atom name="C9" type="3003"/>
+   <Atom name="H18" type="3004"/>
+   <Atom name="H19" type="3004"/>
+   <Atom name="C10" type="3003"/>
+   <Atom name="H20" type="3004"/>
+   <Atom name="H21" type="3004"/>
+   <Atom name="C11" type="3005"/>
+   <Atom name="H22" type="3006"/>
+   <Atom name="H23" type="3006"/>
+   <Atom name="C12" type="3007"/>
+   <Atom name="O1" type="3008"/>
+   <Atom name="O2" type="3008"/>
+   <Bond from="0" to="1"/>
+   <Bond from="0" to="2"/>
+   <Bond from="0" to="3"/>
+   <Bond from="0" to="4"/>
+   <Bond from="4" to="5"/>
+   <Bond from="4" to="6"/>
+   <Bond from="4" to="7"/>
+   <Bond from="7" to="8"/>
+   <Bond from="7" to="9"/>
+   <Bond from="7" to="10"/>
+   <Bond from="10" to="11"/>
+   <Bond from="10" to="12"/>
+   <Bond from="10" to="13"/>
+   <Bond from="13" to="14"/>
+   <Bond from="13" to="15"/>
+   <Bond from="13" to="16"/>
+   <Bond from="16" to="17"/>
+   <Bond from="16" to="18"/>
+   <Bond from="16" to="19"/>
+   <Bond from="19" to="20"/>
+   <Bond from="19" to="21"/>
+   <Bond from="19" to="22"/>
+   <Bond from="22" to="23"/>
+   <Bond from="22" to="24"/>
+   <Bond from="22" to="25"/>
+   <Bond from="25" to="26"/>
+   <Bond from="25" to="27"/>
+   <Bond from="25" to="28"/>
+   <Bond from="28" to="29"/>
+   <Bond from="28" to="30"/>
+   <Bond from="28" to="31"/>
+   <Bond from="31" to="32"/>
+   <Bond from="31" to="33"/>
+   <Bond from="34" to="31"/>
+   <Bond from="34" to="35"/>
+   <Bond from="34" to="36"/>
+  </Residue>
+
+   <Residue name="DDS">  <!-- Dodecansulfonate  negative ion -->
+      <Atom name="C1" type="3001"/>
+      <Atom name="H1" type="3002"/>
+      <Atom name="H2" type="3002"/>
+      <Atom name="H3" type="3002"/>
+      <Atom name="C2" type="3003"/>
+      <Atom name="H4" type="3004"/>
+      <Atom name="H5" type="3004"/>
+      <Atom name="C3" type="3003"/>
+      <Atom name="H6" type="3004"/>
+      <Atom name="H7" type="3004"/>
+      <Atom name="C4" type="3003"/>
+      <Atom name="H8" type="3004"/>
+      <Atom name="H9" type="3004"/>
+      <Atom name="C5" type="3003"/>
+      <Atom name="H10" type="3004"/>
+      <Atom name="H11" type="3004"/>
+      <Atom name="C6" type="3003"/>
+      <Atom name="H12" type="3004"/>
+      <Atom name="H13" type="3004"/>
+      <Atom name="C7" type="3003"/>
+      <Atom name="H14" type="3004"/>
+      <Atom name="H15" type="3004"/>
+      <Atom name="C8" type="3003"/>
+      <Atom name="H16" type="3004"/>
+      <Atom name="H17" type="3004"/>
+      <Atom name="C9" type="3003"/>
+      <Atom name="H18" type="3004"/>
+      <Atom name="H19" type="3004"/>
+      <Atom name="C10" type="3003"/>
+      <Atom name="H20" type="3004"/>
+      <Atom name="H21" type="3004"/>
+      <Atom name="C11" type="3003"/>
+      <Atom name="H22" type="3004"/>
+      <Atom name="H23" type="3004"/>
+      <Atom name="C12" type="3031"/>
+      <Atom name="H24" type="3032"/>
+      <Atom name="H25" type="3032"/>
+      <Atom name="S1" type="3033"/>
+      <Atom name="O1" type="3034"/>
+      <Atom name="O2" type="3034"/>
+      <Atom name="O3" type="3034"/>
+      <Bond from="0" to="1"/>
+      <Bond from="0" to="2"/>
+      <Bond from="0" to="3"/>
+      <Bond from="0" to="4"/>
+      <Bond from="4" to="5"/>
+      <Bond from="4" to="6"/>
+      <Bond from="4" to="7"/>
+      <Bond from="7" to="8"/>
+      <Bond from="7" to="9"/>
+      <Bond from="7" to="10"/>
+      <Bond from="10" to="11"/>
+      <Bond from="10" to="12"/>
+      <Bond from="10" to="13"/>
+      <Bond from="13" to="14"/>
+      <Bond from="13" to="15"/>
+      <Bond from="13" to="16"/>
+      <Bond from="16" to="17"/>
+      <Bond from="16" to="18"/>
+      <Bond from="16" to="19"/>
+      <Bond from="19" to="20"/>
+      <Bond from="19" to="21"/>
+      <Bond from="19" to="22"/>
+      <Bond from="22" to="23"/>
+      <Bond from="22" to="24"/>
+      <Bond from="22" to="25"/>
+      <Bond from="25" to="26"/>
+      <Bond from="25" to="27"/>
+      <Bond from="25" to="28"/>
+      <Bond from="28" to="29"/>
+      <Bond from="28" to="30"/>
+      <Bond from="28" to="31"/>
+      <Bond from="31" to="32"/>
+      <Bond from="31" to="33"/>
+      <Bond from="31" to="34"/>
+      <Bond from="34" to="35"/>
+      <Bond from="34" to="36"/>
+      <Bond from="34" to="37"/>
+      <Bond from="37" to="38"/>
+      <Bond from="37" to="39"/>
+      <Bond from="37" to="40"/>
+   </Residue>
+
+      <Residue name="DBC"> <!-- para-dodecyl benzene carbonate anion. C12H25C6H4COO-  -->
+         <Atom name="C1"  type="3001"/>
+         <Atom name="H1"  type="3002"/>
+         <Atom name="H2"  type="3002"/>
+         <Atom name="H3"  type="3002"/>
+         <Atom name="C2"  type="3003"/>
+         <Atom name="H4"  type="3004"/>
+         <Atom name="H5"  type="3004"/>
+         <Atom name="C3"  type="3003"/>
+         <Atom name="H6"  type="3004"/>
+         <Atom name="H7"  type="3004"/>
+         <Atom name="C4"  type="3003"/>
+         <Atom name="H8"  type="3004"/>
+         <Atom name="H9"  type="3004"/>
+         <Atom name="C5"  type="3003"/>
+         <Atom name="H10" type="3004"/>
+         <Atom name="H11" type="3004"/>
+         <Atom name="C6"  type="3003"/>
+         <Atom name="H12" type="3004"/>
+         <Atom name="H13" type="3004"/>
+         <Atom name="C7"  type="3003"/>
+         <Atom name="H14" type="3004"/>
+         <Atom name="H15" type="3004"/>
+         <Atom name="C8"  type="3003"/>
+         <Atom name="H16" type="3004"/>
+         <Atom name="H17" type="3004"/>
+         <Atom name="C9"  type="3003"/>
+         <Atom name="H18" type="3004"/>
+         <Atom name="H19" type="3004"/>
+         <Atom name="C10" type="3003"/>
+         <Atom name="H20" type="3004"/>
+         <Atom name="H21" type="3004"/>
+         <Atom name="C11" type="3003"/>
+         <Atom name="H22" type="3004"/>
+         <Atom name="H23" type="3004"/>
+         <Atom name="C12" type="3011"/>
+         <Atom name="H24" type="3012"/>
+         <Atom name="H25" type="3012"/>
+         <Atom name="C13" type="3013"/>
+         <Atom name="C14" type="3015"/>
+         <Atom name="H26" type="3016"/>
+         <Atom name="C15" type="3015"/>
+         <Atom name="H27" type="3016"/>
+         <Atom name="C16" type="3017"/>
+         <Atom name="H28" type="3018"/>
+         <Atom name="C17" type="3017"/>
+         <Atom name="H29" type="3018"/>
+         <Atom name="C18" type="3019"/>
+         <Atom name="C19" type="3021"/>
+         <Atom name="O1"  type="3022"/>
+         <Atom name="O2"  type="3022"/>
+         <!-->
+         <Bond atomName1="C1" atomName2="H1"/>
+         <Bond atomName1="C1" atomName2="H2"/>
+         <Bond atomName1="C1" atomName2="H3"/>
+         <Bond atomName1="C1" atomName2="C2"/>
+         <Bond atomName1="C2" atomName2="H4"/>
+         <Bond atomName1="C2" atomName2="H5"/>
+         <Bond atomName1="C2" atomName2="C3"/>
+         <Bond atomName1="C3" atomName2="H6"/>
+         <Bond atomName1="C3" atomName2="H7"/>
+         <Bond atomName1="C3" atomName2="C4"/>
+         <Bond atomName1="C4" atomName2="H8"/>
+         <Bond atomName1="C4" atomName2="H9"/>
+         <Bond atomName1="C4" atomName2="C5"/>
+         <Bond atomName1="C5" atomName2="H10"/>
+         <Bond atomName1="C5" atomName2="H11"/>
+         <Bond atomName1="C5" atomName2="C6"/>
+         <Bond atomName1="C6" atomName2="H12"/>
+         <Bond atomName1="C6" atomName2="H13"/>
+         <Bond atomName1="C6" atomName2="C7"/>
+         <Bond atomName1="C7" atomName2="H14"/>
+         <Bond atomName1="C7" atomName2="H15"/>
+         <Bond atomName1="C7" atomName2="C8"/>
+         <Bond atomName1="C8" atomName2="H16"/>
+         <Bond atomName1="C8" atomName2="H17"/>
+         <Bond atomName1="C8" atomName2="C9"/>
+         <Bond atomName1="C9" atomName2="H18"/>
+         <Bond atomName1="C9" atomName2="H19"/>
+         <Bond atomName1="C9" atomName2="C10"/>
+         <Bond atomName1="C10" atomName2="H20"/>
+         <Bond atomName1="C10" atomName2="H21"/>
+         <Bond atomName1="C10" atomName2="C11"/>
+         <Bond atomName1="C11" atomName2="H22"/>
+         <Bond atomName1="C11" atomName2="H23"/>
+         <Bond atomName1="C11" atomName2="C12"/>
+         <Bond atomName1="C12" atomName2="H24"/>
+         <Bond atomName1="C12" atomName2="H25"/>
+         <Bond atomName1="C12" atomName2="C13"/>
+         <Bond atomName1="C13" atomName2="C14"/>
+         <Bond atomName1="C13" atomName2="C15"/>
+         <Bond atomName1="C14" atomName2="H26"/>
+         <Bond atomName1="C15" atomName2="H27"/>     
+         <Bond atomName1="C14" atomName2="C16"/>
+         <Bond atomName1="C16" atomName2="H28"/>
+         <Bond atomName1="C15" atomName2="C17"/>
+         <Bond atomName1="C17" atomName2="H29"/>
+         <Bond atomName1="C16" atomName2="C18"/>
+         <Bond atomName1="C18" atomName2="C17"/>
+         <Bond atomName1="C18" atomName2="C19"/>
+         <Bond atomName1="C19" atomName2="O1"/>
+         <Bond atomName1="C19" atomName2="O2"/>
+      -->
+         <Bond from="0" to="1"/>
+         <Bond from="0" to="2"/>
+         <Bond from="0" to="3"/>
+         <Bond from="0" to="4"/>
+         <Bond from="4" to="5"/>
+         <Bond from="4" to="6"/>
+         <Bond from="4" to="7"/>
+         <Bond from="7" to="8"/>
+         <Bond from="7" to="9"/>
+         <Bond from="7" to="10"/>
+         <Bond from="10" to="11"/>
+         <Bond from="10" to="12"/>
+         <Bond from="10" to="13"/>
+         <Bond from="13" to="14"/>
+         <Bond from="13" to="15"/>
+         <Bond from="13" to="16"/>
+         <Bond from="16" to="17"/>
+         <Bond from="16" to="18"/>
+         <Bond from="16" to="19"/>
+         <Bond from="19" to="20"/>
+         <Bond from="19" to="21"/>
+         <Bond from="19" to="22"/>
+         <Bond from="22" to="23"/>
+         <Bond from="22" to="24"/>
+         <Bond from="22" to="25"/>
+         <Bond from="25" to="26"/>
+         <Bond from="25" to="27"/>
+         <Bond from="25" to="28"/>
+         <Bond from="28" to="29"/>
+         <Bond from="28" to="30"/>
+         <Bond from="28" to="31"/>
+         <Bond from="31" to="32"/>
+         <Bond from="31" to="33"/>
+         <Bond from="31" to="34"/>
+         <Bond from="34" to="35"/>
+         <Bond from="34" to="36"/>
+         <Bond from="34" to="37"/>
+         <Bond from="37" to="38"/>
+         <Bond from="37" to="40"/>
+         <Bond from="38" to="39"/>
+         <Bond from="40" to="41"/>
+         <Bond from="38" to="42"/>
+         <Bond from="42" to="43"/>
+         <Bond from="40" to="44"/>
+         <Bond from="44" to="45"/>
+         <Bond from="42" to="46"/>
+         <Bond from="44" to="46"/>
+         <Bond from="47" to="46"/>
+         <Bond from="47" to="48"/>
+         <Bond from="47" to="49"/> 
+      </Residue>
+   
+   <Residue name="DBS"> <!-- para-dodecyl benzene sulfonate anion. C12H25C6H4SO3-  -->
+      <Atom name="C1"  type="3001"/>
+      <Atom name="H1"  type="3002"/>
+      <Atom name="H2"  type="3002"/>
+      <Atom name="H3"  type="3002"/>
+      <Atom name="C2"  type="3003"/>
+      <Atom name="H4"  type="3004"/>
+      <Atom name="H5"  type="3004"/>
+      <Atom name="C3"  type="3003"/>
+      <Atom name="H6"  type="3004"/>
+      <Atom name="H7"  type="3004"/>
+      <Atom name="C4"  type="3003"/>
+      <Atom name="H8"  type="3004"/>
+      <Atom name="H9"  type="3004"/>
+      <Atom name="C5"  type="3003"/>
+      <Atom name="H10" type="3004"/>
+      <Atom name="H11" type="3004"/>
+      <Atom name="C6"  type="3003"/>
+      <Atom name="H12" type="3004"/>
+      <Atom name="H13" type="3004"/>
+      <Atom name="C7"  type="3003"/>
+      <Atom name="H14" type="3004"/>
+      <Atom name="H15" type="3004"/>
+      <Atom name="C8"  type="3003"/>
+      <Atom name="H16" type="3004"/>
+      <Atom name="H17" type="3004"/>
+      <Atom name="C9"  type="3003"/>
+      <Atom name="H18" type="3004"/>
+      <Atom name="H19" type="3004"/>
+      <Atom name="C10" type="3003"/>
+      <Atom name="H20" type="3004"/>
+      <Atom name="H21" type="3004"/>
+      <Atom name="C11" type="3003"/>
+      <Atom name="H22" type="3004"/>
+      <Atom name="H23" type="3004"/>
+      <Atom name="C12" type="3041"/>
+      <Atom name="H24" type="3042"/>
+      <Atom name="H25" type="3042"/>
+      <Atom name="C13" type="3043"/>
+      <Atom name="C14" type="3045"/>
+      <Atom name="H26" type="3046"/>
+      <Atom name="C15" type="3045"/>
+      <Atom name="H27" type="3046"/>
+      <Atom name="C16" type="3047"/>
+      <Atom name="H28" type="3048"/>
+      <Atom name="C17" type="3047"/>
+      <Atom name="H29" type="3048"/>
+      <Atom name="C18" type="3049"/>
+      <Atom name="S1"  type="3051"/>
+      <Atom name="O1"  type="3052"/>
+      <Atom name="O2"  type="3052"/>
+      <Atom name="O3"  type="3052"/>
+      <Bond from="0" to="1"/>
+      <Bond from="0" to="2"/>
+      <Bond from="0" to="3"/>
+      <Bond from="0" to="4"/>
+      <Bond from="4" to="5"/>
+      <Bond from="4" to="6"/>
+      <Bond from="4" to="7"/>
+      <Bond from="7" to="8"/>
+      <Bond from="7" to="9"/>
+      <Bond from="7" to="10"/>
+      <Bond from="10" to="11"/>
+      <Bond from="10" to="12"/>
+      <Bond from="10" to="13"/>
+      <Bond from="13" to="14"/>
+      <Bond from="13" to="15"/>
+      <Bond from="13" to="16"/>
+      <Bond from="16" to="17"/>
+      <Bond from="16" to="18"/>
+      <Bond from="16" to="19"/>
+      <Bond from="19" to="20"/>
+      <Bond from="19" to="21"/>
+      <Bond from="19" to="22"/>
+      <Bond from="22" to="23"/>
+      <Bond from="22" to="24"/>
+      <Bond from="22" to="25"/>
+      <Bond from="25" to="26"/>
+      <Bond from="25" to="27"/>
+      <Bond from="25" to="28"/>
+      <Bond from="28" to="29"/>
+      <Bond from="28" to="30"/>
+      <Bond from="28" to="31"/>
+      <Bond from="31" to="32"/>
+      <Bond from="31" to="33"/>
+      <Bond from="31" to="34"/>
+      <Bond from="34" to="35"/>
+      <Bond from="34" to="36"/>
+      <Bond from="34" to="37"/>
+      <Bond from="37" to="38"/>
+      <Bond from="37" to="40"/>
+      <Bond from="38" to="39"/>
+      <Bond from="40" to="41"/>         
+      <Bond from="38" to="42"/>
+      <Bond from="42" to="43"/>     
+      <Bond from="40" to="44"/>
+      <Bond from="44" to="45"/>
+      <Bond from="42" to="46"/>
+      <Bond from="44" to="46"/>
+      <Bond from="46" to="47"/>
+      <Bond from="47" to="48"/>
+      <Bond from="47" to="49"/>
+      <Bond from="47" to="50"/> 
+   </Residue>
+
+</Residues>
+
+<AmoebaBondForce bond-cubic="-25.5" bond-quartic="379.3125">
+      <!--Hexane (and backbone of surfactants) bond lengths and spring constants-->
+      <Bond class1="3001" class2="3002" length="0.1112" k="1.4267e+05"/>
+      <Bond class1="3001" class2="3003" length="0.1524" k="1.35143e+05"/>
+      <Bond class1="3003" class2="3003" length="0.1524" k="1.35143e+05"/>
+      <Bond class1="3003" class2="3004" length="0.1112" k="1.4267e+05"/>
+      
+      <!--DDC connection between backbone to headgroup, and headgroup along connections-->
+      <Bond class1="3003" class2="3005" length="0.1524" k="1.35143e+05"/>
+      <Bond class1="3005" class2="3006" length="0.1112" k="1.4267e+05"/>
+      <Bond class1="3007" class2="3008" length="0.12553" k="294972.0"/>
+      <Bond class1="3007" class2="3005" length="0.1568" k="1.44348e+05"/>
+      
+   <!--DDS connection between backbone to headgroup, and headgroup along connections-->
+   <Bond class1="3031" class2="3003" length="0.15247" k="189535.2"/>
+   <Bond class1="3034" class2="3033" length="0.1487" k="238488.0"/>
+   <Bond class1="3032" class2="3031" length="0.1112" k="142674.4"/>
+   <Bond class1="3033" class2="3031" length="0.18015" k="92048.0"/>
+   
+   <!-- ring class atoms --> 
+   <Bond class1="3101" class2="3101" length="0.13887" k="197442.96"/>
+   <Bond class1="3101" class2="3102" length="0.11000" k="155017.2"/>
+   
+   <!-- DBC HG -->
+   <Bond class1="3003" class2="3011" length="0.1525" k="135143.2"/>
+   <Bond class1="3012" class2="3011" length="0.1112" k="142674.4"/>
+   <Bond class1="3011" class2="3101" length="0.1499" k="189618.88"/>
+   <Bond class1="3101" class2="3021" length="0.1524" k="1.350E+05"/>
+   <Bond class1="3021" class2="3022" length="0.1258" k="1.961e+05"/>
+   
+   <!-- DBS HG -->
+   <Bond class1="3003" class2="3041" length="0.1525" k="135143.2"/>
+   <Bond class1="3041" class2="3101" length="0.1499" k="189618.88"/>
+   <Bond class1="3042" class2="3041" length="0.1112" k="142674.4"/>   
+   <Bond class1="3051" class2="3101" length="0.1824" k="9.481E+04"/>
+   <Bond class1="3052" class2="3051" length="0.1647" k="2.255E+05"/>
+
+
+</AmoebaBondForce>
+   
+<AmoebaAngleForce angle-cubic="-0.014" angle-quartic="5.6e-05" angle-pentic="-7.0e-07" angle-sextic="2.2e-08">
+       <!--Hexane (and dod, dda, dds, dbs backbone) angles and constants-->
+        <Angle class1="3002" class2="3001" class3="3002" k="5.098077e-02" angle1="107.8" inPlane="False"/>
+        <Angle class1="3002" class2="3001" class3="3003" k="5.352980e-02" angle1="111.3" inPlane="False"/>
+        <Angle class1="3001" class2="3003" class3="3003" k="6.143183e-02" angle1="109.5" angle2="110.2" angle3="111.0" inPlane="False"/>
+        <Angle class1="3003" class2="3003" class3="3003" k="6.143183e-02" angle1="109.5" angle2="110.2" angle3="111.0" inPlane="False"/>
+        <Angle class1="3001" class2="3003" class3="3004" k="5.352980e-02" angle1="110.7" inPlane="False"/>
+        <Angle class1="3003" class2="3003" class3="3004" k="5.352980e-02" angle1="110.7" inPlane="False"/>
+        <Angle class1="3004" class2="3003" class3="3004" k="5.098077e-02" angle1="107.8" inPlane="False"/>
+         
+        <Angle class1="3003" class2="3003" class3="3005" k="6.143183e-02" angle1="109.5" angle2="110.2" angle3="111.0" inPlane="False"/>
+        <Angle class1="3006" class2="3005" class3="3006" k="5.098077e-02" angle1="107.8" inPlane="False"/>
+        <Angle class1="3003" class2="3005" class3="3006" k="5.352980e-02" angle1="110.7" inPlane="False"/>
+        <Angle class1="3005" class2="3003" class3="3004" k="5.352980e-02" angle1="110.7" inPlane="False"/>
+
+       <!--DDC headgroup connection to backbone and individual angles and constants-->
+       <Angle class1="3005" class2="3007" class3="3008" k="0.06066711793702356" angle1="110.60" inPlane="True"/>
+       <Angle class1="3008" class2="3007" class3="3008" k="7.341231e-02" angle1="134.0" inPlane="True"/>
+       <Angle class1="3003" class2="3005" class3="3007" k="0.1019615427513001" angle1="122.40" inPlane="False"/>
+       <Angle class1="3006" class2="3005" class3="3007" k="0.0497062520912588" angle1="109.50" inPlane="False"/>
+      
+   <!--DDS headgroup connection to backbone -->
+   
+   <Angle class1="3003" class2="3003" class3="3031" k="0.09521952181668589" angle1="110.54" inPlane="False" />
+   <Angle class1="3031" class2="3003" class3="3004" k="0.061508960865711095" angle1="108.11" inPlane="False"/>
+   
+   <Angle class1="3033" class2="3031" class3="3003" k="0.06754952207273632" angle1="110.016" inPlane="False"/>
+   <Angle class1="3034" class2="3033" class3="3031" k="0.07647115706347507" angle1="104.6" inPlane="False"/>
+   <Angle class1="3032" class2="3031" class3="3003" k="0.0540905984295647" angle1="109.80" angle2="109.30" angle3="110.70" inPlane="False"/>
+   <Angle class1="3032" class2="3031" class3="3032" k="0.0497062520912588" angle1="110.75" inPlane="False"/>
+   <Angle class1="3033" class2="3031" class3="3032" k="0.04460817495369379" angle1="108.15" inPlane="False"/>
+   <Angle class1="3034" class2="3033" class3="3034" k="0.08921634990738758" angle1="113.5" inPlane="False"/>
+            
+   <!-- Ring angles -->
+   <Angle class1="3101" class2="3101" class3="3102" k="0.044990530739011166" angle1="120.00" angle2="120.50" angle3="0.00" inPlane="True"/>
+   <Angle class1="3101" class2="3101" class3="3101" k="0.06971620485620145" angle1="121.70" inPlane="True"/>
+   
+   
+   <!--DBC  -->         
+   <Angle class1="3004" class2="3003" class3="3011" k="0.05352980994443255" angle1="110.70" inPlane="False"/>
+   <Angle class1="3003" class2="3011" class3="3101" k="0.049578800162819674" angle1="110.60" inPlane="False"/>
+   <Angle class1="3003" class2="3011" class3="3012" k="0.05999008946959708" angle1="109.34" inPlane="False"/>
+   
+   <Angle class1="3012" class2="3011" class3="3012" k="5.098077e-02" angle1="107.8" inPlane="False"/>
+   <Angle class1="3012" class2="3011" class3="3101" k="0.05047096366189355" angle1="109.50" angle2="109.30" angle3="110.40" inPlane="False"/>
+   
+   <Angle class1="3011" class2="3101" class3="3101" k="0.043078751812424286" angle1="120.93" inPlane="True"/>
+   <Angle class1="3101" class2="3101" class3="3021" k="1.127E-01" angle1="120.0" inPlane="True"/>
+   <Angle class1="3101" class2="3021" class3="3022" k="1.919E-01" angle1="115.88" inPlane="True"/>
+   <Angle class1="3022" class2="3021" class3="3022" k="7.491E-02" angle1="128.24" inPlane="True"/>
+   
+   <!--DBS headgroup connection to backbone -->         
+   <Angle class1="3003" class2="3041" class3="3042" k="0.05352980994443255" angle1="110.70" inPlane="False"/>
+   <Angle class1="3003" class2="3041" class3="3101" k="0.049578800162819674" angle1="110.60" inPlane="False"/>
+   <Angle class1="3004" class2="3003" class3="3041" k="0.06143182950765831" angle1="109.50" angle2="110.20" angle3="111.00" inPlane="False"/>
+   
+   <Angle class1="3042" class2="3041" class3="3042" k="0.05098077137565005" angle1="107.80" inPlane="False"/>
+   <Angle class1="3042" class2="3041" class3="3101" k="0.05047096366189355" angle1="109.50" angle2="109.30" angle3="110.40" inPlane="Fasle"/>
+
+   <Angle class1="3052" class2="3051" class3="3101" k="9.112E-02" angle1="103.95" inPlane="False"/>
+   <Angle class1="3052" class2="3051" class3="3052" k="7.662E-02" angle1="113.5" inPlane="False"/>
+
+   <Angle class1="3041" class2="3101" class3="3101" k="0.043078751812424286" angle1="122.30" inPlane="True"/>
+   <Angle class1="3051" class2="3101" class3="3101" k="7.307E-02" angle1="120.0" inPlane="True"/>
+
+</AmoebaAngleForce>
+ 
+
+<AmoebaOutOfPlaneBendForce type="ALLINGER" opbend-cubic="-0.014" opbend-quartic="5.6e-05" opbend-pentic="-7.0e-07" opbend-sextic="2.2e-08">
+   <!-- DDc -->
+   <Angle class1="3005" class2="3007" class3="" class4="" k="0.15498154498197614"/>
+   <Angle class1="3008" class2="3007" class3="" class4="" k="0.1512854390572415"/>
+   
+   <!-- DDS -->
+   <!--Angle class1="3031" class2="3033" class3="" class4="" k="0.05403961765818905"-->
+
+   <!-- Ring -->
+   <Angle class1="3101" class2="3101" class3="" class4="" k="0.01835307769523402"/>
+   <Angle class1="3102" class2="3101" class3="" class4="" k="0.019245241194307892"/>
+   
+   <!-- DBC -->
+   <Angle class1="3011" class2="3101" class3="" class4="" k="0.01835307769523402"/>
+   <Angle class1="3021" class2="3101" class3="" class4="" k="0.01835307769523402"/>
+   <Angle class1="3101" class2="3021" class3="" class4="" k="0.01835307769523402"/>
+   <Angle class1="3022" class2="3021" class3="" class4="" k="0.1512854390572415"/>
+   
+   <!-- DBS -->
+   <Angle class1="3041" class2="3101" class3="" class4="" k="0.01835307769523402"/>
+   <Angle class1="3051" class2="3101" class3="" class4="" k="0.018340332502390106"/>
+   
+
+</AmoebaOutOfPlaneBendForce>
+
+   
+<AmoebaStretchBendForce stretchBendUnit="1.0">
+  <!--Backbone-->
+   <StretchBend class1="3002" class2="3001" class3="3003" k1="8.3978" k2="8.3978"/>
+   <StretchBend class1="3001" class2="3003" class3="3003" k1="13.656" k2="13.656"/>
+   <StretchBend class1="3003" class2="3003" class3="3003" k1="13.656" k2="13.656"/>
+   <StretchBend class1="3001" class2="3003" class3="3004" k1="8.3978" k2="8.3978"/>
+   <StretchBend class1="3003" class2="3003" class3="3004" k1="8.3978" k2="8.3978"/>
+   <StretchBend class1="3004" class2="3003" class3="3004" k1="8.3978" k2="8.397823" />
+
+   
+   <StretchBend class1="3003" class2="3003" class3="3005" k1="13.656" k2="13.656"/>
+   <StretchBend class1="3005" class2="3003" class3="3004" k1="8.3978" k2="8.3978"/>
+   <!--DDC Headgroup-->
+   <StretchBend class1="3003" class2="3005" class3="3007" k1="13.656" k2="13.656"/>
+   <StretchBend class1="3005" class2="3005" class3="3006" k1="8.3978" k2="8.3978"/>
+   <StretchBend class1="3007" class2="3005" class3="3006" k1="8.3978" k2="8.3978"/>
+   <StretchBend class1="3005" class2="3007" class3="3008" k1="13.656" k2="13.656"/> 
+      
+   <!--DDS Headgroup-->
+   <StretchBend class1="3033" class2="3031" class3="3003" k1="13.656" k2="13.656" />
+   <StretchBend class1="3032" class2="3031" class3="3003" k1="8.3978" k2="8.39783" />
+   <StretchBend class1="3031" class2="3003" class3="3004" k1="27.749" k2="-3.2861" />
+   <StretchBend class1="3032" class2="3031" class3="3032" k1="8.3978" k2="8.3978" />
+   <StretchBend class1="3033" class2="3031" class3="3032" k1="8.3978" k2="8.3978" />
+   
+   <!-- ring -->
+   <StretchBend class1="3101" class2="3101" class3="3101" k1="13.656" k2="13.656" />
+   <StretchBend class1="3102" class2="3101" class3="3101" k1="8.3978" k2="8.3978" />
+   <StretchBend class1="3101" class2="3101" class3="3102" k1="8.3978" k2="8.39783" />
+   
+   
+   <!-- DBC -->
+   <StretchBend class1="3003" class2="3011" class3="3101" k1="13.656" k2="13.656" />
+   <StretchBend class1="3003" class2="3011" class3="3012" k1="8.3978" k2="8.3978" />
+   <StretchBend class1="3004" class2="3003" class3="3011" k1="8.3978" k2="8.3978" />
+   <StretchBend class1="3011" class2="3101" class3="3101" k1="13.656" k2="13.656" />
+   <StretchBend class1="3012" class2="3011" class3="3101" k1="8.3978" k2="8.3978" />
+   <StretchBend class1="3012" class2="3011" class3="3012" k1="8.3978" k2="8.3978" />
+   <StretchBend class1="3101" class2="3021" class3="3022" k1="13.656" k2="13.656" />
+   <StretchBend class1="3021" class2="3101" class3="3101" k1="13.656" k2="13.656" />
+   <StretchBend class1="3022" class2="3021" class3="3022" k1="13.656" k2="13.656" />
+   
+   <!-- DBS -->
+   <StretchBend class1="3003" class2="3041" class3="3042" k1="8.397826228907983" k2="8.397826228907983" />
+   <StretchBend class1="3003" class2="3041" class3="3101" k1="8.397826228907983" k2="8.397826228907983" />
+   <StretchBend class1="3041" class2="3003" class3="3004" k1="8.397826228907983" k2="8.397826228907983" />
+   <StretchBend class1="3041" class2="3101" class3="3101" k1="13.655595693963415" k2="13.655595693963415" />
+   <StretchBend class1="3042" class2="3041" class3="3042" k1="8.397826228907983" k2="8.397826228907983" />
+   <StretchBend class1="3042" class2="3041" class3="3101" k1="8.397826228907983" k2="8.397826228907983" />
+   <StretchBend class1="3051" class2="3101" class3="3101" k1="13.655595693963415" k2="13.655595693963415" />
+
+</AmoebaStretchBendForce>
+
+<AmoebaVdwForce type="BUFFERED-14-7" radiusrule="CUBIC-MEAN" radiustype="R-MIN" radiussize="DIAMETER" epsilonrule="HHG" vdw-13-scale="0.0" vdw-14-scale="1.0" vdw-15-scale="1.0">
+   <!--Hexane (and backbones)-->
+   <Vdw class="3001" sigma="3.820e-01" epsilon="4.22584e-01" reduction="1.0"/>
+   <Vdw class="3002" sigma="2.980e-01" epsilon="1.00416e-01" reduction="0.92"/>
+   <Vdw class="3003" sigma="3.820e-01" epsilon="4.22584e-01" reduction="1.0"/>
+   <Vdw class="3004" sigma="2.980e-01" epsilon="1.00416e-01" reduction="0.92"/>
+   
+   <!--DDC Headgroup-->
+   <Vdw class="3005" sigma="3.820e-01" epsilon="4.22584e-01" reduction="1.0"/>
+   <Vdw class="3006" sigma="2.980e-01" epsilon="1.00416e-01" reduction="0.92"/>
+   <Vdw class="3007" sigma="0.382" epsilon="0.443504" reduction="1.0"/>
+   <Vdw class="3008" sigma="0.355" epsilon="0.39748" reduction="1.0"/>
+         
+   <!--DDS Headgroup-->
+   <Vdw class="3031" sigma="0.382" epsilon="0.422584" reduction="1.0"/>
+   <Vdw class="3032" sigma="2.980e-01" epsilon="1.00416e-01" reduction="0.92"/>
+   <Vdw class="3033" sigma="0.391" epsilon="1.61084" reduction="1.0"/>
+   <Vdw class="3034" sigma="0.351" epsilon="0.468608" reduction="1.0"/>
+   
+   <!-- Ring atoms -->
+   <Vdw class="3101" sigma="0.38" epsilon="0.372376" reduction="1.0"/>
+   <Vdw class="3102" sigma="0.298" epsilon="0.108784" reduction="0.920"/>
+   
+   
+   <!-- DBC head group -->
+   <Vdw class="3011" sigma="0.382" epsilon="0.422584" reduction="1.0"/>
+   <Vdw class="3012" sigma="0.298" epsilon="0.100416" reduction="0.920"/>
+   <Vdw class="3021" sigma="0.382" epsilon="0.443504" reduction="1.0"/>
+   <Vdw class="3022" sigma="0.355" epsilon="0.39748" reduction="1.0"/>
+   
+   <!-- DBS -->
+   <Vdw class="3041" sigma="0.38" epsilon="0.372376" reduction="1.0"/>
+   <Vdw class="3042" sigma="0.298" epsilon="0.100416" reduction="0.920"/>
+   <Vdw class="3051" sigma="0.391" epsilon="1.61084" reduction="1.0"/>
+   <Vdw class="3052" sigma="0.351" epsilon="0.468608" reduction="1.0"/>
+
+
+</AmoebaVdwForce>
+
+<PeriodicTorsionForce>
+      
+      <!--Tail source is tinker amoeba2018.prm -->
+   <Proper class1="3002" class2="3001" class3="3003" class4="3004"   k1="0.0" phase1="0.0" periodicity1="1"   k2="0.0" phase2="3.141592653594307" periodicity2="2"   k3="0.625508" phase3="0.0" periodicity3="3" />
+   <Proper class1="3003" class2="3003" class3="3001" class4="3002"   k1="0.0" phase1="0.0" periodicity1="1"   k2="0.0" phase2="3.141592653594307" periodicity2="2"   k3="0.713372" phase3="0.0" periodicity3="3" />
+   <Proper class1="3001" class2="3003" class3="3003" class4="3004"   k1="0.0" phase1="0.0" periodicity1="1"   k2="0.0" phase2="3.141592653594307" periodicity2="2"   k3="0.713372" phase3="0.0" periodicity3="3" />
+   <Proper class1="3001" class2="3003" class3="3003" class4="3003"   k1="0.0" phase1="0.0" periodicity1="1"   k2="0.0" phase2="3.141592653594307" periodicity2="2"   k3="-2.092" phase3="0.0" periodicity3="3" />
+   <Proper class1="3004" class2="3003" class3="3003" class4="3004"   k1="0.0" phase1="0.0" periodicity1="1"   k2="0.0" phase2="3.141592653594307" periodicity2="2"   k3="0.625508" phase3="0.0" periodicity3="3" />
+   <Proper class1="3003" class2="3003" class3="3003" class4="3004"   k1="0.0" phase1="0.0" periodicity1="1"   k2="0.0" phase2="3.141592653594307" periodicity2="2"   k3="0.713372" phase3="0.0" periodicity3="3" />
+   <Proper class1="3003" class2="3003" class3="3003" class4="3003"   k1="0.0" phase1="0.0" periodicity1="1"   k2="0.0" phase2="3.141592653594307" periodicity2="2"   k3="-2.092" phase3="0.0" periodicity3="3" />
+   
+   <!--DDC adjacent Methylene-->
+   <Proper class1="3004" class2="3003" class3="3005" class4="3006"   k1="0.0" phase1="0.0" periodicity1="1"   k2="0.0" phase2="3.141592653594307" periodicity2="2"   k3="0.625508" phase3="0.0" periodicity3="3" />
+   <Proper class1="3003" class2="3003" class3="3005" class4="3006"   k1="0.0" phase1="0.0" periodicity1="1"   k2="0.0" phase2="3.141592653594307" periodicity2="2"   k3="0.713372" phase3="0.0" periodicity3="3" />
+   <Proper class1="3003" class2="3003" class3="3003" class4="3005"   k1="0.0" phase1="0.0" periodicity1="1"   k2="0.0" phase2="3.141592653594307" periodicity2="2"   k3="-2.092" phase3="0.0" periodicity3="3" />
+   
+   <!--DDC headgroup connections -->
+   <Proper class1="3004" class2="3003" class3="3005" class4="3007"   k1="0.0" phase1="0.0" periodicity1="1"   k2="0.0" phase2="3.141592653594307" periodicity2="2"   k3="2.7196" phase3="0.0" periodicity3="3" />
+   <Proper class1="3003" class2="3005" class3="3007" class4="3008"   k1="0.0" phase1="0.0" periodicity1="1"   k2="3.05432" phase2="3.141592653594307" periodicity2="2"   k3="0.0" phase3="0.0" periodicity3="3" />
+   <Proper class1="3006" class2="3005" class3="3007" class4="3008"   k1="-0.322168" phase1="0.0" periodicity1="1"   k2="0.092048" phase2="3.141592653594307" periodicity2="2"   k3="-0.179912" phase3="0.0" periodicity3="3" />
+
+   <!-- DDS -->
+   <Proper class1="3033" class2="3031" class3="3003" class4="401"   k1="0.0" phase1="0.0" periodicity1="1"   k2="0.0" phase2="3.141592653594307" periodicity2="2"   k3="0.5857600000000001" phase3="0.0" periodicity3="3" />
+   <Proper class1="3032" class2="3031" class3="3003" class4="3003"   k1="0.0" phase1="0.0" periodicity1="1"   k2="0.0" phase2="3.141592653594307" periodicity2="2"   k3="0.5857600000000001" phase3="0.0" periodicity3="3" />
+   <Proper class1="3004" class2="3003" class3="3003" class4="406"   k1="0.0" phase1="0.0" periodicity1="1"   k2="0.0" phase2="3.141592653594307" periodicity2="2"   k3="0.497896" phase3="0.0" periodicity3="3" />
+   <Proper class1="3033" class2="3031" class3="3003" class4="3004"   k1="0.0" phase1="0.0" periodicity1="1"   k2="0.0" phase2="3.141592653594307" periodicity2="2"   k3="0.497896" phase3="0.0" periodicity3="3" />
+   <Proper class1="3032" class2="3031" class3="3003" class4="3004"   k1="0.0" phase1="0.0" periodicity1="1"   k2="0.0" phase2="3.141592653594307" periodicity2="2"   k3="0.625508" phase3="0.0" periodicity3="3" />
+   <Proper class1="3034" class2="3033" class3="3031" class4="3003"   k1="0.0" phase1="0.0" periodicity1="1"   k2="0.0" phase2="3.141592653594307" periodicity2="2"   k3="0.0" phase3="0.0" periodicity3="3" />
+   <Proper class1="3032" class2="3031" class3="3033" class4="3034"   k1="0.0" phase1="0.0" periodicity1="1"   k2="0.0" phase2="3.141592653594307" periodicity2="2"   k3="0.0" phase3="0.0" periodicity3="3" />
+
+   <!-- Ring only -->
+   <Proper class1="3101" class2="3101" class3="3101" class4="3101" k1="-1.40164" phase1="0.0" periodicity1="1"   k2="8.376368" phase2="3.141592653594307" periodicity2="2"   k3="0.0" phase3="0.0" periodicity3="3" />
+   <Proper class1="3101" class2="3101" class3="3101" class4="3102"   k1="1.1506" phase1="0.0" periodicity1="1"   k2="9.485128" phase2="3.141592653594307" periodicity2="2"   k3="-1.1506" phase3="0.0" periodicity3="3" />
+   <Proper class1="3102" class2="3101" class3="3101" class4="3102"     k1="0.0" phase1="0.0" periodicity1="1"   k2="8.518624" phase2="3.141592653594307" periodicity2="2"   k3="0.0" phase3="0.0" periodicity3="3" />
+   
+
+   <!-- DBC -->
+   <Proper class1="3003" class2="3011" class3="3101" class4="3101"   k1="-0.17782" phase1="0.0" periodicity1="1"   k2="-1.901628" phase2="3.141592653594307" periodicity2="2"   k3="3.663092" phase3="0.0" periodicity3="3" />
+   <Proper class1="3004" class2="3003" class3="3011" class4="3012"   k1="0.0" phase1="0.0" periodicity1="1"   k2="0.0" phase2="3.141592653594307" periodicity2="2"   k3="0.625508" phase3="0.0" periodicity3="3" />
+   <Proper class1="3012" class2="3011" class3="3101" class4="3101"   k1="0.0" phase1="0.0" periodicity1="1"   k2="0.0" phase2="3.141592653594307" periodicity2="2"   k3="0.225936" phase3="0.0" periodicity3="3" />
+   <Proper class1="3101" class2="3011" class3="3003" class4="3004"   k1="0.0" phase1="0.0" periodicity1="1"   k2="0.0" phase2="3.141592653594307" periodicity2="2"   k3="1.046" phase3="0.0" periodicity3="3" />
+   <Proper class1="3102" class2="3101" class3="3101" class4="3011"   k1="0.0" phase1="0.0" periodicity1="1"   k2="16.352118" phase2="3.141592653594307" periodicity2="2"   k3="0.0" phase3="0.0" periodicity3="3" />
+   <Proper class1="3011" class2="3101" class3="3101" class4="3101"   k1="-1.27612" phase1="0.0" periodicity1="1"   k2="12.394054" phase2="3.141592653594307" periodicity2="2"   k3="0.0" phase3="0.0" periodicity3="3" />
+   <Proper class1="3021" class2="3101" class3="3101" class4="3101"   k1="-1.40164" phase1="0.0" periodicity1="1"   k2="13.152404" phase2="3.141592653594307" periodicity2="2"   k3="0.0" phase3="0.0" periodicity3="3" />
+   <Proper class1="3021" class2="3101" class3="3101" class4="3102"   k1="1.1506" phase1="0.0" periodicity1="1"   k2="12.943204000000001" phase2="3.141592653594307" periodicity2="2"   k3="-1.1506" phase3="0.0" periodicity3="3" />
+   <Proper class1="3022" class2="3021" class3="3101" class4="3101"   k1="0.00" phase1="0.0" periodicity1="1"   k2="20.1" phase2="0.5235987755983" periodicity2="6"   k3="0.000" phase3="0.0" periodicity3="3" />
+   
+   <!-- DBS -->
+   <Proper class1="3003" class2="3041" class3="3101" class4="3101"   k1="0.0" phase1="0.0" periodicity1="1"   k2="-1.2008079999999999" phase2="3.141592653594307" periodicity2="2"   k3="0.0" phase3="0.0" periodicity3="3" />
+   <Proper class1="3004" class2="3003" class3="3041" class4="3042"   k1="0.0" phase1="0.0" periodicity1="1"   k2="0.0" phase2="3.141592653594307" periodicity2="2"   k3="0.625508" phase3="0.0" periodicity3="3" />
+   <Proper class1="3042" class2="3041" class3="3101" class4="3101"   k1="0.0" phase1="0.0" periodicity1="1"   k2="0.0" phase2="3.141592653594307" periodicity2="2"   k3="0.0" phase3="0.0" periodicity3="3" />
+   <Proper class1="3101" class2="3041" class3="3003" class4="3004"   k1="0.0" phase1="0.0" periodicity1="1"   k2="0.0" phase2="3.141592653594307" periodicity2="2"   k3="1.046" phase3="0.0" periodicity3="3" />
+   <Proper class1="3102" class2="3101" class3="3101" class4="3041"   k1="0.0" phase1="0.0" periodicity1="1"   k2="8.585568" phase2="3.141592653594307" periodicity2="2"   k3="0.0" phase3="0.0" periodicity3="3" />
+   <Proper class1="3101" class2="3101" class3="3101" class4="3041"   k1="-1.27612" phase1="0.0" periodicity1="1"   k2="8.811504" phase2="3.141592653594307" periodicity2="2"   k3="0.0" phase3="0.0" periodicity3="3" />
+   <Proper class1="3051" class2="3101" class3="3101" class4="3101"   k1="-1.4016400000000002" phase1="0.0" periodicity1="1"   k2="13.152404" phase2="3.141592653594307" periodicity2="2"   k3="0.0" phase3="0.0" periodicity3="3" />
+   <Proper class1="3051" class2="3101" class3="3101" class4="3102"   k1="0.0" phase1="0.0" periodicity1="1"   k2="9.35124" phase2="3.141592653594307" periodicity2="2"   k3="0.0" phase3="0.0" periodicity3="3" />
+   <Proper class1="3052" class2="3051" class3="3101" class4="3101"   k1="0.0" phase1="0.0" periodicity1="1"   k2="0.07069" phase2="3.141592653594307" periodicity2="2"   k3="0.0" phase3="0.0" periodicity3="3" />
+
+</PeriodicTorsionForce>
+      
+   
+<AmoebaPiTorsionForce piTorsionUnit="1.0">
+
+   <PiTorsion class1="3101" class2="3101" k="28.6604" />
+
+</AmoebaPiTorsionForce>
+      
+      
+<AmoebaMultipoleForce  direct11Scale="0.0"  direct12Scale="1.0"  direct13Scale="1.0"  direct14Scale="1.0"  mpole12Scale="0.0"  mpole13Scale="0.0"  mpole14Scale="0.4"  mpole15Scale="0.8"  mutual11Scale="1.0"  mutual12Scale="1.0"  mutual13Scale="1.0"  mutual14Scale="1.0"  polar12Scale="0.0"  polar13Scale="0.0"  polar14Intra="0.5"  polar14Scale="1.0"  polar15Scale="1.0"  >
+   <!-- Source AMOEBA 18 Openmm Distribution-->
+   
+   <!--Tail:  Methyl and methylene atom charges adjusted to make tail net neutral-->
+   <Multipole type="3001" kz="3003" kx="3003" c0="-0.171" d1="0.00145312061478814" d2="0.0" d3="0.00569235923280263" q11="-0.000182149216734327" q21="0.0" q22="-0.00012951318961713579" q31="1.9237959192858867e-05" q32="0.0" q33="0.00031166240635146277" />
+   <Multipole type="3002" kz="3001" kx="3003" c0="0.057" d1="0.00172935111767212" d2="0.0" d3="-0.0023469009200966498" q11="2.2691644249315822e-05" q21="0.0" q22="-1.1817203463444603e-05" q31="5.320541843730982e-07" q32="0.0" q33="-1.087444078587122e-05" />
+   <Multipole type="3003" kz="3003" kx="3003" c0="-0.127" d1="0.01331568609975017" d2="0.0" d3="0.007960941926027958" q11="0.00010974317623990378" q21="0.0" q22="-0.0007001833066349973" q31="-0.0005884519279166467" q32="0.0" q33="0.0005904401303950935"  />
+   <Multipole type="3004" kz="3003" kx="3003" c0="0.0635" d1="0.00125573751598407" d2="0.0" d3="-0.00321051812451553" q11="-1.997536762383211e-06" q21="0.0" q22="5.8563297416786296e-05" q31="1.721241957866655e-05" q32="0.0" q33="-5.656576065440308e-05"  />
+      
+   <!--methylene adjacent to carbonyl atom charge adjusted so that head group + methylene charge is -1.0 -->
+   <Multipole type="3005" kz="3007" kx="3003" c0="-0.36" d1="0.015410698668557979" d2="0.0" d3="-0.019100122166847457" q11="0.0004837959364220646" q21="0.0" q22="-7.544901705767988e-05" q31="-0.0003319084682094496" q32="0.0" q33="-0.0004083469193643848" />
+   <Multipole type="3006" kz="3005" kx="3007" c0="0.058" d1="0.00285544021755164" d2="0.0" d3="0.00276653844650852" q11="-3.0075062842984606e-05" q21="0.0" q22="5.5725675100129764e-06" q31="-2.818953748783784e-06" q32="0.0" q33="2.450249533297163e-05" />
+   
+   <!--carbonyl-->
+   <Multipole type="3007" kz="-3008" kx="-3008" c0="1.050" d1="0.0" d2="0.0" d3="-0.00328248622488377" q11="0.0004851494075928383" q21="0.0" q22="-0.0005929043813542953" q31="0.0" q32="0.0" q33="0.00010775497376145695"   />
+   <Multipole type="3008" kz="3007" kx="3008" c0="-0.903" d1="0.010316309681462051" d2="0.0" d3="-0.004764711586144359" q11="-0.0005294312505869783" q21="0.0" q22="8.136695307333856e-05" q31="0.00021984105526938968" q32="0.0" q33="0.0004480642975136397" />
+   
+   <!-- DDS -->
+   <Multipole type="3031" kz="3033" kx="3003" c0="-0.100" d1="0.007640789714831009" d2="0.0" d3="0.00919127893599971" q11="5.771387757857661e-05" q21="0.0" q22="1.6334996888647754e-06" q31="-5.0610487502998925e-05" q32="0.0" q33="-5.934737726744138e-05"/>
+   <Multipole type="3032" kz="3031" kx="3033" c0="0.097" d1="0.00135310612236463" d2="0.0" d3="0.0090648055831467" q11="-2.5538600849908715e-05" q21="0.0" q22="-6.813093845156568e-05" q31="-3.666506730206193e-05" q32="0.0" q33="9.36695393014744e-05" />
+   <Multipole type="3033" kz="3031" kx="3034" c0="1.306" d1="0.0" d2="0.0" d3="0.00221301908632338" q11="0.00018486549335981073" q21="0.0" q22="0.00018486549335981073" q31="0.0" q32="0.0" q33="-0.00036973098671962145"  />
+   <Multipole type="3034" kz="3033" kx="3031" c0="-0.80" d1="0.00105465017671987" d2="0.0" d3="0.02508247050995741" q11="-0.00048290917944810943" q21="0.0" q22="-0.0005533736888837678" q31="-1.1667854920462682e-06" q32="0.0" q33="0.0010362828683318772"/>
+   
+   
+   <!-- DBC -->
+   <Multipole type="3011" kz="3003" kx="3013" c0="-0.087" d1="0.00660095649995166" d2="0.0" d3="0.005208162086942779" q11="6.369715358178986e-05" q21="0.0" q22="-0.000400384775166661" q31="-6.845763838933865e-05" q32="0.0" q33="0.00033668762158487115"  />
+   <Multipole type="3012" kz="3011" kx="3003" c0="0.0533" d1="0.00150762586727291" d2="0.0" d3="-0.00237812237540346" q11="2.975769718914802e-05" q21="0.0" q22="-3.827989842305396e-05" q31="1.5018862853619564e-05" q32="0.0" q33="8.522201233905942e-06"  />
+   <Multipole type="3013" kz="-3015" kx="-3015" c0="-0.052" d1="0.0" d2="0.0" d3="-0.00551773075396793" q11="8.008815617405584e-06" q21="0.0" q22="-0.00040671341967552" q31="0.0" q32="0.0" q33="0.0003987046040581144"  />
+   <Multipole type="3015" kz="3016" kx="3013" c0="-0.0174" d1="0.00578073182663716" d2="0.0" d3="0.00177962295248817" q11="2.044208182065062e-06" q21="0.0" q22="-0.0003907331255764543" q31="-0.00017472846100491274" q32="0.0" q33="0.00038868891739438923"  />
+   <Multipole type="3016" kz="3015" kx="3013" c0="-0.0482" d1="0.00063660018193377" d2="0.0" d3="-0.00879545438397439" q11="0.00011624917214355378" q21="0.0" q22="-2.058209607969617e-05" q31="-5.15252473287632e-06" q32="0.0" q33="-9.566707606385761e-05"  />
+   <Multipole type="3017" kz="3018" kx="3015" c0="0.0486" d1="-0.0023056250978266296" d2="0.0" d3="0.0027866471804349397" q11="0.00015803876132668292" q21="0.0" q22="-0.00026864069168873277" q31="-3.226861956803159e-05" q32="0.0" q33="0.00011060193036204984"  />
+   <Multipole type="3018" kz="3017" kx="3015" c0="-0.0028" d1="-0.00237812237540346" d2="0.0" d3="-0.00775138775142632" q11="0.00012211110245559424" q21="0.0" q22="-1.666169682642071e-05" q31="0.0" q32="0.0" q33="-0.00010544940562917353"  />
+   <Multipole type="3019" kz="-3017" kx="-3017" c0="-0.288" d1="0.0" d2="0.0" d3="0.03096692106947821" q11="-0.00037251260333265974" q21="0.0" q22="0.0004782980431835426" q31="0.0" q32="0.0" q33="-0.00010578543985088285"  />
+   <Multipole type="3021" kz="-3022" kx="-3022" c0="1.25" d1="0.0" d2="0.0" d3="-0.00392861159657216" q11="0.0011928934842162955" q21="0.0" q22="-0.0007107217131991592" q31="0.0" q32="0.0" q33="-0.00048217177101713625"  />
+   <Multipole type="3022" kz="3021" kx="3022" c0="-0.945" d1="0.015075729495520508" d2="0.0" d3="-0.00778366756115031" q11="-0.0005141510277831403" q21="0.0" q22="0.00012288584802231295" q31="0.0003173563195526486" q32="0.0" q33="0.0003912651797608274"  />
+   
+   <!-- DBS -->
+   <Multipole type="3041" kz="3003" kx="3043" c0="-0.09415" d1="0.00855309122244017" d2="0.0" d3="0.00565849189145287" q11="7.931341060733713e-05" q21="0.0" q22="-0.0004076095109334115" q31="-4.76795223469787e-05" q32="0.0" q33="0.0003282961003260744"  />
+   <Multipole type="3042" kz="3041" kx="3003" c0="0.05817" d1="0.0018251321924269098" d2="0.0" d3="-0.00256174686678419" q11="4.3329746032630215e-05" q21="0.0" q22="-2.7993517525174063e-05" q31="2.6593374934718544e-05" q32="0.0" q33="-1.533622850745615e-05"  />
+   <Multipole type="3043" kz="-3045" kx="-3045" c0="-0.04091" d1="0.0" d2="0.0" d3="-0.00741694775559744" q11="6.0906202684815196e-05" q21="0.0" q22="-0.0003768530453630718" q31="0.0" q32="0.0" q33="0.00031594684267825666"/>
+   <Multipole type="3045" kz="3046" kx="3043" c0="0.06060" d1="0.00417573735298369" d2="0.0" d3="-0.008031851671979019" q11="-0.0002929751699108497" q21="0.0" q22="-0.0005577701366177981" q31="-1.3180008918154646e-05" q32="0.0" q33="0.0008507453065286478"/>
+   <Multipole type="3046" kz="3045" kx="3043" c0="-0.03488" d1="-0.00023125044015382998" d2="0.0" d3="-0.007393134781210889" q11="0.00010769896805783874" q21="0.0" q22="-2.2430284299097458e-05" q31="-1.4094768743918919e-05" q32="0.0" q33="-8.526868375874127e-05"  />
+   <Multipole type="3047" kz="3048" kx="3045" c0="-0.04022" d1="-0.0019277925708933697" d2="0.0" d3="0.0012181659341741799" q11="0.00037108445789039513" q21="0.0" q22="-9.873805547892339e-05" q31="3.06724570149123e-05" q32="0.0" q33="-0.0002723464024114717"/>
+   <Multipole type="3048" kz="3047" kx="3045" c0="0.02719" d1="0.00203997813911445" d2="0.0" d3="-0.007749271042591959" q11="2.4110455407644085e-05" q21="0.0" q22="3.355675075125067e-05" q31="3.421948491073295e-05" q32="0.0" q33="-5.766720615889476e-05" />
+   <Multipole type="3049" kz="-3047" kx="-3047" c0="-0.17459" d1="0.0" d2="0.0" d3="0.007332279402223039" q11="0.0002687247002441601" q21="0.0" q22="0.00021897296686330722" q31="0.0" q32="0.0" q33="-0.0004876976671074674"  />
+   <Multipole type="3051" kz="-3052" kx="-3052" ky="-3052" c0="1.57285" d1="-0.00051171436070653" d2="0.0" d3="0.02379551153866653" q11="0.0005161578988294599" q21="0.0" q22="0.0005101746228262467" q31="1.147183495779891e-05" q32="0.0" q33="-0.0010263325216557065"  />
+   <Multipole type="3052" kz="3051" kx="3049" c0="-0.80164" d1="-0.00115201878310043" d2="0.0" d3="-0.00415457026464009" q11="-0.00016551552275971543" q21="0.0" q22="-0.00025408854303193173" q31="-4.052946085171917e-05" q32="0.0" q33="0.0004196040657916471"  />
+
+      
+      <!--Tail-->
+        <Polarize type="3001" polarizability="1.3340e-03" thole="3.9000e-01" pgrp1="3003" pgrp2="3002"/>
+        <Polarize type="3002" polarizability="4.9600E-04" thole="3.9000e-01" pgrp1="3001"/>
+        <Polarize type="3003" polarizability="1.3340E-03" thole="3.9000e-01" pgrp1="3003" pgrp2="3004"/>
+        <Polarize type="3004" polarizability="4.9600E-04" thole="3.9000e-01" pgrp1="3003"/>
+      <!--methylene adjacent to carbonyl-->
+        <Polarize type="3005" polarizability="1.3340E-03" thole="3.9000e-01" pgrp1="3006" pgrp2="3007"/>
+        <Polarize type="3006" polarizability="4.9600E-04" thole="3.9000e-01" pgrp1="3005"/>
+      <!--carbonyl-->
+        <Polarize type="3007" polarizability="1.3340E-03" thole="3.9000e-01" pgrp1="3005" pgrp2="3008"/>
+        <Polarize type="3008" polarizability="1.20e-03" thole="3.9000e-01" pgrp1="3007" />
+         
+   <!-- DDS -->
+   <Polarize type="3031" polarizability="0.001334" thole="0.3900" pgrp1="3032" />
+   <Polarize type="3032" polarizability="0.000496" thole="0.3900" pgrp1="3031" />
+   <Polarize type="3033" polarizability="0.0033" thole="0.3900" pgrp1="3034" />
+   <Polarize type="3034" polarizability="0.000837" thole="0.3900" pgrp1="3033" />
+   
+   <!-- DBC -->
+   <Polarize type="3015" polarizability="0.00175" thole="0.3900" pgrp1="3017" pgrp2="3013" pgrp3="3016" />
+   <Polarize type="3017" polarizability="0.00175" thole="0.3900" pgrp1="3015" pgrp2="3019" pgrp3="3018" />
+   <Polarize type="3019" polarizability="0.00175" thole="0.3900" pgrp1="3017" />
+   <Polarize type="3013" polarizability="0.00175" thole="0.3900" pgrp1="3015" />
+   <Polarize type="3018" polarizability="0.000696" thole="0.3900" pgrp1="3017" />
+   <Polarize type="3016" polarizability="0.000696" thole="0.3900" pgrp1="3015" />
+   <Polarize type="3021" polarizability="0.001334" thole="0.3900" pgrp1="3022" />
+   <Polarize type="3011" polarizability="0.001334" thole="0.3900" pgrp1="3012" />
+   <Polarize type="3012" polarizability="0.000496" thole="0.3900" pgrp1="3011" />
+   <Polarize type="3022" polarizability="0.00129" thole="0.3900" pgrp1="3021" />
+   
+   <!-- DBS -->
+   <Polarize type="3041" polarizability="0.001334" thole="0.3900" pgrp1="3042" />
+   <Polarize type="3042" polarizability="0.000496" thole="0.3900" pgrp1="3041" />
+   <Polarize type="3043" polarizability="0.001334" thole="0.3900" pgrp1="3045" />
+   <Polarize type="3045" polarizability="0.001334" thole="0.3900" pgrp1="3047" pgrp2="3043" pgrp3="3046" />
+   <Polarize type="3046" polarizability="0.000496" thole="0.3900" pgrp1="3045" />
+   <Polarize type="3047" polarizability="0.001334" thole="0.3900" pgrp1="3045" pgrp2="3049" pgrp3="3048" />
+   <Polarize type="3048" polarizability="0.000496" thole="0.3900" pgrp1="3047" />
+   <Polarize type="3049" polarizability="0.001334" thole="0.3900" pgrp1="3047" />
+   <Polarize type="3052" polarizability="0.000496" thole="0.3900" pgrp1="3051" />
+   <Polarize type="3051" polarizability="0.001334" thole="0.3900" pgrp1="3052" />
+
+</AmoebaMultipoleForce>
+</ForceField>

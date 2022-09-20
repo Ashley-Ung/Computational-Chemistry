@@ -229,9 +229,15 @@ def main():
 
 		# use a loop for carbons 1 to carbon 11 amd hydrogen 1 to 23 sinc the sigma is the fixed & doesnt change
 		#for 'C' in "DDC_TailGroups"[0:3:0]:
-		# need to also do solvents 
 		
-	#1 : 0.2655*adjust,
+		# Solvents for DDC 
+		("CTC", "C"):(0.36 * adjust),
+		("CTC", "Cl1"):(0.3898 * adjust),
+		("CTC", "Cl2"):(0.3898 * adjust),
+		("CTC", "Cl3"):(0.3898 * adjust),
+		("CTC", "Cl4"):(0.3898 * adjust)
+	
+		#1 : 0.2655*adjust,
 	#3 : 0.22*adjust,
 	#8 : 0.3405*adjust,
 	#9 : 0.343*adjust,

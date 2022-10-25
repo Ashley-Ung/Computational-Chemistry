@@ -52,7 +52,7 @@ def main():
 	
 	simnumber= int(sys.argv[2])
 		
-# First check for presence of epected data files
+# First check for presence of expected data files
 	if not os.path.isfile(basefile+".siminfo"):
 		print("Simulation info file {} does not exist.  Exiting!".format(basefile+".siminfo"))
 		sys.exit(1)
@@ -120,7 +120,7 @@ def main():
 	aqueousTypes = ["Holes", "H", "Li+", "O", "F-", "Na+", "Mg2+", "Cl-", "K+", "Ca2+", "Zn2+", "Br-", "I-"]
 	global hydrophobicTypes
 	hydrophobicTypes = ["Holes", "Solvent", "DDC_Tail", "DDC_HeadGroup"]
-	#hydrophobicTypes = ["Solvent", "DDC_Tail", "DDC_HeadGroup", "DBC_Tail", "DBC_HeadGroup", "DDS_Tail", "DDS_HeadGroup", "DBS_Tail", "DBS_HeadGroup"] # syntax error because other surfactants are not declared yet 
+	#hydrophobicTypes = ["Holes", "Solvent", "DDC_Tail", "DDC_HeadGroup", "DBC_Tail", "DBC_HeadGroup", "DDS_Tail", "DDS_HeadGroup", "DBS_Tail", "DBS_HeadGroup"] # syntax error because other surfactants are not declared yet 
 	print (hydrophobicTypes)
 	
 	# A dictionary of the hydrophobic and aqueous interface atom names and vdw radii values-- values are from Amoeba2018 data adjust to 0.7 of diameter
@@ -191,6 +191,10 @@ def main():
 	}
 
 # Looping through the data file and sorting the atoms by aqueous or hydrophobic by adding into designated array 
+	global atom_type   # An array that stores the atom type 
+	global atom_radius # An array that stores the van der waals radius 
+	atom_type = mp.Arrary ('l',atomCount)
+	atom_radius = mp.Array ('l', atomCount)
 	aqueousArray = []
 	hydrophobicArray = []
 	for atom in range (atomCount): 
@@ -199,8 +203,10 @@ def main():
 		elif sim_data.atominfo[atom]['molecule'] in hydrophobicMolecules: 
 			hydrophobicArray.append (atom)
 		else: 
-			print ("No aqueous or hydrophobic molecules found!")
-			
+			sys.exit (1) # print atom number 
+		atom_type[atom] = interfaceData[(sim_data.atominfo[atom]['molecule'],sim_data.atominfo[atom]['type'])][0]
+		atom_radius[atom] = interfaceData[(sim_data.atominfo[atom]['molecule'],sim_data.atominfo[atom]['type'])][0]
+		
 	
 # Defines the range above and below the interface to test for surface atoms.  in nm
 	global interfaceBound

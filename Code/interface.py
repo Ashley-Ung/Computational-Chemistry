@@ -6,31 +6,23 @@ Interface_Ionic_Analysis.py
 Ashley Ung, Pacific University
 Fall 2022
 
-Hydrophobic interface analysis for DDC 
+Hydrophobic and Hydrophillic interface analysis for DDC 
 
 This Program will read in all of the atom data from the simulations using FrameDataClass.py and will create a 2-d of the uppermost water atoms and ions (i.e. the interface) for each frame and save the z height and the atom type count. The resulting interface location data is analyzed with 2d FFT and fractal analysis.  Output three files:
 		nn_##.interface_comp.txt including percenrt atomic composition of interface of O, H, ions, and holes
 		nn_##.interface_FFT.txt averaged trace of 2-d fft with x axis and stdev
 		nn_##.interface_FD.txt  averaged fractal area ratio, x axis and stdev
 """
-		
 import sys
-
 import os.path
-# String regular expressions
-import re
-# import numpy for extensive array and math functions
-import numpy as np
-
-# For multiprocessing
+import re # String regular expressions
+import numpy as np # import numpy for extensive array and math functions 
 import multiprocessing as mp
-
 import FrameDataClass as fd
 import time
-
-
 import math
 from decimal import Decimal
+
 #This is the size of your 2-d array for a surface z position and element type. Must be 2^n, and bigger is more often better
 global size
 size = 512
@@ -40,40 +32,32 @@ global Analysis_Target
 Analysis_Target = 100
 
 # First check for the presence of expected data files		
-		
 def main():
 	print("Welcome To Surface Analysis")
-# Check for presence of two parameters in input line
+	# Check for presence of two parameters in input line
 	if len(sys.argv)!=3:
 		print("Two input arguments are expected: The input pdb file for the simulations, and the integer number of the simulation.")
 		sys.exit(1)
-		
 	basefile = sys.argv[1]
-	
 	simnumber= int(sys.argv[2])
-		
-# First check for presence of expected data files
+	# First check for presence of expected data files
 	if not os.path.isfile(basefile+".siminfo"):
 		print("Simulation info file {} does not exist.  Exiting!".format(basefile+".siminfo"))
 		sys.exit(1)
 	if not os.path.isfile(basefile+".simtopo"):
 		print("Simulation info file {} does not exist.  Exiting!".format(basefile+".simtopo"))
 		sys.exit(1)
-	
+		
 	global filename
 	filename="{}_{:02d}".format(basefile,simnumber)
-	
 	if not os.path.isfile(filename+"_traj.framebin"):
 		print("Simulation info file "+filename+"_traj.framebin does not exist.  Exiting!")
 		sys.exit(1)
 
-	
 	global sim_data
-#Read the data for the simulation
+	#Read the data for the simulation
 	sim_data=fd.FrameData(basefile,simnumber)
-	
 	print('Simulation dimensions {} x {} x {} {}'.format(sim_data.simdimensions.x, sim_data.simdimensions.y, sim_data.simdimensions.z, sim_data.simdimensions.units))
-	
 	if (sim_data.simdimensions.x != sim_data.simdimensions.y):
 		print("Analysis assumes square dimensional simulation. Exiting!")
 		sys.exit(1)
@@ -81,47 +65,40 @@ def main():
 	global space_dim
 	space_dim = sim_data.simdimensions.x
 
-
-		
 	print('Frame count ', sim_data.framecount)
 	print('Atom count ', sim_data.atomcount)
 
-
-# Interface Locating constants
-		
-
-#minimum z height for simulation
+	# Minimum z height for simulation
 	global min_z
 	min_z = -4.0 #in nanometers(-40 angstroms)
 
-# Variable to convert real position to array index and inverse.  These constants reduce calculations in time-critical core function
+	# Variable to convert real position to array index and inverse.  These constants reduce calculations in time-critical core function
 	global cell_dimension
 	cell_dimension = space_dim/size
 	global inverse_cell_dimension
 	inverse_cell_dimension = size / space_dim
 	
-
-#The number of atoms in the simulation
+	# The number of atoms in the simulation
 	global atomCount
 	atomCount = sim_data.atomcount
 
-#the number of frames to Analyze
+	# The number of frames to Analyze
 	global Analysis_Count
 	Analysis_Count = min(Analysis_Target,sim_data.framecount)
 	Frame_Skip = sim_data.framecount // Analysis_Count
 	
-#The specific molecule we are looking for on our surface. The b signifies that this is a binary string.  Assumes water and ions w/ van der Waals Radius as specified.
+	# The specific molecule we are looking for on our surface. The b signifies that this is a binary string.
+	# Assumes water and ions w/ van der Waals Radius as specified.
 	global interface_molecules
 	aqueousMolecules = [b'HOH',b'LI',b'NA',b'K',b'MG',b'CA',b'ZN',b'F',b'Cl',b'Br',b'I']
 	hydrophobicMolecules = [b'DDC', b'DBC', b'DDS', b'DBS', b'CTC']
 	
-# A list of aqueous and hydrophobic atom types
+	# A list of aqueous and hydrophobic atom types
 	global aqueousTypes
 	aqueousTypes = ["Holes", "H", "Li+", "O", "F-", "Na+", "Mg2+", "Cl-", "K+", "Ca2+", "Zn2+", "Br-", "I-"]
 	global hydrophobicTypes
 	hydrophobicTypes = ["Holes", "Solvent", "DDC_Tail", "DDC_HeadGroup"]
 	#hydrophobicTypes = ["Holes", "Solvent", "DDC_Tail", "DDC_HeadGroup", "DBC_Tail", "DBC_HeadGroup", "DDS_Tail", "DDS_HeadGroup", "DBS_Tail", "DBS_HeadGroup"] # syntax error because other surfactants are not declared yet 
-	print (hydrophobicTypes)
 	
 	# A dictionary of the hydrophobic and aqueous interface atom names and vdw radii values-- values are from Amoeba2018 data adjust to 0.7 of diameter
 	adjust = 0.70 #Empirical Value 
@@ -190,11 +167,11 @@ def main():
 		(b"CTC", b"Cl4"):(hydrophobicTypes.index ("Solvent"), 0.3898 * adjust)
 	}
 
-# Looping through the data file and sorting the atoms by aqueous or hydrophobic by adding into designated array 
+	# Looping through the data file and sorting the atoms by aqueous or hydrophobic by adding into designated array 
 	global atom_type   # An array that stores the atom type 
 	global atom_radius # An array that stores the van der waals radius 
 	atom_type = mp.Arrary ('l',atomCount)
-	atom_radius = mp.Array ('l', atomCount)
+	atom_radius = mp.Array ('d', atomCount)
 	aqueousArray = []
 	hydrophobicArray = []
 	for atom in range (atomCount): 
@@ -204,16 +181,15 @@ def main():
 			hydrophobicArray.append (atom)
 		else: 
 			sys.exit (1) # print atom number 
-		atom_type[atom] = interfaceData[(sim_data.atominfo[atom]['molecule'],sim_data.atominfo[atom]['type'])][0]
-		atom_radius[atom] = interfaceData[(sim_data.atominfo[atom]['molecule'],sim_data.atominfo[atom]['type'])][0]
+		atom_type[atom] = interfaceData[(sim_data.atominfo[atom]['molecule'], sim_data.atominfo[atom]['type'])][0]
+		atom_radius[atom] = interfaceData[(sim_data.atominfo[atom]['molecule'], sim_data.atominfo[atom]['type'])][1]
 		
-	
-# Defines the range above and below the interface to test for surface atoms.  in nm
+	# Defines the range above and below the interface to test for surface atoms; in nm
 	global interfaceBound
 	interfaceBound = 2.0
 	
-#2-d arrays for surface atom type and z height.  Defined as 1-d array for purposes of multiprocessing, which only uses 1-d indexing	
-	global z_type
+#2-d arrays for surface atom type and z height. Defined as 1-d array for purposes of multiprocessing, which only uses 1-d indexing	
+	global z_type										             # need z-height of aqueus and hydrphobic layer 
 	mpArray_type = mp.Array('l',size*size)
 		
 	z_type = np.frombuffer(mpArray_type.get_obj())
@@ -223,15 +199,8 @@ def main():
 		
 	z_height = np.frombuffer(mpArray_height.get_obj(),dtype='float64')
 
-# Array to keep atom type -- from the simulation topography.  Used for interface composition	
-	global atomLookup
-	atomLookup = np.zeros(atomCount)
-
-
+# Roughness analysis for the aqueous interface  FFT and Fractal
 # Array and constants for 2-d fft
-
-# data array
-
 	global interface_fft
 	interface_fft = np.empty([Analysis_Count,size//2],float)
 	
@@ -242,15 +211,15 @@ def main():
 	global hanning_correct
 	hanning_correct=12.0
 	
-# Fractal Analysis constantds
+# Fractal Analysis constants
 
-# box increment
+# Box increment
 	global box_increment
 	box_increment = 2  # MUST BE EVEN
 	global fd_size
 	fd_size = size//box_increment
 	
-# fractal dimension data array 
+# Fractal dimension data array 
 	global interface_fd
 	interface_fd = np.empty((Analysis_Count,fd_size))
 
@@ -264,61 +233,51 @@ def main():
 		('seconds', 1),
 		)
 	
-
-#Fills List with atomic number from atom index
-	print("Creating Atom Type Listing")
-	global surfaceAtoms
-	surfaceAtoms = []
-	global atomTypes
-	atomTypes=[0]
-# Creates list of atomic numbers to save the count of surface type
-	for atom in range(atomCount):
-		#This if statement ensures that we only grab the information from the atoms defined for the solution (H and O in water and ions.
-		if sim_data.atominfo[atom]['molecule'] in aqueousMolecules:
-			surfaceAtoms.append(atom)
-			atomLookup[atom] = sim_data.atominfo[atom]['atomicno']
-			if not(sim_data.atominfo[atom]['atomicno'] in atomTypes) : atomTypes.append(sim_data.atominfo[atom]['atomicno'])
-	
-	atomTypes.sort()
-# 2-d Array if integers for composition. One row for each frame, columns for each atom thype and for 'holes'	
-	global interface_comp
-	interface_comp = np.empty([Analysis_Count,len(atomTypes)],int)
-	
+	#to be deleted 
+	#global interface_comp											 
+	#interface_comp = np.empty([Analysis_Count,len(atomTypes)],int)
+	global aqueousComposition 
+	aqueousComposition = np.empty ([Analysis_Count, len (atom_type)],int)
+	global hydrophobicComposition 
+	hydrophobicComposition = np.empty ([Analysis_Count, len (atom_type)], int)
 			
-			#This portion fills the z_height and z_type arrays with the max z heights at every (x,y) and what atom type they are	
+	#This portion fills the z_height and z_type arrays with the max z heights at every (x,y) and what atom type they are	
 	print("Starting Interface Analysis.")
 
 	start_time = time.time()
 	Frames_Remaining = Analysis_Count
 	
-#frame loop	
+	# Frame loop	
 	for frame in range(0,sim_data.framecount+1-Frame_Skip,Frame_Skip):
 		print('Analysis of frame {} of {}'.format(frame + 1,sim_data.framecount))
-		
 		frame_start_time = time.time()
 
-# Load Frame Data --  skip over
+		# Load Frame Data --  skip over
 		for i in range(Frame_Skip):
 			sim_data.next()
 
-# Clear Result Arrays	
+		# Clear Result Arrays	
 		z_height.fill(-1.0*interfaceBound)
 		z_type.fill(0)
 		
-
-# Set up the multiprocessing to use 1/2 of available cores.		
-		print("Determining Interface composition and location")
+		# Aqueous -- Set up the multiprocessing to use 1/2 of available cores.
+		print ("Determining Aqueous Interface Composition and Location")
 		pool = mp.Pool(mp.cpu_count()//2)
-# The multiprocessing is called here and closed when all threads are finished.
-		results = pool.map(Test_Atom,[atom for atom in surfaceAtoms])
-		pool.close()
-		pool.join()
-
-# Record surface composition				
-
+		# The multiprocessing is called here and closed when all threads are finished.
+		aqueousResults = pool.map (Test_Atom, [atom for atom in aqueousArray])
+		pool.close () 
+		pool.join ()
 		
+		# Hydrophobic -- Set up the multiprocessing to use 1/2 of available cores.
+		print ("Determining Hydrophobic Interface Composition and Location")
+		pool = mp.Pool(mp.cpu_count()//2)
+		# The multiprocessing is called here and closed when all threads are finished.
+		hydrophobicResults = pool.map (Test_Atom, [atom for atom in hydrophobicArray])
+		pool.close ()
+		pool.join ()
+
+		# Record surface composition				
 		append_composition(frame//Frame_Skip)
-		
 		
 		print("Begin FFT analysis")
 		Analysis_FFT(frame//Frame_Skip)
@@ -338,7 +297,6 @@ def main():
 	write_FD()
 	
 	print("\nExecution time = {} ".format(display_time(time.time() - start_time)))
-	
 	
 	print("Surface Analysis Complete for {}_{:02d}".format(basefile,simnumber))	
 	

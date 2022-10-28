@@ -170,7 +170,7 @@ def main():
 	# Looping through the data file and sorting the atoms by aqueous or hydrophobic by adding into designated array 
 	global atom_type   # An array that stores the atom type 
 	global atom_radius # An array that stores the van der waals radius 
-	atom_type = mp.Arrary ('l',atomCount)
+	atom_type = mp.Array ('l',atomCount)
 	atom_radius = mp.Array ('d', atomCount)
 	aqueousArray = []
 	hydrophobicArray = []
@@ -235,7 +235,7 @@ def main():
 	
 	#to be deleted 
 	#global interface_comp											 
-	#interface_comp = np.empty([Analysis_Count,len(atomTypes)],int)
+	#interface_comp = np.empty([Analysis_Count,len(atom_type)],int)
 	global aqueousComposition 
 	aqueousComposition = np.empty ([Analysis_Count, len (atom_type)],int)
 	global hydrophobicComposition 
@@ -277,24 +277,27 @@ def main():
 		pool.join ()
 
 		# Record surface composition				
-		append_composition(frame//Frame_Skip)
+		append_aqueous_composition(frame//Frame_Skip)
+		append_hydrophobic_composition(frame//Frame_Skip)
 		
-		print("Begin FFT analysis")
-		Analysis_FFT(frame//Frame_Skip)
-		print("Begin Fractal Dimension Analysis")
-		Analysis_FD(frame//Frame_Skip)
+		# FFT and Fractal Dimension analysis for Aqueous Interface 
+		print ("Begin FFT analysis for Aqueous Interface")
+		Analysis_FFT (frame//Frame_Skip)
+		print ("Begin Fractal Dimension Analysis for Aqueous Interface")
+		Analysis_FD (frame//Frame_Skip)
 		
 		#This portion estimates the remaining time left in the data retrieval
 		Frames_Remaining -= 1
 		remainingSeconds = (time.time() - frame_start_time) * (Frames_Remaining)
 		
-		print("Frame analysis Complete\n\tEstimated Remaining Time = {} ".format(display_time(remainingSeconds)))	
+		print ("Frame analysis Complete\n\tEstimated Remaining Time = {} ".format(display_time(remainingSeconds)))	
 	
-	sim_data.done()
-	print("Writing Data Files")
-	write_composition()
-	write_FFT()
-	write_FD()
+	sim_data.done ()
+	print ("Writing Data Files")
+	write_aqueous_composition()
+	write_hydrophobic_composition()
+	write_FFT ()
+	write_FD ()
 	
 	print("\nExecution time = {} ".format(display_time(time.time() - start_time)))
 	
@@ -341,24 +344,32 @@ def Test_Atom(atom):
 					if z > z_height[matrix_index]:
 						z_height[matrix_index] = z
 						z_type[matrix_index] = atom_type
-					
-						
+				
 	return True
 # End of the multiprocess core function
 
-
 #######
-# appends composition count to array
-def append_composition(frame):
-
+# appends aqueous composition count to array
+def append_aqueous_composition(frame):
 	# Iterate through the atom types: Print frame result and save to interface composition 2-D array
 	i = 0
-	for atom in atomTypes:
+	for atom in atom_type:
 		n= (z_type == atom).sum()
-		print("{} count = {:d}".format(atomNames[atom],n))
-		interface_comp[frame,i]=n
+		print("{} count = {:d}".format(interfaceData[atom],n))
+		aqueousComposition[frame,i]=n
 		i+=1
-	
+	return True
+
+#######
+# appends hydrophobic composition count to array
+def append_hydrophobic_composition(frame):
+	# Iterate through the atom types: Print frame result and save to interface composition 2-D array
+	i = 0
+	for atom in atom_type:
+		n= (z_type == atom).sum()
+		print("{} count = {:d}".format(interfaceData[atom],n))
+		hydrophobicComposition[frame,i]=n
+		i+=1
 	return True
 
 #####	
@@ -366,19 +377,15 @@ def append_composition(frame):
 # calculates a power spectrum with a Hanning nwindow to reduce artifacts, then does approximate amplitude correction & normalization.
 #Data saved for each frame in array.  File write  average, std calculation
 def Analysis_FFT(frame):
-	
 	z_square = np.reshape(z_height,(size,size))
 	ps = np.abs(np.fft.rfft2(z_square * hanning2d))*hanning_correct/size**2
-	
 	for i in range(size//2):
 		interface_fft[frame, i] = ps[i+1,i+1]
-	
 	return True
 	
 #####
 # Do the fractal dimension analysis using pyramid analysis	This is a revision of the Clark method:  The eight panel method of W. Sun
 def Analysis_FD(frame):
-
 
 # Some variables precalculated for efficiency	
 	global x0, xm, x1, l2, l4, box_len
@@ -401,7 +408,6 @@ def Analysis_FD(frame):
 			for y0 in range(0,size,box_len):
 				Sum_FD_Area +=Sum_Cell(y0)
 			
-
 #Save the sum and normalize by the area of the 'flat' base beneath it.
 		interface_fd[frame,(box_len//box_increment)-1]= Sum_FD_Area/((box_len*cell_dimension*count)**2)
 	
@@ -424,103 +430,88 @@ def Sum_Cell (ystart):
 	z20= z_height[x1 + y0]-center
 	z10= z_height[xm + y0]-center
 		
-
 	return 0.5*(math.sqrt(l4 + l2*(2*(z01*z01 - z00*z01) + z00*z00)) + math.sqrt(l4 + l2*(2*(z01*z01 - z01*z02) + z02*z02)) + math.sqrt(l4 + l2*(2*(z10*z10 - z00*z10) + z00*z00)) + math.sqrt(l4 + l2*(2*(z10*z10 - z10*z20) + z20*z20)) + math.sqrt(l4 + l2*(2*(z12*z12 - z02*z12) + z02*z02)) + math.sqrt(l4 + l2*(2*(z12*z12 - z12*z22) + z22*z22)) + math.sqrt(l4 + l2*(2*(z21*z21 - z20*z21) + z20*z20)) + math.sqrt(l4 + l2*(2*(z21*z21 - z21*z22) + z22*z22)))
 	
-
-
 #######
 # Output functions
-
-def write_composition():
-	
+def write_aqueous_composition():
 	f=open(filename+"_interface_comp.txt",'w')
-	
-	comp_ave = np.average(interface_comp, axis = 0)
-	comp_std = np.std(interface_comp, axis = 0)
+	a_comp_ave = np.average (aqueousComposition, axis = 0)
+	a_comp_std = np.std (aqueousComposition, axis = 0)
 
-#Print lables
-	f.write('Interface Composition\n')
-	for atom in atomTypes:
-		f.write("\t{} ".format(atomNames[atom]))
-		
-	f.write('\naverage')
-	for i in range(len(atomTypes)):
-		f.write('\t{:.1f}'.format(comp_ave[i]))
+def write_hydrophobic_composition():
+	f=open(filename+"_interface_comp.txt",'w')
+	h_comp_ave = np.average (hydrophobicComposition, axis = 0)
+	h_comp_std = np.std (hydrophobicComposition, axis = 0)
 	
-	f.write('\nstandard_deviation')
-	for i in range(len(atomTypes)):
-		f.write('\t{:.1f}'.format(comp_std[i]))
-
-	f.write('\nSampleCount = {:d}\n'.format(Analysis_Count))
-	
-	f.close()
-	
+#Print lables for Aqueous Interface 
+	f.write ('Aqueous Interface Composition\n')
+	for atom in atom_type:
+		f.write("\t{} ".format(interfaceData[atom]))
+	f.write ('\nAqueous Interface Average')
+	for i in range(len(atom_type)):
+		f.write ('\t{:.1f}'.format(a_comp_ave[i]))
+	f.write ('\nAqueous Interface Standard Deviation')
+	for i in range(len(atom_type)):
+		f.write ('\t{:.1f}'.format(a_comp_std[i]))
+	f.write ('\nSampleCount = {:d}\n'.format(Analysis_Count))
+	f.close ()
 	return True
 	
-	
+#Print lables for Hydrophobic Interface 
+	f.write ('Hydrophobic Interface Composition\n')
+	for atom in atom_type:
+		f.write ("\t{} ".format(interfaceData[atom]))
+	f.write ('\nHydrophobic Interface Average')
+	for i in range(len(atom_type)):
+		f.write ('\t{:.1f}'.format(h_comp_ave[i]))
+	f.write ('\nHydrophobic Interface Standard Deviation')
+	for i in range (len(atom_type)):
+		f.write ('\t{:.1f}'.format(h_comp_std[i]))
+	f.write ('\nSampleCount = {:d}\n'.format(Analysis_Count))
+	f.close ()
+	return True
+		
 def write_FFT():
-
 	f=open(filename+"_interface_FFT.txt",'w')
-
 	FFT_ave = np.average(interface_fft, axis = 0)
 	FFT_std = np.std(interface_fft, axis = 0)
-	
-
-	f.write('Interface FFT\n')
+	f.write('Aqueous Interface FFT\n')
 	f.write('x(nm^-1)')
 	for i in range(size//2-1):
 		f.write('\t{:.3e}'.format(space_dim/(i+1)))
-	
 	f.write('\naverage')
 	for i in range(size//2-1):
 		f.write('\t{:.3e}'.format(FFT_ave[i]))
-	
 	f.write('\nstdev')
 	for i in range(size//2-1):
 		f.write('\t{:.3e}'.format(FFT_std[i]))
-	
 	f.write('\nSampleCount = {:d}\n'.format(Analysis_Count))
-	
 	f.close()
-	
 	return True
 	
 def write_FD():
-
 	f=open(filename+"_interface_FD.txt",'w')
-	
 	FD_x_values = np.arange(box_increment,size+1,box_increment)* cell_dimension
 	FD_ave = np.average(interface_fd, axis = 0)
 	FD_std = np.std(interface_fd, axis = 0)
-	
 	f.write('Interface Fractal Dimension')
 	f.write('\nx(nm)')
 	for i in range(size//box_increment):
 		f.write('\t{:.3e}'.format(FD_x_values[i]))
-		
 	f.write('\naverage')
 	for i in range(size//box_increment):
 		f.write('\t{:.3e}'.format(FD_ave[i]))
-		
 	f.write('\nstdev')
 	for i in range(size//box_increment):
 		f.write('\t{:.3e}'.format(FD_std[i]))
-		
 	f.write('\nSampleCount = {:d}\n'.format(Analysis_Count))
-	
 	f.close()
-	
 	return True
 
-
-
-
 ########
-		
 def display_time(seconds, granularity=2):
 	result = []
-
 	for name, count in intervals:
 		value = seconds // count
 		if value:
@@ -531,8 +522,7 @@ def display_time(seconds, granularity=2):
 	return ', '.join(result[:granularity])
 	
 #########
-	
 if __name__ == '__main__':  
-	mp.set_start_method('fork')
-	main()
+	mp.set_start_method ('fork')
+	main ()
 	

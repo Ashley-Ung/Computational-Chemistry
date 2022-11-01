@@ -105,7 +105,8 @@ def main():
 	global interfaceData 
 	interfaceData = {
 		# Aqueous 
-		(b"HOH", b"H"):(aqueousTypes.index("H"), 0.2655*adjust), 
+		(b"HOH", b"H1"):(aqueousTypes.index("H"), 0.2655*adjust),
+		(b"HOH", b"H2"):(aqueousTypes.index("H"), 0.2655*adjust), 
 		(b"LI", b"Li"):(aqueousTypes.index("Li+"), 0.22*adjust),
 		(b"HOH", b"O"):(aqueousTypes.index("O"), 0.3405*adjust),
 		(b"F", b"F"):(aqueousTypes.index("F-"), 0.343*adjust),
@@ -172,6 +173,8 @@ def main():
 	global atom_radius # An array that stores the van der waals radius 
 	atom_type = mp.Array ('l',atomCount)
 	atom_radius = mp.Array ('d', atomCount)
+	global aqueousArray
+	global hydrophobicArray 
 	aqueousArray = []
 	hydrophobicArray = []
 	for atom in range (atomCount): 
@@ -237,9 +240,9 @@ def main():
 	#global interface_comp											 
 	#interface_comp = np.empty([Analysis_Count,len(atom_type)],int)
 	global aqueousComposition 
-	aqueousComposition = np.empty ([Analysis_Count, len (atom_type)],int)
+	aqueousComposition = np.empty ([Analysis_Count, len (atom_type)],int) #atomType? 
 	global hydrophobicComposition 
-	hydrophobicComposition = np.empty ([Analysis_Count, len (atom_type)], int)
+	hydrophobicComposition = np.empty ([Analysis_Count, len (atom_type)], int) #atomType? 
 			
 	#This portion fills the z_height and z_type arrays with the max z heights at every (x,y) and what atom type they are	
 	print("Starting Interface Analysis.")
@@ -314,27 +317,27 @@ def Test_Atom(atom):
 	global sim_data
 	
 # First test if atom is within +/- interfacebound (8 angstrom defined above) of interface 0	
-	atom_type = int(atomLookup[atom])
-	atom_radius = vdwRadius[atom_type]
+	atomType = int(atom_type[atom])
+	atomRadius = atom_radius[atomType]
 	z_center = sim_data.positions[atom,2]
-	if z_center - atom_radius <= interfaceBound and z_center + atom_radius >= -interfaceBound:	
+	if z_center - atomRadius <= interfaceBound and z_center + atomRadius >= -interfaceBound:	
 		
 		x_pos = sim_data.positions[atom,0]
 		y_pos = sim_data.positions[atom,1]
 		
 # Calculate the surface array index bounds for the atom radius	
-		x_minIndex = math.ceil((x_pos - atom_radius)*inverse_cell_dimension)
-		x_maxIndex = math.ceil((x_pos + atom_radius)*inverse_cell_dimension)
+		x_minIndex = math.ceil((x_pos - atomRadius)*inverse_cell_dimension)
+		x_maxIndex = math.ceil((x_pos + atomRadius)*inverse_cell_dimension)
 		
-		y_minIndex = math.ceil((y_pos - atom_radius)*inverse_cell_dimension)
-		y_maxIndex = math.ceil((y_pos + atom_radius)*inverse_cell_dimension)
+		y_minIndex = math.ceil((y_pos - atomRadius)*inverse_cell_dimension)
+		y_maxIndex = math.ceil((y_pos + atomRadius)*inverse_cell_dimension)
 
 	
 
 		for x_index in range(x_minIndex,x_maxIndex):
 			for y_index in range(y_minIndex,y_maxIndex):
 #This calculates the intersection of the atom sphere with the line in the z direction at the surface index point. Uses always the larger intersection point
-				calculation = atom_radius**2 - (x_index*cell_dimension - x_pos)**2 - (y_index*cell_dimension - y_pos)**2
+				calculation = atomRadius**2 - (x_index*cell_dimension - x_pos)**2 - (y_index*cell_dimension - y_pos)**2
 				if calculation >= 0.0:
 					z = z_center + np.sqrt(calculation)
 					
@@ -343,7 +346,7 @@ def Test_Atom(atom):
 					matrix_index=x_index%size + ((y_index%size)*size)
 					if z > z_height[matrix_index]:
 						z_height[matrix_index] = z
-						z_type[matrix_index] = atom_type
+						z_type[matrix_index] = atomType
 				
 	return True
 # End of the multiprocess core function
@@ -355,7 +358,16 @@ def append_aqueous_composition(frame):
 	i = 0
 	for atom in atom_type:
 		n= (z_type == atom).sum()
-		print("{} count = {:d}".format(interfaceData[atom],n))
+		# Iterate through the interfaceData dictionary to check if the certain keys don't exist in the dictionary. the .items () function will return a new view of the dictionary's items (key, value) pairs. 
+		#for key, value in interfaceData.items():
+		#	print (key, value)
+		#try: 
+		#	print (interfaceData[1])
+		#except KeyError: 
+		#	print ("Key does not exist in the interface data dictionary.")
+		#interfaceData[1] = []
+		print("{} count = {:d}".format(aqueousArray[atom],n))
+		#print("{} count = {:d}".format(interfaceData[atom],n))
 		aqueousComposition[frame,i]=n
 		i+=1
 	return True
@@ -367,7 +379,8 @@ def append_hydrophobic_composition(frame):
 	i = 0
 	for atom in atom_type:
 		n= (z_type == atom).sum()
-		print("{} count = {:d}".format(interfaceData[atom],n))
+		print("{} count = {:d}".format(hydrophobicArray[atom],n))
+		#print("{} count = {:d}".format(interfaceData[atom],n))
 		hydrophobicComposition[frame,i]=n
 		i+=1
 	return True

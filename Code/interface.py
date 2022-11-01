@@ -448,16 +448,16 @@ def Sum_Cell (ystart):
 #######
 # Output functions
 def write_aqueous_composition():
-	f=open(filename+"_interface_comp.txt",'w')
+	f=open(filename+"_aqueous_interface_comp.txt",'w')
 	a_comp_ave = np.average (aqueousComposition, axis = 0)
 	a_comp_std = np.std (aqueousComposition, axis = 0)
 
 def write_hydrophobic_composition():
-	f=open(filename+"_interface_comp.txt",'w')
+	f=open(filename+"_hydrophobic_interface_comp.txt",'w')
 	h_comp_ave = np.average (hydrophobicComposition, axis = 0)
 	h_comp_std = np.std (hydrophobicComposition, axis = 0)
 	
-#Print lables for Aqueous Interface 
+# Aqueous Interface Average & Standard Deviation
 	f.write ('Aqueous Interface Composition\n')
 	for atom in atom_type:
 		f.write("\t{} ".format(interfaceData[atom]))
@@ -471,7 +471,7 @@ def write_hydrophobic_composition():
 	f.close ()
 	return True
 	
-#Print lables for Hydrophobic Interface 
+# Hydrophobic Interface Average & Standard Deviation 
 	f.write ('Hydrophobic Interface Composition\n')
 	for atom in atom_type:
 		f.write ("\t{} ".format(interfaceData[atom]))
@@ -484,9 +484,10 @@ def write_hydrophobic_composition():
 	f.write ('\nSampleCount = {:d}\n'.format(Analysis_Count))
 	f.close ()
 	return True
-		
+
+# Aqueous Interface FFT
 def write_FFT():
-	f=open(filename+"_interface_FFT.txt",'w')
+	f=open(filename+"_aqueous_interface_FFT.txt",'w')
 	FFT_ave = np.average(interface_fft, axis = 0)
 	FFT_std = np.std(interface_fft, axis = 0)
 	f.write('Aqueous Interface FFT\n')
@@ -502,9 +503,10 @@ def write_FFT():
 	f.write('\nSampleCount = {:d}\n'.format(Analysis_Count))
 	f.close()
 	return True
-	
+
+# Aqueous Interface FD 
 def write_FD():
-	f=open(filename+"_interface_FD.txt",'w')
+	f=open(filename+"_aqueous_interface_FD.txt",'w')
 	FD_x_values = np.arange(box_increment,size+1,box_increment)* cell_dimension
 	FD_ave = np.average(interface_fd, axis = 0)
 	FD_std = np.std(interface_fd, axis = 0)

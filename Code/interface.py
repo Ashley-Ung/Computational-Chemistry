@@ -319,7 +319,8 @@ def main():
 ### End Main
 
 #######	
-# This function assumes atom is index of atom in water (including ions), and tests if the sphere of the atom is above the current interface. Does not need to be called sequentially, and therefore is the core multiprocess function.
+# This function assumes atom is index of atom in water (including ions), and tests if the sphere of the atom is above the current interface. 
+# Does not need to be called sequentially, and therefore is the core multiprocess function.
 def Test_Atom_Aqueous(atom):
 	global atomLookup
 	global sim_data
@@ -482,13 +483,7 @@ def write_aqueous_composition():
 	f=open(filename+"_aqueous_interface_comp.txt",'w')
 	a_comp_ave = np.average (aqueousComposition, axis = 0)
 	a_comp_std = np.std (aqueousComposition, axis = 0)
-
-def write_hydrophobic_composition():
-	f=open(filename+"_hydrophobic_interface_comp.txt",'w')
-	h_comp_ave = np.average (hydrophobicComposition, axis = 0)
-	h_comp_std = np.std (hydrophobicComposition, axis = 0)
-	
-# Aqueous Interface Average & Standard Deviation
+	# Aqueous Interface Average & Standard Deviation
 	f.write ('Aqueous Interface Composition\n')
 	for atom in atom_type:
 		f.write("\t{} ".format(interfaceData[atom]))
@@ -501,8 +496,12 @@ def write_hydrophobic_composition():
 	f.write ('\nSampleCount = {:d}\n'.format(Analysis_Count))
 	f.close ()
 	return True
-	
-# Hydrophobic Interface Average & Standard Deviation 
+
+def write_hydrophobic_composition():
+	f=open(filename+"_hydrophobic_interface_comp.txt",'w')
+	h_comp_ave = np.average (hydrophobicComposition, axis = 0)
+	h_comp_std = np.std (hydrophobicComposition, axis = 0)
+	# Hydrophobic Interface Average & Standard Deviation 
 	f.write ('Hydrophobic Interface Composition\n')
 	for atom in atom_type:
 		f.write ("\t{} ".format(interfaceData[atom]))

@@ -90,6 +90,8 @@ def main():
 	# The specific molecule we are looking for on our surface. The b signifies that this is a binary string.
 	# Assumes water and ions w/ van der Waals Radius as specified.
 	global interface_molecules
+	global aqueousMolecules
+	global hydrophobicMolecules
 	aqueousMolecules = [b'HOH',b'LI',b'NA',b'K',b'MG',b'CA',b'ZN',b'F',b'Cl',b'Br',b'I']
 	hydrophobicMolecules = [b'DDC', b'DBC', b'DDS', b'DBS', b'CTC']
 	
@@ -98,7 +100,7 @@ def main():
 	aqueousTypes = ["Holes", "H", "Li+", "O", "F-", "Na+", "Mg2+", "Cl-", "K+", "Ca2+", "Zn2+", "Br-", "I-"]
 	global hydrophobicTypes
 	hydrophobicTypes = ["Holes", "Solvent", "DDC_Tail", "DDC_HeadGroup"]
-	#hydrophobicTypes = ["Holes", "Solvent", "DDC_Tail", "DDC_HeadGroup", "DBC_Tail", "DBC_HeadGroup", "DDS_Tail", "DDS_HeadGroup", "DBS_Tail", "DBS_HeadGroup"] # syntax error because other surfactants are not declared yet 
+	#hydrophobicTypes = ["Holes", "Solvent", "DDC_Tail", "DDC_HeadGroup", "DBC_Tail", "DBC_HeadGroup", "DDS_Tail", "DDS_HeadGroup", "DBS_Tail", "DBS_HeadGroup"] # syntax error because other surfactants are not declared yet in the dictionary 
 	
 	# A dictionary of the hydrophobic and aqueous interface atom names and vdw radii values-- values are from Amoeba2018 data adjust to 0.7 of diameter
 	adjust = 0.70 #Empirical Value 
@@ -191,19 +193,24 @@ def main():
 	global interfaceBound
 	interfaceBound = 2.0
 	
-#2-d arrays for surface atom type and z height. Defined as 1-d array for purposes of multiprocessing, which only uses 1-d indexing	
-	global z_type										             # need z-height of aqueus and hydrphobic layer 
-	mpArray_type = mp.Array('l',size*size)
-		
-	z_type = np.frombuffer(mpArray_type.get_obj())
-		
-	global z_height
-	mpArray_height = mp.Array('d',size*size)
-		
-	z_height = np.frombuffer(mpArray_height.get_obj(),dtype='float64')
-
-# Roughness analysis for the aqueous interface  FFT and Fractal
-# Array and constants for 2-d fft
+	# Aqueous Interface 2-d arrays for surface atom type and z height. Defined as 1-d array for purposes of multiprocessing, which only uses 1-d indexing	
+	global z_type_aqueous										              
+	mpArray_type_aqueous = mp.Array('l',size*size) #l = long integer data type
+	z_type_aqueous = np.frombuffer(mpArray_type_aqueous.get_obj())
+	global z_height_aqueous
+	mpArray_height_aqueous = mp.Array('d',size*size) #d = decimal float data type 
+	z_height_aqueous = np.frombuffer(mpArray_height_aqueous.get_obj(),dtype='float64')
+	
+	# Hydrophobic Interface 2-d arrays for surface atom type and z height. Defined as 1-d array for purposes of multiprocessing, which only uses 1-d indexing
+	global z_type_hydrophobic 										              
+	mpArray_type_hydrophobic = mp.Array('l',size*size) #l = long integer data type
+	z_type_hydrophobic = np.frombuffer(mpArray_type_hydrophobic.get_obj())
+	global z_height_hydrophobic
+	mpArray_height_hydrophobic = mp.Array('d',size*size) #d = decimal float data type 
+	z_height_hydrophobic = np.frombuffer(mpArray_height_hydrophobic.get_obj(),dtype='float64')
+	
+	# Roughness analysis for the aqueous interface FFT and Fractal
+	# Array and constants for 2-d fft
 	global interface_fft
 	interface_fft = np.empty([Analysis_Count,size//2],float)
 	
@@ -214,19 +221,19 @@ def main():
 	global hanning_correct
 	hanning_correct=12.0
 	
-# Fractal Analysis constants
+	# Fractal Analysis constants
 
-# Box increment
+	# Box increment
 	global box_increment
 	box_increment = 2  # MUST BE EVEN
 	global fd_size
 	fd_size = size//box_increment
 	
-# Fractal dimension data array 
+	# Fractal dimension data array 
 	global interface_fd
 	interface_fd = np.empty((Analysis_Count,fd_size))
 
-# Constants used for time display			
+	# Constants used for time display			
 	global intervals
 	intervals = (
 		('weeks', 604800),  # 60 * 60 * 24 * 7
@@ -235,10 +242,8 @@ def main():
 		('minutes', 60),
 		('seconds', 1),
 		)
-	
-	#to be deleted 
-	#global interface_comp											 
-	#interface_comp = np.empty([Analysis_Count,len(atom_type)],int)
+
+	# Interface composition (aqueous or hydrophobic) 
 	global aqueousComposition 
 	aqueousComposition = np.empty ([Analysis_Count, len (atom_type)],int) #atomType? 
 	global hydrophobicComposition 
@@ -258,29 +263,33 @@ def main():
 		# Load Frame Data --  skip over
 		for i in range(Frame_Skip):
 			sim_data.next()
-
-		# Clear Result Arrays	
-		z_height.fill(-1.0*interfaceBound)
-		z_type.fill(0)
+		
+		# Clear Result Arrays for Aqueous Interface 
+		z_height_aqueous.fill(-1.0*interfaceBound)
+		z_type_aqueous.fill(0)
+		
+		# Clear Result Arrays for Hydrophobic Interface 
+		z_height_hydrophobic.fill(-1.0*interfaceBound)
+		z_type_hydrophobic.fill(0)
 		
 		# Aqueous -- Set up the multiprocessing to use 1/2 of available cores.
-		print ("Determining Aqueous Interface Composition and Location")
 		pool = mp.Pool(mp.cpu_count()//2)
 		# The multiprocessing is called here and closed when all threads are finished.
-		aqueousResults = pool.map (Test_Atom, [atom for atom in aqueousArray])
+		aqueousResults = pool.map (Test_Atom_Aqueous, [atom for atom in aqueousArray])
 		pool.close () 
 		pool.join ()
 		
 		# Hydrophobic -- Set up the multiprocessing to use 1/2 of available cores.
-		print ("Determining Hydrophobic Interface Composition and Location")
 		pool = mp.Pool(mp.cpu_count()//2)
 		# The multiprocessing is called here and closed when all threads are finished.
-		hydrophobicResults = pool.map (Test_Atom, [atom for atom in hydrophobicArray])
+		hydrophobicResults = pool.map (Test_Atom_Hydrophobic, [atom for atom in hydrophobicArray])
 		pool.close ()
 		pool.join ()
 
-		# Record surface composition				
+		# Record surface composition
+		print ("Determining Aqueous Interface Composition and Location")
 		append_aqueous_composition(frame//Frame_Skip)
+		print ("Determining Hydrophobic Interface Composition and Location")
 		append_hydrophobic_composition(frame//Frame_Skip)
 		
 		# FFT and Fractal Dimension analysis for Aqueous Interface 
@@ -289,7 +298,7 @@ def main():
 		print ("Begin Fractal Dimension Analysis for Aqueous Interface")
 		Analysis_FD (frame//Frame_Skip)
 		
-		#This portion estimates the remaining time left in the data retrieval
+		# This portion estimates the remaining time left in the data retrieval
 		Frames_Remaining -= 1
 		remainingSeconds = (time.time() - frame_start_time) * (Frames_Remaining)
 		
@@ -311,44 +320,66 @@ def main():
 
 #######	
 # This function assumes atom is index of atom in water (including ions), and tests if the sphere of the atom is above the current interface. Does not need to be called sequentially, and therefore is the core multiprocess function.
-def Test_Atom(atom):
-	
+def Test_Atom_Aqueous(atom):
 	global atomLookup
 	global sim_data
-	
-# First test if atom is within +/- interfacebound (8 angstrom defined above) of interface 0	
+	# First test if atom is within +/- interfacebound (8 angstrom defined above) of interface 0	
 	atomType = int(atom_type[atom])
 	atomRadius = atom_radius[atomType]
 	z_center = sim_data.positions[atom,2]
 	if z_center - atomRadius <= interfaceBound and z_center + atomRadius >= -interfaceBound:	
-		
 		x_pos = sim_data.positions[atom,0]
 		y_pos = sim_data.positions[atom,1]
-		
-# Calculate the surface array index bounds for the atom radius	
+		# Calculate the surface array index bounds for the atom radius	
 		x_minIndex = math.ceil((x_pos - atomRadius)*inverse_cell_dimension)
 		x_maxIndex = math.ceil((x_pos + atomRadius)*inverse_cell_dimension)
-		
 		y_minIndex = math.ceil((y_pos - atomRadius)*inverse_cell_dimension)
 		y_maxIndex = math.ceil((y_pos + atomRadius)*inverse_cell_dimension)
-
-	
-
 		for x_index in range(x_minIndex,x_maxIndex):
 			for y_index in range(y_minIndex,y_maxIndex):
-#This calculates the intersection of the atom sphere with the line in the z direction at the surface index point. Uses always the larger intersection point
-				calculation = atomRadius**2 - (x_index*cell_dimension - x_pos)**2 - (y_index*cell_dimension - y_pos)**2
-				if calculation >= 0.0:
-					z = z_center + np.sqrt(calculation)
-					
-					
-# Test if the calculated height of atom at array position (x,y) is greater that current. If yes, then replace then height ant type.  Note: the arrays are 1-d for multiprocessing, therefore the index must be calculated.  Also, to accout for periodic boundaries calculate the index with a %size -- i.e. the remainder.
+				#This calculates the intersection of the atom sphere with the line in the z direction at the surface index point. Uses always the larger intersection point
+				zsquared = atomRadius**2 - (x_index*cell_dimension - x_pos)**2 - (y_index*cell_dimension - y_pos)**2
+				if zsquared >= 0.0:
+					z = z_center + np.sqrt(zsquared)
+					# Test if the calculated height of atom at array position (x,y) is greater that current. If yes, then replace then height ant type.
+					# Note: the arrays are 1-d for multiprocessing, therefore the index must be calculated.  Also, to accout for periodic boundaries
+					# calculate the index with a %size -- i.e. the remainder.
 					matrix_index=x_index%size + ((y_index%size)*size)
-					if z > z_height[matrix_index]:
-						z_height[matrix_index] = z
-						z_type[matrix_index] = atomType
-				
+					if z > z_height_aqueous[matrix_index]:
+						z_height_aqueous[matrix_index] = z
+						z_type_aqueous[matrix_index] = atomType
 	return True
+
+def Test_Atom_Hydrophobic(atom):
+	global atomLookup
+	global sim_data
+	# First test if atom is within +/- interfacebound (8 angstrom defined above) of interface 0	
+	atomType = int(atom_type[atom])
+	atomRadius = atom_radius[atomType]
+	z_center = sim_data.positions[atom,2]
+	if z_center - atomRadius <= interfaceBound and z_center + atomRadius >= -interfaceBound:	
+		x_pos = sim_data.positions[atom,0]
+		y_pos = sim_data.positions[atom,1]
+		# Calculate the surface array index bounds for the atom radius	
+		x_minIndex = math.ceil((x_pos - atomRadius)*inverse_cell_dimension)
+		x_maxIndex = math.ceil((x_pos + atomRadius)*inverse_cell_dimension)
+		y_minIndex = math.ceil((y_pos - atomRadius)*inverse_cell_dimension)
+		y_maxIndex = math.ceil((y_pos + atomRadius)*inverse_cell_dimension)
+		for x_index in range(x_minIndex,x_maxIndex):
+			for y_index in range(y_minIndex,y_maxIndex):
+				#This calculates the intersection of the atom sphere with the line in the z direction at the surface index point. Uses always the larger intersection point
+				zsquared = atomRadius**2 - (x_index*cell_dimension - x_pos)**2 - (y_index*cell_dimension - y_pos)**2
+				if zsquared >= 0.0:
+					z = z_center - np.sqrt(zsquared)
+					# Test if the calculated height of atom at array position (x,y) is greater that current. If yes, then replace then height ant type.
+					# Note: the arrays are 1-d for multiprocessing, therefore the index must be calculated.  Also, to accout for periodic boundaries
+					# calculate the index with a %size -- i.e. the remainder.
+					matrix_index=x_index%size + ((y_index%size)*size)
+					if z < z_height_hydrophobic[matrix_index]:
+						z_height_hydrophobic[matrix_index] = z
+						z_type_hydrophobic[matrix_index] = atomType
+	return True
+
 # End of the multiprocess core function
 
 #######
@@ -357,7 +388,7 @@ def append_aqueous_composition(frame):
 	# Iterate through the atom types: Print frame result and save to interface composition 2-D array
 	i = 0
 	for atom in atom_type:
-		n= (z_type == atom).sum()
+		n= (z_type_aqueous == atom).sum()
 		# Iterate through the interfaceData dictionary to check if the certain keys don't exist in the dictionary. the .items () function will return a new view of the dictionary's items (key, value) pairs. 
 		#for key, value in interfaceData.items():
 		#	print (key, value)
@@ -366,8 +397,7 @@ def append_aqueous_composition(frame):
 		#except KeyError: 
 		#	print ("Key does not exist in the interface data dictionary.")
 		#interfaceData[1] = []
-		print("{} count = {:d}".format(aqueousArray[atom],n))
-		#print("{} count = {:d}".format(interfaceData[atom],n))
+		print("{} count = {:d}".format(aqueousTypes[atom],n))
 		aqueousComposition[frame,i]=n
 		i+=1
 	return True
@@ -378,9 +408,10 @@ def append_hydrophobic_composition(frame):
 	# Iterate through the atom types: Print frame result and save to interface composition 2-D array
 	i = 0
 	for atom in atom_type:
-		n= (z_type == atom).sum()
-		print("{} count = {:d}".format(hydrophobicArray[atom],n))
-		#print("{} count = {:d}".format(interfaceData[atom],n))
+		n= (z_type_hydrophobic == atom).sum()
+		#print("{} count = {:d}".format(hydrophobicArray[atom],n)) # no error but random numbers 
+		print("{} count = {:d}".format(hydrophobicTypes[atom],n)) # indexing error 
+		#print("{} count = {:d}". format(hydrophobicMolecules[atom], n)) #indexing error 
 		hydrophobicComposition[frame,i]=n
 		i+=1
 	return True
@@ -390,7 +421,7 @@ def append_hydrophobic_composition(frame):
 # calculates a power spectrum with a Hanning nwindow to reduce artifacts, then does approximate amplitude correction & normalization.
 #Data saved for each frame in array.  File write  average, std calculation
 def Analysis_FFT(frame):
-	z_square = np.reshape(z_height,(size,size))
+	z_square = np.reshape(z_height_aqueous,(size,size))
 	ps = np.abs(np.fft.rfft2(z_square * hanning2d))*hanning_correct/size**2
 	for i in range(size//2):
 		interface_fft[frame, i] = ps[i+1,i+1]
@@ -400,51 +431,51 @@ def Analysis_FFT(frame):
 # Do the fractal dimension analysis using pyramid analysis	This is a revision of the Clark method:  The eight panel method of W. Sun
 def Analysis_FD(frame):
 
-# Some variables precalculated for efficiency	
+	# Some variables precalculated for efficiency	
 	global x0, xm, x1, l2, l4, box_len
-#loop linearly through multiple of starting box length
-
+	#loop linearly through multiple of starting box length
 	for box_len in range(box_increment, size +1, box_increment):
 		Sum_FD_Area=0.0   # Collects calculated area in a row -- from MP function 
 		count=len(range (0, size, box_len))  # need a counter to know the number of cells in a column -- for normalization
 		
-# The base of the real pyramid is invarient for a given box length.  Center of pyramic is at x=0,y=0. Corners +-box_len/2
+		# The base of the real pyramid is invarient for a given box length.  Center of pyramic is at x=0,y=0. Corners +-box_len/2
 		corner = box_len//2*cell_dimension
 		l2=corner*corner
 		l4=l2*l2
 
-# Loop through columns spaced by the length of box  0 and 1 are coreners  m is midpoint  data wrapping requires %size
+		# Loop through columns spaced by the length of box  0 and 1 are coreners  m is midpoint  data wrapping requires %size
 		for x0 in range (0, size, box_len):
 			xm=(x0+box_len//2)%size
 			x1=(x0+box_len)%size
 			
 			for y0 in range(0,size,box_len):
-				Sum_FD_Area +=Sum_Cell(y0)
+				Sum_FD_Area +=Sum_Cell_Aqueous(y0)
 			
-#Save the sum and normalize by the area of the 'flat' base beneath it.
+		#Save the sum and normalize by the area of the 'flat' base beneath it.
 		interface_fd[frame,(box_len//box_increment)-1]= Sum_FD_Area/((box_len*cell_dimension*count)**2)
 	
 	return True
 
-def Sum_Cell (ystart):
+# Sum cell for aqueous interface 
+def Sum_Cell_Aqueous (ystart):
 	y0=ystart*size
 	ym=((ystart+box_len//2)%size)*size
 	y1=((ystart+box_len)%size)*size
-	
-# calculate the coordinates of the 4 corners and four edge points going around the box of the current analysis box	Note:  center point is 0,0,0 and all z heights adjusted to this value.  indices precalculated for efficiency
-#This method uses the algebraic calculation of the 8 prism area, simplified and made efficient.  math.sqrt is 5x faster than np.sqrt!  Sage was used to calculate the return expression		
-	center= z_height[xm + ym]
-	z00= z_height[x0 + y0]-center
-	z01= z_height[x0 + ym]-center
-	z02= z_height[x0 + y1]-center
-	z12= z_height[xm + y1]-center
-	z22= z_height[x1 + y1]-center
-	z21= z_height[x1 + ym]-center
-	z20= z_height[x1 + y0]-center
-	z10= z_height[xm + y0]-center
-		
+	# calculate the coordinates of the 4 corners and four edge points going around the box of the current analysis box	
+	# Note: center point is 0,0,0 and all z heights adjusted to this value.  indices precalculated for efficiency
+	# This method uses the algebraic calculation of the 8 prism area, simplified and made efficient.  math.sqrt is 5x faster than np.sqrt!  
+	# Sage was used to calculate the return expression		
+	center= z_height_aqueous[xm + ym]
+	z00= z_height_aqueous[x0 + y0]-center
+	z01= z_height_aqueous[x0 + ym]-center
+	z02= z_height_aqueous[x0 + y1]-center
+	z12= z_height_aqueous[xm + y1]-center
+	z22= z_height_aqueous[x1 + y1]-center
+	z21= z_height_aqueous[x1 + ym]-center
+	z20= z_height_aqueous[x1 + y0]-center
+	z10= z_height_aqueous[xm + y0]-center
 	return 0.5*(math.sqrt(l4 + l2*(2*(z01*z01 - z00*z01) + z00*z00)) + math.sqrt(l4 + l2*(2*(z01*z01 - z01*z02) + z02*z02)) + math.sqrt(l4 + l2*(2*(z10*z10 - z00*z10) + z00*z00)) + math.sqrt(l4 + l2*(2*(z10*z10 - z10*z20) + z20*z20)) + math.sqrt(l4 + l2*(2*(z12*z12 - z02*z12) + z02*z02)) + math.sqrt(l4 + l2*(2*(z12*z12 - z12*z22) + z22*z22)) + math.sqrt(l4 + l2*(2*(z21*z21 - z20*z21) + z20*z20)) + math.sqrt(l4 + l2*(2*(z21*z21 - z21*z22) + z22*z22)))
-	
+
 #######
 # Output functions
 def write_aqueous_composition():

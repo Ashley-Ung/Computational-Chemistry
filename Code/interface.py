@@ -222,7 +222,6 @@ def main():
 	hanning_correct=12.0
 	
 	# Fractal Analysis constants
-
 	# Box increment
 	global box_increment
 	box_increment = 2  # MUST BE EVEN
@@ -245,9 +244,9 @@ def main():
 
 	# Interface composition (aqueous or hydrophobic) 
 	global aqueousComposition 
-	aqueousComposition = np.empty ([Analysis_Count, len (atom_type)],int) #atomType? 
+	aqueousComposition = np.empty ([Analysis_Count, len (z_type_aqueous)],int) #atom_type? 
 	global hydrophobicComposition 
-	hydrophobicComposition = np.empty ([Analysis_Count, len (atom_type)], int) #atomType? 
+	hydrophobicComposition = np.empty ([Analysis_Count, len (z_type_hydrophobic)], int) #atom_type? 
 			
 	#This portion fills the z_height and z_type arrays with the max z heights at every (x,y) and what atom type they are	
 	print("Starting Interface Analysis.")
@@ -269,7 +268,7 @@ def main():
 		z_type_aqueous.fill(0)
 		
 		# Clear Result Arrays for Hydrophobic Interface 
-		z_height_hydrophobic.fill(-1.0*interfaceBound)
+		z_height_hydrophobic.fill(+1.0*interfaceBound)                     					#+1.0 for hydrophobic interface? 
 		z_type_hydrophobic.fill(0)
 		
 		# Aqueous -- Set up the multiprocessing to use 1/2 of available cores.
@@ -288,7 +287,7 @@ def main():
 
 		# Record surface composition
 		print ("Determining Aqueous Interface Composition and Location")
-		append_aqueous_composition(frame//Frame_Skip)
+		append_aqueous_composition(frame//Frame_Skip) # returns the floor value for both integer and floating point arguments after division
 		print ("Determining Hydrophobic Interface Composition and Location")
 		append_hydrophobic_composition(frame//Frame_Skip)
 		
@@ -390,14 +389,6 @@ def append_aqueous_composition(frame):
 	i = 0
 	for atom in atom_type:
 		n= (z_type_aqueous == atom).sum()
-		# Iterate through the interfaceData dictionary to check if the certain keys don't exist in the dictionary. the .items () function will return a new view of the dictionary's items (key, value) pairs. 
-		#for key, value in interfaceData.items():
-		#	print (key, value)
-		#try: 
-		#	print (interfaceData[1])
-		#except KeyError: 
-		#	print ("Key does not exist in the interface data dictionary.")
-		#interfaceData[1] = []
 		print("{} count = {:d}".format(aqueousTypes[atom],n))
 		aqueousComposition[frame,i]=n
 		i+=1
@@ -408,15 +399,32 @@ def append_aqueous_composition(frame):
 def append_hydrophobic_composition(frame):
 	# Iterate through the atom types: Print frame result and save to interface composition 2-D array
 	i = 0
-	for atom in atom_type:
+	#atomType = int(atom_type[atom])
+	for atom in range ((len(hydrophobicTypes))):
 		n= (z_type_hydrophobic == atom).sum()
-		#print("{} count = {:d}".format(hydrophobicArray[atom],n)) # no error but random numbers 
-		print("{} count = {:d}".format(hydrophobicTypes[atom],n)) # indexing error 
-		#print("{} count = {:d}". format(hydrophobicMolecules[atom], n)) #indexing error 
+		print("{} count = {:d}".format(hydrophobicTypes[atom],n)) # indexing error -- fixed 
 		hydrophobicComposition[frame,i]=n
 		i+=1
 	return True
-
+	
+	"""
+	for atom in range ((len(hydrophobicTypes))):
+		n= (z_type_hydrophobic == atom).sum()
+		print("{} count = {:d}".format(hydrophobicTypes[atom],n)) # indexing error -- fixed 
+		hydrophobicComposition[frame,i]=n
+		i+=1
+	return True
+	"""
+	
+	"""
+	for atom in atom_type:
+		n= (z_type_hydrophobic == atom).sum()
+		print("{} count = {:d}".format(hydrophobicArray[atom],n)) # no error but random numbers 
+		hydrophobicComposition[frame,i]=n
+		i+=1
+	return True
+	"""
+	
 #####	
 # Completes 2-D fft, extracts diagonal and appends to array	
 # calculates a power spectrum with a Hanning nwindow to reduce artifacts, then does approximate amplitude correction & normalization.
@@ -431,7 +439,6 @@ def Analysis_FFT(frame):
 #####
 # Do the fractal dimension analysis using pyramid analysis	This is a revision of the Clark method:  The eight panel method of W. Sun
 def Analysis_FD(frame):
-
 	# Some variables precalculated for efficiency	
 	global x0, xm, x1, l2, l4, box_len
 	#loop linearly through multiple of starting box length
@@ -448,13 +455,11 @@ def Analysis_FD(frame):
 		for x0 in range (0, size, box_len):
 			xm=(x0+box_len//2)%size
 			x1=(x0+box_len)%size
-			
 			for y0 in range(0,size,box_len):
 				Sum_FD_Area +=Sum_Cell_Aqueous(y0)
 			
 		#Save the sum and normalize by the area of the 'flat' base beneath it.
 		interface_fd[frame,(box_len//box_increment)-1]= Sum_FD_Area/((box_len*cell_dimension*count)**2)
-	
 	return True
 
 # Sum cell for aqueous interface 

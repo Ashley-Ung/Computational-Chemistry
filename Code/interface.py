@@ -33,7 +33,7 @@ Analysis_Target = 100
 
 # First check for the presence of expected data files		
 def main():
-	print("Welcome To Surface Analysis")
+	print("\nWelcome To Surface Analysis")
 	# Check for presence of two parameters in input line
 	if len(sys.argv)!=3:
 		print("Two input arguments are expected: The input pdb file for the simulations, and the integer number of the simulation.")
@@ -286,22 +286,22 @@ def main():
 		pool.join ()
 
 		# Record surface composition
-		print ("Determining Aqueous Interface Composition and Location")
+		print ("\nDetermining Aqueous Interface Composition and Location")
 		append_aqueous_composition(frame//Frame_Skip) # returns the floor value for both integer and floating point arguments after division
-		print ("Determining Hydrophobic Interface Composition and Location")
+		print ("\nDetermining Hydrophobic Interface Composition and Location")
 		append_hydrophobic_composition(frame//Frame_Skip)
 		
 		# FFT and Fractal Dimension analysis for Aqueous Interface 
-		print ("Begin FFT analysis for Aqueous Interface")
+		print ("\nBegin FFT analysis for Aqueous Interface")
 		Analysis_FFT (frame//Frame_Skip)
-		print ("Begin Fractal Dimension Analysis for Aqueous Interface")
+		print ("\nBegin Fractal Dimension Analysis for Aqueous Interface")
 		Analysis_FD (frame//Frame_Skip)
 		
 		# This portion estimates the remaining time left in the data retrieval
 		Frames_Remaining -= 1
 		remainingSeconds = (time.time() - frame_start_time) * (Frames_Remaining)
 		
-		print ("Frame analysis Complete\n\tEstimated Remaining Time = {} ".format(display_time(remainingSeconds)))	
+		print ("\nFrame analysis Complete\n\tEstimated Remaining Time = {} ".format(display_time(remainingSeconds)))	
 	
 	sim_data.done ()
 	print ("Writing Data Files")
@@ -387,9 +387,9 @@ def Test_Atom_Hydrophobic(atom):
 def append_aqueous_composition(frame):
 	# Iterate through the atom types: Print frame result and save to interface composition 2-D array
 	i = 0
-	for atom in atom_type:
+	for atom in range ((len(aqueousTypes))):
 		n= (z_type_aqueous == atom).sum()
-		print("{} count = {:d}".format(aqueousTypes[atom],n))
+		print("{} count = {:d}".format(aqueousTypes[atom],n)) 
 		aqueousComposition[frame,i]=n
 		i+=1
 	return True
@@ -406,24 +406,6 @@ def append_hydrophobic_composition(frame):
 		hydrophobicComposition[frame,i]=n
 		i+=1
 	return True
-	
-	"""
-	for atom in range ((len(hydrophobicTypes))):
-		n= (z_type_hydrophobic == atom).sum()
-		print("{} count = {:d}".format(hydrophobicTypes[atom],n)) # indexing error -- fixed 
-		hydrophobicComposition[frame,i]=n
-		i+=1
-	return True
-	"""
-	
-	"""
-	for atom in atom_type:
-		n= (z_type_hydrophobic == atom).sum()
-		print("{} count = {:d}".format(hydrophobicArray[atom],n)) # no error but random numbers 
-		hydrophobicComposition[frame,i]=n
-		i+=1
-	return True
-	"""
 	
 #####	
 # Completes 2-D fft, extracts diagonal and appends to array	
@@ -482,40 +464,50 @@ def Sum_Cell_Aqueous (ystart):
 	z10= z_height_aqueous[xm + y0]-center
 	return 0.5*(math.sqrt(l4 + l2*(2*(z01*z01 - z00*z01) + z00*z00)) + math.sqrt(l4 + l2*(2*(z01*z01 - z01*z02) + z02*z02)) + math.sqrt(l4 + l2*(2*(z10*z10 - z00*z10) + z00*z00)) + math.sqrt(l4 + l2*(2*(z10*z10 - z10*z20) + z20*z20)) + math.sqrt(l4 + l2*(2*(z12*z12 - z02*z12) + z02*z02)) + math.sqrt(l4 + l2*(2*(z12*z12 - z12*z22) + z22*z22)) + math.sqrt(l4 + l2*(2*(z21*z21 - z20*z21) + z20*z20)) + math.sqrt(l4 + l2*(2*(z21*z21 - z21*z22) + z22*z22)))
 
-#######
-# Output functions
+####### Output functions
+
+# Aqueous Interface Composition, Average & Standard Deviation
 def write_aqueous_composition():
 	f=open(filename+"_aqueous_interface_comp.txt",'w')
+	
 	a_comp_ave = np.average (aqueousComposition, axis = 0)
 	a_comp_std = np.std (aqueousComposition, axis = 0)
-	# Aqueous Interface Average & Standard Deviation
+	
 	f.write ('Aqueous Interface Composition\n')
-	for atom in atom_type:
-		f.write("\t{} ".format(interfaceData[atom]))
+	for atom in range ((len(aqueousTypes))):
+		f.write("\t{} ".format(aqueousTypes[atom]))
+		
 	f.write ('\nAqueous Interface Average')
-	for i in range(len(atom_type)):
+	for i in range ((len(aqueousTypes))):
 		f.write ('\t{:.1f}'.format(a_comp_ave[i]))
+		
 	f.write ('\nAqueous Interface Standard Deviation')
-	for i in range(len(atom_type)):
+	for i in range ((len(aqueousTypes))):
 		f.write ('\t{:.1f}'.format(a_comp_std[i]))
+		
 	f.write ('\nSampleCount = {:d}\n'.format(Analysis_Count))
 	f.close ()
 	return True
 
+# Hydrophobic Interface Composition, Average & Standard Deviation 
 def write_hydrophobic_composition():
 	f=open(filename+"_hydrophobic_interface_comp.txt",'w')
+	
 	h_comp_ave = np.average (hydrophobicComposition, axis = 0)
 	h_comp_std = np.std (hydrophobicComposition, axis = 0)
-	# Hydrophobic Interface Average & Standard Deviation 
+	
 	f.write ('Hydrophobic Interface Composition\n')
-	for atom in atom_type:
-		f.write ("\t{} ".format(interfaceData[atom]))
+	for atom in range ((len(hydrophobicTypes))):
+		f.write ("\t{} ".format(hydrophobicTypes[atom]))
+	
 	f.write ('\nHydrophobic Interface Average')
-	for i in range(len(atom_type)):
+	for i in range(len(hydrophobicTypes)):
 		f.write ('\t{:.1f}'.format(h_comp_ave[i]))
+	
 	f.write ('\nHydrophobic Interface Standard Deviation')
-	for i in range (len(atom_type)):
+	for i in range (len(hydrophobicTypes)):
 		f.write ('\t{:.1f}'.format(h_comp_std[i]))
+	
 	f.write ('\nSampleCount = {:d}\n'.format(Analysis_Count))
 	f.close ()
 	return True

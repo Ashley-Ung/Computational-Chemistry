@@ -190,8 +190,12 @@ def main():
 		atom_radius[atom] = interfaceData[(sim_data.atominfo[atom]['molecule'], sim_data.atominfo[atom]['type'])][1]
 		
 	# Defines the range above and below the interface to test for surface atoms; in nm
-	global interfaceBound
-	interfaceBound = 2.0
+		#global interfaceBound
+		#interfaceBound = 2.0
+	global aqueousInterfaceBound 
+	aqueousInterfaceBound = 2.0 
+	global hydrophobicInterfaceBound
+	hydrophobicInterfaceBound = 3.0 
 	
 	# Aqueous Interface 2-d arrays for surface atom type and z height. Defined as 1-d array for purposes of multiprocessing, which only uses 1-d indexing	
 	global z_type_aqueous										              
@@ -264,11 +268,11 @@ def main():
 			sim_data.next()
 		
 		# Clear Result Arrays for Aqueous Interface 
-		z_height_aqueous.fill(-1.0*interfaceBound)
+		z_height_aqueous.fill(-1.0*aqueousInterfaceBound)
 		z_type_aqueous.fill(0)
 		
 		# Clear Result Arrays for Hydrophobic Interface 
-		z_height_hydrophobic.fill(+1.0*interfaceBound)                     					#+1.0 for hydrophobic interface? 
+		z_height_hydrophobic.fill(+1.0*hydrophobicInterfaceBound)                     					#+1.0 for hydrophobic interface? 
 		z_type_hydrophobic.fill(0)
 		
 		# Aqueous -- Set up the multiprocessing to use 1/2 of available cores.
@@ -327,7 +331,7 @@ def Test_Atom_Aqueous(atom):
 	atomType = int(atom_type[atom])
 	atomRadius = atom_radius[atomType]
 	z_center = sim_data.positions[atom,2]
-	if z_center - atomRadius <= interfaceBound and z_center + atomRadius >= -interfaceBound:	
+	if z_center - atomRadius <= aqueousInterfaceBound and z_center + atomRadius >= -aqueousInterfaceBound:	
 		x_pos = sim_data.positions[atom,0]
 		y_pos = sim_data.positions[atom,1]
 		# Calculate the surface array index bounds for the atom radius	
@@ -357,7 +361,7 @@ def Test_Atom_Hydrophobic(atom):
 	atomType = int(atom_type[atom])
 	atomRadius = atom_radius[atomType]
 	z_center = sim_data.positions[atom,2]
-	if z_center - atomRadius <= interfaceBound and z_center + atomRadius >= -interfaceBound:	
+	if z_center - atomRadius <= hydrophobicInterfaceBound and z_center + atomRadius >= -hydrophobicInterfaceBound:	
 		x_pos = sim_data.positions[atom,0]
 		y_pos = sim_data.positions[atom,1]
 		# Calculate the surface array index bounds for the atom radius	

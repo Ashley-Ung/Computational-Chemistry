@@ -393,7 +393,8 @@ def append_aqueous_composition(frame):
 	i = 0
 	for atom in range ((len(aqueousTypes))):
 		n= (z_type_aqueous == atom).sum()
-		print("{} count = {:d}".format(aqueousTypes[atom],n)) 
+		if not n == 0:			 									#check if atom is found in the file 
+			print("{} count = {:d}".format(aqueousTypes[atom],n)) 
 		aqueousComposition[frame,i]=n
 		i+=1
 	return True
@@ -406,7 +407,8 @@ def append_hydrophobic_composition(frame):
 	#atomType = int(atom_type[atom])
 	for atom in range ((len(hydrophobicTypes))):
 		n= (z_type_hydrophobic == atom).sum()
-		print("{} count = {:d}".format(hydrophobicTypes[atom],n)) # indexing error -- fixed 
+		if not n == 0: 
+			print("{} count = {:d}".format(hydrophobicTypes[atom],n))  #check if atom is found in the file
 		hydrophobicComposition[frame,i]=n
 		i+=1
 	return True
@@ -477,21 +479,27 @@ def write_aqueous_composition():
 	a_comp_ave = np.average (aqueousComposition, axis = 0)
 	a_comp_std = np.std (aqueousComposition, axis = 0)
 	
-	f.write ('Aqueous Interface Composition\n')
-	for atom in range ((len(aqueousTypes))):
-		f.write("\t{} ".format(aqueousTypes[atom]))
+	for atom in range ((len(aqueousTypes))): 
+		n= (z_type_aqueous == atom).sum()
+		f.write ('Aqueous Interface Composition\n')
+		for atom in range ((len(aqueousTypes))):
+			if not n == 0: 
+				f.write("\t{} ".format(aqueousTypes[atom]))
 		
-	f.write ('\nAqueous Interface Average')
-	for i in range ((len(aqueousTypes))):
-		f.write ('\t{:.1f}'.format(a_comp_ave[i]))
+		f.write ('\nAqueous Interface Average')
+		for i in range ((len(aqueousTypes))):
+			if not n == 0:
+				f.write ('\t{:.1f}'.format(a_comp_ave[i]))
 		
-	f.write ('\nAqueous Interface Standard Deviation')
-	for i in range ((len(aqueousTypes))):
-		f.write ('\t{:.1f}'.format(a_comp_std[i]))
+		f.write ('\nAqueous Interface Standard Deviation')
+		for i in range ((len(aqueousTypes))):
+			if not n == 0:
+				f.write ('\t{:.1f}'.format(a_comp_std[i]))
 		
-	f.write ('\nSampleCount = {:d}\n'.format(Analysis_Count))
-	f.close ()
-	return True
+		f.write ('\nSampleCount = {:d}\n'.format(Analysis_Count))
+		f.close ()
+		
+		return True
 
 # Hydrophobic Interface Composition, Average & Standard Deviation 
 def write_hydrophobic_composition():
@@ -503,15 +511,12 @@ def write_hydrophobic_composition():
 	f.write ('Hydrophobic Interface Composition\n')
 	for atom in range ((len(hydrophobicTypes))):
 		f.write ("\t{} ".format(hydrophobicTypes[atom]))
-	
 	f.write ('\nHydrophobic Interface Average')
 	for i in range(len(hydrophobicTypes)):
 		f.write ('\t{:.1f}'.format(h_comp_ave[i]))
-	
 	f.write ('\nHydrophobic Interface Standard Deviation')
 	for i in range (len(hydrophobicTypes)):
 		f.write ('\t{:.1f}'.format(h_comp_std[i]))
-	
 	f.write ('\nSampleCount = {:d}\n'.format(Analysis_Count))
 	f.close ()
 	return True

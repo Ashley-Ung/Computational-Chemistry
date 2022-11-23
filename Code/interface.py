@@ -479,27 +479,26 @@ def write_aqueous_composition():
 	a_comp_ave = np.average (aqueousComposition, axis = 0)
 	a_comp_std = np.std (aqueousComposition, axis = 0)
 	
-	for atom in range ((len(aqueousTypes))): 
-		n= (z_type_aqueous == atom).sum()
-		f.write ('Aqueous Interface Composition\n')
-		for atom in range ((len(aqueousTypes))):
-			if not n == 0: 
-				f.write("\t{} ".format(aqueousTypes[atom]))
+	f.write ('Aqueous Interface Composition\n')
+	for atom in range ((len(aqueousTypes))):
+		n= (z_type_aqueous == atom).sum() 
+		if not n == 0:											# check if atom was found in the file 
+			f.write("\t{} ".format(aqueousTypes[atom])) 
 		
-		f.write ('\nAqueous Interface Average')
-		for i in range ((len(aqueousTypes))):
-			if not n == 0:
-				f.write ('\t{:.1f}'.format(a_comp_ave[i]))
+	f.write ('\nAqueous Interface Average')
+	for i in range ((len(aqueousTypes))):
+		if not a_comp_ave[i] == 0:
+			f.write ('\t{:.1f}'.format(a_comp_ave[i]))
 		
-		f.write ('\nAqueous Interface Standard Deviation')
-		for i in range ((len(aqueousTypes))):
-			if not n == 0:
-				f.write ('\t{:.1f}'.format(a_comp_std[i]))
+	f.write ('\nAqueous Interface Standard Deviation')
+	for i in range ((len(aqueousTypes))):
+		if not a_comp_std[i] == 0:
+			f.write ('\t{:.1f}'.format(a_comp_std[i]))
 		
-		f.write ('\nSampleCount = {:d}\n'.format(Analysis_Count))
-		f.close ()
+	f.write ('\nSampleCount = {:d}\n'.format(Analysis_Count))
+	f.close ()
 		
-		return True
+	return True
 
 # Hydrophobic Interface Composition, Average & Standard Deviation 
 def write_hydrophobic_composition():
@@ -511,12 +510,15 @@ def write_hydrophobic_composition():
 	f.write ('Hydrophobic Interface Composition\n')
 	for atom in range ((len(hydrophobicTypes))):
 		f.write ("\t{} ".format(hydrophobicTypes[atom]))
+		
 	f.write ('\nHydrophobic Interface Average')
 	for i in range(len(hydrophobicTypes)):
 		f.write ('\t{:.1f}'.format(h_comp_ave[i]))
+		
 	f.write ('\nHydrophobic Interface Standard Deviation')
 	for i in range (len(hydrophobicTypes)):
 		f.write ('\t{:.1f}'.format(h_comp_std[i]))
+		
 	f.write ('\nSampleCount = {:d}\n'.format(Analysis_Count))
 	f.close ()
 	return True
@@ -524,18 +526,24 @@ def write_hydrophobic_composition():
 # Aqueous Interface FFT
 def write_FFT():
 	f=open(filename+"_aqueous_interface_FFT.txt",'w')
+	
 	FFT_ave = np.average(interface_fft, axis = 0)
 	FFT_std = np.std(interface_fft, axis = 0)
+	
 	f.write('Aqueous Interface FFT\n')
+	
 	f.write('x(nm^-1)')
 	for i in range(size//2-1):
 		f.write('\t{:.3e}'.format(space_dim/(i+1)))
+		
 	f.write('\naverage')
 	for i in range(size//2-1):
 		f.write('\t{:.3e}'.format(FFT_ave[i]))
+		
 	f.write('\nstdev')
 	for i in range(size//2-1):
 		f.write('\t{:.3e}'.format(FFT_std[i]))
+		
 	f.write('\nSampleCount = {:d}\n'.format(Analysis_Count))
 	f.close()
 	return True
@@ -543,19 +551,25 @@ def write_FFT():
 # Aqueous Interface FD 
 def write_FD():
 	f=open(filename+"_aqueous_interface_FD.txt",'w')
+	
 	FD_x_values = np.arange(box_increment,size+1,box_increment)* cell_dimension
 	FD_ave = np.average(interface_fd, axis = 0)
 	FD_std = np.std(interface_fd, axis = 0)
+	
 	f.write('Interface Fractal Dimension')
+	
 	f.write('\nx(nm)')
 	for i in range(size//box_increment):
 		f.write('\t{:.3e}'.format(FD_x_values[i]))
+		
 	f.write('\naverage')
 	for i in range(size//box_increment):
 		f.write('\t{:.3e}'.format(FD_ave[i]))
+		
 	f.write('\nstdev')
 	for i in range(size//box_increment):
 		f.write('\t{:.3e}'.format(FD_std[i]))
+		
 	f.write('\nSampleCount = {:d}\n'.format(Analysis_Count))
 	f.close()
 	return True
@@ -576,4 +590,5 @@ def display_time(seconds, granularity=2):
 if __name__ == '__main__':  
 	mp.set_start_method ('fork')
 	main ()
+	
 	

@@ -510,17 +510,17 @@ def write_hydrophobic_composition():
 	f.write ('Hydrophobic Interface Composition\n')
 	for atom in range ((len(hydrophobicTypes))):
 		n = (z_type_hydrophobic == atom).sum()
-		if not n == 0:
+		if not n == 0.0:
 			f.write ("\t{} ".format(hydrophobicTypes[atom]))
 		
 	f.write ('\nHydrophobic Interface Average')
 	for i in range(len(hydrophobicTypes)):
-		if not h_comp_ave[i] == 0: 
+		if not h_comp_ave[i] == 0.0: 
 			f.write ('\t{:.1f}'.format(h_comp_ave[i]))
 		
 	f.write ('\nHydrophobic Interface Standard Deviation')
 	for i in range (len(hydrophobicTypes)):
-		if not h_comp_std[i] == 0:
+		if not h_comp_std[i] == 0.0:
 			f.write ('\t{:.1f}'.format(h_comp_std[i]))
 		
 	f.write ('\nSampleCount = {:d}\n'.format(Analysis_Count))

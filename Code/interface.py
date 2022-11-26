@@ -168,6 +168,26 @@ def main():
 		(b"CTC", b"Cl2"):(hydrophobicTypes.index ("Solvent"), 0.3898 * adjust),
 		(b"CTC", b"Cl3"):(hydrophobicTypes.index ("Solvent"), 0.3898 * adjust),
 		(b"CTC", b"Cl4"):(hydrophobicTypes.index ("Solvent"), 0.3898 * adjust)
+		
+		# Headgroups for Hydrophobic DBC 
+		#(b"DBC", b"O1"):(hydrophobicTypes.index ("DBC_HeadGroup"), 0.355*adjust),
+		#(b"DBC", b"O2"):(hydrophobicTypes.index ("DBC_HeadGroup"), 0.355*adjust),
+		#(b"DBC", b"C18"):(hydrophobicTypes.index ("DBC_HeadGroup"), 0.382*adjust),
+		# Benzene Ring Headgroup DBC
+		#(b"DBC", b"C12"):(hydrophobicTypes.index ("DBC_HeadGroup"), 0.38*adjust),
+		#(b"DBC", b"?????????????"):(hydrophobicTypes.index ("DBC_HeadGroup"), 0.298*adjust),  #figure out the h-number 
+		#(b"DBC", b"C13"):(hydrophobicTypes.index ("DBC_HeadGroup"), 0.38*adjust),
+		#(b"DBC", b"C14"):(hydrophobicTypes.index ("DBC_HeadGroup"), 0.38*adjust),
+		#(b"DBC", b"C15"):(hydrophobicTypes.index ("DBC_HeadGroup"), 0.38*adjust),
+		#(b"DBC", b"C16"):(hydrophobicTypes.index ("DBC_HeadGroup"), 0.38*adjust),
+		#(b"DBC", b"C17"):(hydrophobicTypes.index ("DBC_HeadGroup"), 0.38*adjust),
+		# Tailgroups for Hydrophobic DBC 
+		
+		# Headgroups for Hydrophobic DDS 
+		# Tailgroups for Hydrophobic DDS 
+		
+		# Headgroups for Hydrophobic DBS 
+		# Tailgroups for Hydrophobic DBS 
 	}
 
 	# Looping through the data file and sorting the atoms by aqueous or hydrophobic by adding into designated array 
@@ -481,19 +501,18 @@ def write_aqueous_composition():
 	
 	f.write ('Aqueous Interface Composition\n')
 	for atom in range ((len(aqueousTypes))):
-		n = (z_type_aqueous == atom).sum() 
-		if not n == 0:										# check if atom was found in the file 
+		if not a_comp_std[atom] == 0: 
 			f.write("\t{} ".format(aqueousTypes[atom])) 
 		
 	f.write ('\nAqueous Interface Average')
-	for i in range ((len(aqueousTypes))):
-		if not a_comp_ave[i] == 0:
-			f.write ('\t{:.1f}'.format(a_comp_ave[i]))
+	for atom in range ((len(aqueousTypes))):
+		if not a_comp_ave[atom] == 0:
+			f.write ('\t{:.1f}'.format(a_comp_ave[atom]))
 		
 	f.write ('\nAqueous Interface Standard Deviation')
-	for i in range ((len(aqueousTypes))):
-		if not a_comp_std[i] == 0:
-			f.write ('\t{:.1f}'.format(a_comp_std[i]))
+	for atom in range ((len(aqueousTypes))):
+		if not a_comp_std[atom] == 0:
+			f.write ('\t{:.1f}'.format(a_comp_std[atom]))
 		
 	f.write ('\nSampleCount = {:d}\n'.format(Analysis_Count))
 	f.close ()
@@ -509,19 +528,18 @@ def write_hydrophobic_composition():
 	
 	f.write ('Hydrophobic Interface Composition\n')
 	for atom in range ((len(hydrophobicTypes))):
-		n = (z_type_hydrophobic == atom).sum()
-		if not n == 0.0:
+		if not h_comp_std[atom] == 0:
 			f.write ("\t{} ".format(hydrophobicTypes[atom]))
 		
 	f.write ('\nHydrophobic Interface Average')
-	for i in range(len(hydrophobicTypes)):
-		if not h_comp_ave[i] == 0.0: 
-			f.write ('\t{:.1f}'.format(h_comp_ave[i]))
+	for atom in range(len(hydrophobicTypes)):
+		if not h_comp_ave[atom] == 0.0: 
+			f.write ('\t{:.1f}'.format(h_comp_ave[atom]))
 		
 	f.write ('\nHydrophobic Interface Standard Deviation')
-	for i in range (len(hydrophobicTypes)):
-		if not h_comp_std[i] == 0.0:
-			f.write ('\t{:.1f}'.format(h_comp_std[i]))
+	for atom in range (len(hydrophobicTypes)):
+		if not h_comp_std[atom] == 0.0:
+			f.write ('\t{:.1f}'.format(h_comp_std[atom]))
 		
 	f.write ('\nSampleCount = {:d}\n'.format(Analysis_Count))
 	f.close ()

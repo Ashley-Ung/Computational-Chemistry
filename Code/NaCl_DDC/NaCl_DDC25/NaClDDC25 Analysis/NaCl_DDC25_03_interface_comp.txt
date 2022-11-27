@@ -1,0 +1,5 @@
+Interface Composition
+	Holes 	H 	O 	Na+ 	Cl- 
+average	0.0	72919.4	187754.1	293.8	1176.7
+standard_deviation	0.0	3079.2	3200.8	411.4	1597.9
+SampleCount = 100

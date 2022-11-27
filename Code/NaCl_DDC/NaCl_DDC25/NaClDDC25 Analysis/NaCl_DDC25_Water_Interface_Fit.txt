@@ -1,0 +1,33 @@
+Water Interface Mass Density fit to hyperbolic tangent function for n=101 data points
+Trajectory  1
+	max	inflection	width
+Fit:	0.9802	-0.0184	0.2180
+StDev:	0.0020	0.0014	0.0025
+
+Water Interface Mass Density fit to hyperbolic tangent function for n=101 data points
+Trajectory  2
+	max	inflection	width
+Fit:	0.9840	-0.0207	0.2133
+StDev:	0.0018	0.0013	0.0022
+
+Water Interface Mass Density fit to hyperbolic tangent function for n=101 data points
+Trajectory  3
+	max	inflection	width
+Fit:	0.9880	-0.0222	0.2177
+StDev:	0.0021	0.0015	0.0025
+
+Water Interface Mass Density fit to hyperbolic tangent function for n=101 data points
+Trajectory  4
+	max	inflection	width
+Fit:	0.9868	-0.0165	0.2185
+StDev:	0.0021	0.0015	0.0025
+
+
+Statistics for fit to 4 trajectories:
+Average_Fit:	0.9847	-0.0195	0.2169
+StDev_Fit:	0.0020	0.0014	0.0024
+
+Fit parameters to Average Water Interface Density
+Fit:	0.9847	-0.0195	0.2169
+StDev:	0.0017	0.0012	0.0021
+

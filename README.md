@@ -9,5 +9,7 @@ Ongoing research on how molecules behave on oil/water interfaces.
 
 ![Screen Shot 2022-09-06 at 3 24 29 PM](https://user-images.githubusercontent.com/62251927/188936748-d33e462d-9bc9-4b90-b5b2-75595dbca5ef.png)
 
-NaCl DDC 100 Salt Simulation from VMD
 ![Screen Shot 2022-12-04 at 1 29 16 PM](https://user-images.githubusercontent.com/62251927/205516789-6241c6e3-e94b-45d6-b255-b932a72de9fa.png)
+
+
+NaCl DDC 100 Salt Simulation from VMD

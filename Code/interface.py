@@ -99,7 +99,8 @@ def main():
 	global aqueousTypes
 	aqueousTypes = ["Holes", "H", "Li+", "O", "F-", "Na+", "Mg2+", "Cl-", "K+", "Ca2+", "Zn2+", "Br-", "I-"]
 	global hydrophobicTypes
-	hydrophobicTypes = ["Holes", "Solvent", "DDC_Tail", "DDC_HeadGroup"]
+	#hydrophobicTypes = ["Holes", "Solvent", "DDC_Tail", "DDC_HeadGroup"]
+	hydrophobicTypes = ["Holes", "Solvent", "DDC_Tail", "DDC_HeadGroup", "DDS_Tail", "DDS_HeadGroup"]
 	#hydrophobicTypes = ["Holes", "Solvent", "DDC_Tail", "DDC_HeadGroup", "DBC_Tail", "DBC_HeadGroup", "DDS_Tail", "DDS_HeadGroup", "DBS_Tail", "DBS_HeadGroup"] # syntax error because other surfactants are not declared yet in the dictionary 
 	
 	# A dictionary of the hydrophobic and aqueous interface atom names and vdw radii values-- values are from Amoeba2018 data adjust to 0.7 of diameter
@@ -120,11 +121,6 @@ def main():
 		(b"ZN", b"Zn"):(aqueousTypes.index("Zn2+"), 0.268*adjust),
 		(b"BR", b"Br"):(aqueousTypes.index("Br-"), 0.432*adjust),
 		(b"I", b"I"):(aqueousTypes.index("I-"), 0.461*adjust),
-		
-		# Headgroups for Hydrophobic DDC
-		(b"DDC", b"O1"):(hydrophobicTypes.index ("DDC_HeadGroup"), 0.355*adjust),
-		(b"DDC", b"O2"):(hydrophobicTypes.index ("DDC_HeadGroup"), 0.355*adjust),
-		(b"DDC", b"C12"):(hydrophobicTypes.index ("DDC_HeadGroup"), 0.382*adjust),
 		
 		# Tailgroups for Hydrophobic DDC
 		(b"DDC", b"C1"):(hydrophobicTypes.index ("DDC_Tail"), 3.820e-01 * adjust),
@@ -161,6 +157,54 @@ def main():
 		(b"DDC", b"C11"):(hydrophobicTypes.index ("DDC_Tail"), 3.820e-01 * adjust),
 		(b"DDC", b"H22"):(hydrophobicTypes.index ("DDC_Tail"), 2.980e-01 * adjust),
 		(b"DDC", b"H23"):(hydrophobicTypes.index ("DDC_Tail"), 2.980e-01 * adjust),
+		# Headgroups for Hydrophobic DDC
+		(b"DDC", b"O1"):(hydrophobicTypes.index ("DDC_HeadGroup"), 0.355*adjust),
+		(b"DDC", b"O2"):(hydrophobicTypes.index ("DDC_HeadGroup"), 0.355*adjust),
+		(b"DDC", b"C12"):(hydrophobicTypes.index ("DDC_HeadGroup"), 0.382*adjust),
+		
+		# Tailgroups for Hydrophobic DDS 
+		(b"DDS", b"C1"):(hydrophobicTypes.index ("DDS_Tail"), 3.820e-01 * adjust),
+		(b"DDS", b"H1"):(hydrophobicTypes.index ("DDS_Tail"), 2.980e-01 * adjust),
+		(b"DDS", b"H2"):(hydrophobicTypes.index ("DDS_Tail"), 2.980e-01 * adjust),
+		(b"DDS", b"H3"):(hydrophobicTypes.index ("DDS_Tail"), 2.980e-01 * adjust),
+		(b"DDS", b"C2"):(hydrophobicTypes.index ("DDS_Tail"), 3.820e-01 * adjust),
+		(b"DDS", b"H4"):(hydrophobicTypes.index ("DDS_Tail"), 2.980e-01 * adjust),
+		(b"DDS", b"H5"):(hydrophobicTypes.index ("DDS_Tail"), 2.980e-01 * adjust),
+		(b"DDS", b"C3"):(hydrophobicTypes.index ("DDS_Tail"), 3.820e-01 * adjust),
+		(b"DDS", b"H6"):(hydrophobicTypes.index ("DDS_Tail"), 2.980e-01 * adjust),
+		(b"DDS", b"H7"):(hydrophobicTypes.index ("DDS_Tail"), 2.980e-01 * adjust),
+		(b"DDS", b"C4"):(hydrophobicTypes.index ("DDS_Tail"), 3.820e-01 * adjust),
+		(b"DDS", b"H8"):(hydrophobicTypes.index ("DDS_Tail"), 2.980e-01 * adjust),
+		(b"DDS", b"H9"):(hydrophobicTypes.index ("DDS_Tail"), 2.980e-01* adjust),
+		(b"DDS", b"C5"):(hydrophobicTypes.index ("DDS_Tail"), 3.820e-01 * adjust),
+		(b"DDS", b"H10"):(hydrophobicTypes.index ("DDS_Tail"), 2.980e-01 * adjust),
+		(b"DDS", b"H11"):(hydrophobicTypes.index ("DDS_Tail"), 2.980e-01 * adjust),
+		(b"DDS", b"C6"):(hydrophobicTypes.index ("DDS_Tail"), 3.820e-01 * adjust),
+		(b"DDS", b"H12"):(hydrophobicTypes.index ("DDS_Tail"), 2.980e-01 * adjust),
+		(b"DDS", b"H13"):(hydrophobicTypes.index ("DDS_Tail"), 2.980e-01 * adjust),
+		(b"DDS", b"C7"):(hydrophobicTypes.index ("DDS_Tail"), 3.820e-01 * adjust),
+		(b"DDS", b"H14"):(hydrophobicTypes.index ("DDS_Tail"), 2.980e-01 * adjust),
+		(b"DDS", b"H15"):(hydrophobicTypes.index ("DDS_Tail"), 2.980e-01 * adjust),
+		(b"DDS", b"C8"):(hydrophobicTypes.index ("DDS_Tail"), 3.820e-01 * adjust),
+		(b"DDS", b"H16"):(hydrophobicTypes.index ("DDS_Tail"), 2.980e-01 * adjust),
+		(b"DDS", b"H17"):(hydrophobicTypes.index ("DDS_Tail"), 2.980e-01 * adjust),
+		(b"DDS", b"C9"):(hydrophobicTypes.index ("DDS_Tail"), 3.820e-01 * adjust),
+		(b"DDS", b"H18"):(hydrophobicTypes.index ("DDS_Tail"), 2.980e-01 * adjust),
+		(b"DDS", b"H19"):(hydrophobicTypes.index ("DDS_Tail"), 2.980e-01 * adjust),
+		(b"DDS", b"C10"):(hydrophobicTypes.index ("DDS_Tail"), 3.820e-01 * adjust),
+		(b"DDS", b"H20"):(hydrophobicTypes.index ("DDS_Tail"), 2.980e-01 * adjust),
+		(b"DDS", b"H21"):(hydrophobicTypes.index ("DDS_Tail"), 2.980e-01 * adjust),
+		(b"DDS", b"C11"):(hydrophobicTypes.index ("DDS_Tail"), 0.382 * adjust),   # dont know the vdw value for C12 currentlying using 3031
+		(b"DDS", b"H22"):(hydrophobicTypes.index ("DDS_Tail"), 2.980e-01 * adjust),
+		(b"DDS", b"H23"):(hydrophobicTypes.index ("DDS_Tail"), 2.980e-01 * adjust),
+		(b"DDS", b"H24"):(hydrophobicTypes.index ("DDS_Tail"), 2.980e-01 * adjust),					# is this correct vdw value ??? 
+		(b"DDS", b"H25"):(hydrophobicTypes.index ("DDS_Tail"), 2.980e-01 * adjust),					# is this correct vdw value ???
+		# Headgroups for Hydrophobic DDS
+		(b"DDS", b"C12"):(hydrophobicTypes.index ("DDS_HeadGroup"), 2.980e-01 * adjust), # dont know the vdw value for C12 currentlying using 3032
+		(b"DDS", b"S1"):(hydrophobicTypes.index ("DDS_HeadGroup"), 0.391 * adjust),
+		(b"DDS", b"O1"):(hydrophobicTypes.index ("DDS_HeadGroup"), 0.351 * adjust),
+		(b"DDS", b"O2"):(hydrophobicTypes.index ("DDS_HeadGroup"), 0.351 * adjust),
+		(b"DDS", b"O3"):(hydrophobicTypes.index ("DDS_HeadGroup"), 0.351 * adjust),
 		
 		# Solvent 
 		(b"CTC", b"C"):(hydrophobicTypes.index ("Solvent"), 0.36 * adjust),
@@ -168,28 +212,9 @@ def main():
 		(b"CTC", b"Cl2"):(hydrophobicTypes.index ("Solvent"), 0.3898 * adjust),
 		(b"CTC", b"Cl3"):(hydrophobicTypes.index ("Solvent"), 0.3898 * adjust),
 		(b"CTC", b"Cl4"):(hydrophobicTypes.index ("Solvent"), 0.3898 * adjust)
-		
-		# Headgroups for Hydrophobic DBC 
-		#(b"DBC", b"O1"):(hydrophobicTypes.index ("DBC_HeadGroup"), 0.355*adjust),
-		#(b"DBC", b"O2"):(hydrophobicTypes.index ("DBC_HeadGroup"), 0.355*adjust),
-		#(b"DBC", b"C18"):(hydrophobicTypes.index ("DBC_HeadGroup"), 0.382*adjust),
-		# Benzene Ring Headgroup DBC
-		#(b"DBC", b"C12"):(hydrophobicTypes.index ("DBC_HeadGroup"), 0.38*adjust),
-		#(b"DBC", b"?????????????"):(hydrophobicTypes.index ("DBC_HeadGroup"), 0.298*adjust),  #figure out the h-number 
-		#(b"DBC", b"C13"):(hydrophobicTypes.index ("DBC_HeadGroup"), 0.38*adjust),
-		#(b"DBC", b"C14"):(hydrophobicTypes.index ("DBC_HeadGroup"), 0.38*adjust),
-		#(b"DBC", b"C15"):(hydrophobicTypes.index ("DBC_HeadGroup"), 0.38*adjust),
-		#(b"DBC", b"C16"):(hydrophobicTypes.index ("DBC_HeadGroup"), 0.38*adjust),
-		#(b"DBC", b"C17"):(hydrophobicTypes.index ("DBC_HeadGroup"), 0.38*adjust),
-		# Tailgroups for Hydrophobic DBC 
-		
-		# Headgroups for Hydrophobic DDS 
-		# Tailgroups for Hydrophobic DDS 
-		
-		# Headgroups for Hydrophobic DBS 
-		# Tailgroups for Hydrophobic DBS 
 	}
-
+		
+	
 	# Looping through the data file and sorting the atoms by aqueous or hydrophobic by adding into designated array 
 	global atom_type   # An array that stores the atom type 
 	global atom_radius # An array that stores the van der waals radius 
@@ -354,7 +379,7 @@ def Test_Atom_Aqueous(atom):
 	if z_center - atomRadius <= aqueousInterfaceBound and z_center + atomRadius >= -aqueousInterfaceBound:	
 		x_pos = sim_data.positions[atom,0]
 		y_pos = sim_data.positions[atom,1]
-		# Calculate the surface array index bounds for the atom radius	
+		# Calculate the surface array index bounds for the atom radius, the ceil function returns the smallest intege >= to x 
 		x_minIndex = math.ceil((x_pos - atomRadius)*inverse_cell_dimension)
 		x_maxIndex = math.ceil((x_pos + atomRadius)*inverse_cell_dimension)
 		y_minIndex = math.ceil((y_pos - atomRadius)*inverse_cell_dimension)

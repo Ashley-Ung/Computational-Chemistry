@@ -2,9 +2,9 @@
 # Ashley Ung: the interface_ionic_analysis code that i will be working on 
 
 """
-Interface_Ionic_Analysis.py
+InterfaceIonicAnalysis.py
 Ashley Ung, Pacific University
-Fall 2022
+Fall 2022 and Spring 2023 
 
 Hydrophobic and Hydrophillic interface analysis for DDC 
 

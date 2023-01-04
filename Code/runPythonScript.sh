@@ -9,9 +9,12 @@ To make this script an executable use the following command: chmod +x runPythonS
 
 To run the script, use the following command: ./runPythonScript.sh
 """
-
 #!/bin/bash
-for i in 25 50 75 100 125 
+
+for i in 25 50 75 100 125
 do
-	python Interface_Ionic_Analysis_Copy.py /Users/Shared/SurfactantProject/Sim2022/CCl4_Sims/DDC/DDC$i/DDC$i 1
+   for j in {1..4} # The inner loop will run from 1 to 4 for each value of i
+   do
+      python Interface_Ionic_Analysis_Copy.py /Users/Shared/SurfactantProject/Sim2022/CCl4_Sims/DDC/DDC$i/DDC$i $j
+   done
 done

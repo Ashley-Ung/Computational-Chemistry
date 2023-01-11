@@ -2,9 +2,9 @@
 # Ashley Ung: the interface_ionic_analysis code that i will be working on 
 
 """
-InterfaceIonicAnalysis.py
+Interface_Ionic_Analysis.py
 Ashley Ung, Pacific University
-Fall 2022 and Spring 2023 
+Fall 2022
 
 Hydrophobic and Hydrophillic interface analysis for DDC 
 
@@ -100,8 +100,8 @@ def main():
 	aqueousTypes = ["Holes", "H", "Li+", "O", "F-", "Na+", "Mg2+", "Cl-", "K+", "Ca2+", "Zn2+", "Br-", "I-"]
 	global hydrophobicTypes
 	#hydrophobicTypes = ["Holes", "Solvent", "DDC_Tail", "DDC_HeadGroup"]
-	hydrophobicTypes = ["Holes", "Solvent", "DDC_Tail", "DDC_HeadGroup", "DDS_Tail", "DDS_HeadGroup"]
-	#hydrophobicTypes = ["Holes", "Solvent", "DDC_Tail", "DDC_HeadGroup", "DBC_Tail", "DBC_HeadGroup", "DDS_Tail", "DDS_HeadGroup", "DBS_Tail", "DBS_HeadGroup"] # syntax error because other surfactants are not declared yet in the dictionary 
+	#hydrophobicTypes = ["Holes", "Solvent", "DDC_Tail", "DDC_HeadGroup", "DDS_Tail", "DDS_HeadGroup"]
+	hydrophobicTypes = ["Holes", "Solvent", "DDC_Tail", "DDC_HeadGroup", "DBC_Tail", "DBC_Benzene", "DBC_HeadGroup", "DDS_Tail", "DDS_HeadGroup"]   # "DBS_Tail", "DBS_Benzene", "DBS_HeadGroup"
 	
 	# A dictionary of the hydrophobic and aqueous interface atom names and vdw radii values-- values are from Amoeba2018 data adjust to 0.7 of diameter
 	adjust = 0.70 #Empirical Value 
@@ -205,6 +205,71 @@ def main():
 		(b"DDS", b"O1"):(hydrophobicTypes.index ("DDS_HeadGroup"), 0.351 * adjust),
 		(b"DDS", b"O2"):(hydrophobicTypes.index ("DDS_HeadGroup"), 0.351 * adjust),
 		(b"DDS", b"O3"):(hydrophobicTypes.index ("DDS_HeadGroup"), 0.351 * adjust),
+		
+		
+		
+		
+		
+		
+		# Tailgroups for Hydrophobic DBC 																			### not working DBC
+		(b"DBC", b"C1"):(hydrophobicTypes.index ("DBC_Tail"), 3.820e-01 * adjust),
+		(b"DBC", b"H1"):(hydrophobicTypes.index ("DBC_Tail"), 2.980e-01 * adjust),
+		(b"DBC", b"H2"):(hydrophobicTypes.index ("DBC_Tail"), 2.980e-01 * adjust),
+		(b"DBC", b"H3"):(hydrophobicTypes.index ("DBC_Tail"), 2.980e-01 * adjust),
+		(b"DBC", b"C2"):(hydrophobicTypes.index ("DBC_Tail"), 3.820e-01 * adjust),
+		(b"DBC", b"H4"):(hydrophobicTypes.index ("DBC_Tail"), 2.980e-01 * adjust),
+		(b"DBC", b"H5"):(hydrophobicTypes.index ("DBC_Tail"), 2.980e-01 * adjust),
+		(b"DBC", b"C3"):(hydrophobicTypes.index ("DBC_Tail"), 3.820e-01 * adjust),
+		(b"DBC", b"H6"):(hydrophobicTypes.index ("DBC_Tail"), 2.980e-01 * adjust),
+		(b"DBC", b"H7"):(hydrophobicTypes.index ("DBC_Tail"), 2.980e-01 * adjust),
+		(b"DBC", b"C4"):(hydrophobicTypes.index ("DBC_Tail"), 3.820e-01 * adjust),
+		(b"DBC", b"H8"):(hydrophobicTypes.index ("DBC_Tail"), 2.980e-01 * adjust),
+		(b"DBC", b"H9"):(hydrophobicTypes.index ("DBC_Tail"), 2.980e-01* adjust),
+		(b"DBC", b"C5"):(hydrophobicTypes.index ("DBC_Tail"), 3.820e-01 * adjust),
+		(b"DBC", b"H10"):(hydrophobicTypes.index ("DBC_Tail"), 2.980e-01 * adjust),
+		(b"DBC", b"H11"):(hydrophobicTypes.index ("DBC_Tail"), 2.980e-01 * adjust),
+		(b"DBC", b"C6"):(hydrophobicTypes.index ("DBC_Tail"), 3.820e-01 * adjust),
+		(b"DBC", b"H12"):(hydrophobicTypes.index ("DBC_Tail"), 2.980e-01 * adjust),
+		(b"DBC", b"H13"):(hydrophobicTypes.index ("DBC_Tail"), 2.980e-01 * adjust),
+		(b"DBC", b"C7"):(hydrophobicTypes.index ("DBC_Tail"), 3.820e-01 * adjust),
+		(b"DBC", b"H14"):(hydrophobicTypes.index ("DBC_Tail"), 2.980e-01 * adjust),
+		(b"DBC", b"H15"):(hydrophobicTypes.index ("DBC_Tail"), 2.980e-01 * adjust),
+		(b"DBC", b"C8"):(hydrophobicTypes.index ("DBC_Tail"), 3.820e-01 * adjust),
+		(b"DBC", b"H16"):(hydrophobicTypes.index ("DBC_Tail"), 2.980e-01 * adjust),
+		(b"DBC", b"H17"):(hydrophobicTypes.index ("DBC_Tail"), 2.980e-01 * adjust),
+		(b"DBC", b"C9"):(hydrophobicTypes.index ("DBC_Tail"), 3.820e-01 * adjust),
+		(b"DBC", b"H18"):(hydrophobicTypes.index ("DBC_Tail"), 2.980e-01 * adjust),
+		(b"DBC", b"H19"):(hydrophobicTypes.index ("DBC_Tail"), 2.980e-01 * adjust),
+		(b"DBC", b"C10"):(hydrophobicTypes.index ("DBC_Tail"), 3.820e-01 * adjust),
+		(b"DBC", b"H20"):(hydrophobicTypes.index ("DBC_Tail"), 2.980e-01 * adjust),
+		(b"DBC", b"H21"):(hydrophobicTypes.index ("DBC_Tail"), 2.980e-01 * adjust),
+		(b"DBC", b"C11"):(hydrophobicTypes.index ("DBC_Tail"), 3.820e-01 * adjust),
+		(b"DBC", b"H22"):(hydrophobicTypes.index ("DBC_Tail"), 2.980e-01 * adjust),
+		(b"DBC", b"H23"):(hydrophobicTypes.index ("DBC_Tail"), 2.980e-01 * adjust),
+		# Benzene Ring Headgroup DBC
+		(b"DBC", b"C12"):(hydrophobicTypes.index ("DBC_Benzene"), 0.38*adjust),				#Check ring vdw values
+		(b"DBC", b"C13"):(hydrophobicTypes.index ("DBC_Benzene"), 0.38*adjust),
+		(b"DBC", b"H24"):(hydrophobicTypes.index ("DBC_Benzene"), 0.298*adjust),  
+		(b"DBC", b"C14"):(hydrophobicTypes.index ("DBC_Benzene"), 0.38*adjust),
+		(b"DBC", b"H25"):(hydrophobicTypes.index ("DBC_Benzene"), 0.298*adjust),
+		(b"DBC", b"C15"):(hydrophobicTypes.index ("DBC_Benzene"), 0.38*adjust),
+		(b"DBC", b"H26"):(hydrophobicTypes.index ("DBC_Benzene"), 0.298*adjust),
+		(b"DBC", b"C16"):(hydrophobicTypes.index ("DBC_Benzene"), 0.38*adjust),
+		(b"DBC", b"H27"):(hydrophobicTypes.index ("DBC_Benzene"), 0.298*adjust),
+		(b"DBC", b"C17"):(hydrophobicTypes.index ("DBC_Benzene"), 0.38*adjust),
+		(b"DBC", b"H28"):(hydrophobicTypes.index ("DBC_Benzene"), 0.298*adjust),
+		# Headgroups for Hydrophobic DBC
+		(b"DBC", b"O1"):(hydrophobicTypes.index ("DBC_HeadGroup"), 0.355*adjust),
+		(b"DBC", b"O2"):(hydrophobicTypes.index ("DBC_HeadGroup"), 0.355*adjust),
+		(b"DBC", b"C18"):(hydrophobicTypes.index ("DBC_HeadGroup"), 0.382*adjust),
+																					
+		
+		
+		
+		
+		
+		
+		
 		
 		# Solvent 
 		(b"CTC", b"C"):(hydrophobicTypes.index ("Solvent"), 0.36 * adjust),

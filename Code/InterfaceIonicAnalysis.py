@@ -102,7 +102,7 @@ def main():
 	#hydrophobicTypes = ["Holes", "Solvent", "DDC_Tail", "DDC_HeadGroup"]
 	#hydrophobicTypes = ["Holes", "Solvent", "DDC_Tail", "DDC_HeadGroup", "DDS_Tail", "DDS_HeadGroup"]
 	hydrophobicTypes = ["Holes", "Solvent", "DDC_Tail", "DDC_HeadGroup", "DBC_Tail", "DBC_Benzene", "DBC_HeadGroup", "DDS_Tail", "DDS_HeadGroup"]   # "DBS_Tail", "DBS_Benzene", "DBS_HeadGroup"
-	
+
 	# A dictionary of the hydrophobic and aqueous interface atom names and vdw radii values-- values are from Amoeba2018 data adjust to 0.7 of diameter
 	adjust = 0.70 #Empirical Value 
 	global interfaceData 
@@ -208,7 +208,7 @@ def main():
 		
 		
 		
-		
+
 		
 		
 		# Tailgroups for Hydrophobic DBC 																			### not working DBC
@@ -246,8 +246,8 @@ def main():
 		(b"DBC", b"C11"):(hydrophobicTypes.index ("DBC_Tail"), 3.820e-01 * adjust),
 		(b"DBC", b"H22"):(hydrophobicTypes.index ("DBC_Tail"), 2.980e-01 * adjust),
 		(b"DBC", b"H23"):(hydrophobicTypes.index ("DBC_Tail"), 2.980e-01 * adjust),
-		# Benzene Ring Headgroup DBC
-		(b"DBC", b"C12"):(hydrophobicTypes.index ("DBC_Benzene"), 0.38*adjust),				#Check ring vdw values
+		(b"DBC", b"C12"):(hydrophobicTypes.index ("DBC_Tail"), 3.820e-01*adjust),	 # check vdw for C12 DBC
+		# Benzene Ring Headgroup DBC													#Check ring vdw values
 		(b"DBC", b"C13"):(hydrophobicTypes.index ("DBC_Benzene"), 0.38*adjust),
 		(b"DBC", b"H24"):(hydrophobicTypes.index ("DBC_Benzene"), 0.298*adjust),  
 		(b"DBC", b"C14"):(hydrophobicTypes.index ("DBC_Benzene"), 0.38*adjust),
@@ -258,10 +258,11 @@ def main():
 		(b"DBC", b"H27"):(hydrophobicTypes.index ("DBC_Benzene"), 0.298*adjust),
 		(b"DBC", b"C17"):(hydrophobicTypes.index ("DBC_Benzene"), 0.38*adjust),
 		(b"DBC", b"H28"):(hydrophobicTypes.index ("DBC_Benzene"), 0.298*adjust),
+		(b"DBC", b"C18"):(hydrophobicTypes.index ("DBC_Benzene"), 0.38*adjust), #check vdw for C18 DBC
 		# Headgroups for Hydrophobic DBC
 		(b"DBC", b"O1"):(hydrophobicTypes.index ("DBC_HeadGroup"), 0.355*adjust),
 		(b"DBC", b"O2"):(hydrophobicTypes.index ("DBC_HeadGroup"), 0.355*adjust),
-		(b"DBC", b"C18"):(hydrophobicTypes.index ("DBC_HeadGroup"), 0.382*adjust),
+		(b"DBC", b"C19"):(hydrophobicTypes.index ("DBC_HeadGroup"), 0.382*adjust), #check vdw for C19 DBC
 																					
 		
 		
@@ -279,7 +280,6 @@ def main():
 		(b"CTC", b"Cl4"):(hydrophobicTypes.index ("Solvent"), 0.3898 * adjust)
 	}
 		
-	
 	# Looping through the data file and sorting the atoms by aqueous or hydrophobic by adding into designated array 
 	global atom_type   # An array that stores the atom type 
 	global atom_radius # An array that stores the van der waals radius 
@@ -289,6 +289,7 @@ def main():
 	global hydrophobicArray 
 	aqueousArray = []
 	hydrophobicArray = []
+																																						# program breaks around here for DBC
 	for atom in range (atomCount): 
 		if sim_data.atominfo[atom]['molecule'] in aqueousMolecules:
 			aqueousArray.append (atom)
@@ -314,7 +315,7 @@ def main():
 	global z_height_aqueous
 	mpArray_height_aqueous = mp.Array('d',size*size) #d = decimal float data type 
 	z_height_aqueous = np.frombuffer(mpArray_height_aqueous.get_obj(),dtype='float64')
-	
+
 	# Hydrophobic Interface 2-d arrays for surface atom type and z height. Defined as 1-d array for purposes of multiprocessing, which only uses 1-d indexing
 	global z_type_hydrophobic 										              
 	mpArray_type_hydrophobic = mp.Array('l',size*size) #l = long integer data type
@@ -364,10 +365,10 @@ def main():
 			
 	#This portion fills the z_height and z_type arrays with the max z heights at every (x,y) and what atom type they are	
 	print("Starting Interface Analysis.")
-
+	
 	start_time = time.time()
 	Frames_Remaining = Analysis_Count
-	
+
 	# Frame loop	
 	for frame in range(0,sim_data.framecount+1-Frame_Skip,Frame_Skip):
 		print('Analysis of frame {} of {}'.format(frame + 1,sim_data.framecount))

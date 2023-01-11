@@ -99,8 +99,6 @@ def main():
 	global aqueousTypes
 	aqueousTypes = ["Holes", "H", "Li+", "O", "F-", "Na+", "Mg2+", "Cl-", "K+", "Ca2+", "Zn2+", "Br-", "I-"]
 	global hydrophobicTypes
-	#hydrophobicTypes = ["Holes", "Solvent", "DDC_Tail", "DDC_HeadGroup"]
-	#hydrophobicTypes = ["Holes", "Solvent", "DDC_Tail", "DDC_HeadGroup", "DDS_Tail", "DDS_HeadGroup"]
 	hydrophobicTypes = ["Holes", "Solvent", "DDC_Tail", "DDC_HeadGroup", "DBC_Tail", "DBC_Benzene", "DBC_HeadGroup", "DDS_Tail", "DDS_HeadGroup"]   # "DBS_Tail", "DBS_Benzene", "DBS_HeadGroup"
 
 	# A dictionary of the hydrophobic and aqueous interface atom names and vdw radii values-- values are from Amoeba2018 data adjust to 0.7 of diameter
@@ -289,7 +287,7 @@ def main():
 	global hydrophobicArray 
 	aqueousArray = []
 	hydrophobicArray = []
-																																						# program breaks around here for DBC
+																																						
 	for atom in range (atomCount): 
 		if sim_data.atominfo[atom]['molecule'] in aqueousMolecules:
 			aqueousArray.append (atom)
@@ -299,7 +297,7 @@ def main():
 			sys.exit (1) # print atom number 
 		atom_type[atom] = interfaceData[(sim_data.atominfo[atom]['molecule'], sim_data.atominfo[atom]['type'])][0]
 		atom_radius[atom] = interfaceData[(sim_data.atominfo[atom]['molecule'], sim_data.atominfo[atom]['type'])][1]
-		
+	print ("here") 																											# program breaks around here for DBC
 	# Defines the range above and below the interface to test for surface atoms; in nm
 		#global interfaceBound
 		#interfaceBound = 2.0
@@ -359,11 +357,11 @@ def main():
 
 	# Interface composition (aqueous or hydrophobic) 
 	global aqueousComposition 
-	aqueousComposition = np.empty ([Analysis_Count, len (z_type_aqueous)],int) #atom_type? 
+	aqueousComposition = np.empty ([Analysis_Count, len (z_type_aqueous)],int) 
 	global hydrophobicComposition 
-	hydrophobicComposition = np.empty ([Analysis_Count, len (z_type_hydrophobic)], int) #atom_type? 
+	hydrophobicComposition = np.empty ([Analysis_Count, len (z_type_hydrophobic)], int) 
 			
-	#This portion fills the z_height and z_type arrays with the max z heights at every (x,y) and what atom type they are	
+	#This portion fills the z_height and z_type arrays with the max z heights at every (x,y) and what atom type they are
 	print("Starting Interface Analysis.")
 	
 	start_time = time.time()
@@ -383,7 +381,7 @@ def main():
 		z_type_aqueous.fill(0)
 		
 		# Clear Result Arrays for Hydrophobic Interface 
-		z_height_hydrophobic.fill(+1.0*hydrophobicInterfaceBound)                     					#+1.0 for hydrophobic interface? 
+		z_height_hydrophobic.fill(+1.0*hydrophobicInterfaceBound)
 		z_type_hydrophobic.fill(0)
 		
 		# Aqueous -- Set up the multiprocessing to use 1/2 of available cores.
@@ -416,7 +414,7 @@ def main():
 		Frames_Remaining -= 1
 		remainingSeconds = (time.time() - frame_start_time) * (Frames_Remaining)
 		
-		print ("\nFrame analysis Complete\n\tEstimated Remaining Time = {} ".format(display_time(remainingSeconds)))	
+		print ("\nFrame analysis Complete\n\tEstimated Remaining Time = {} ".format(display_time(remainingSeconds)))
 	
 	sim_data.done ()
 	print ("Writing Data Files")

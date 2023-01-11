@@ -14,38 +14,28 @@ for i in 25 50 75 100 125
 do
 	for j in {1..4} # The inner loop will run from 1 to 4 for each value of i
 	do
-		#this works
 		# CCl4_Sims for DDC
-		#python Interface_Ionic_Analysis_Copy.py /Users/Shared/SurfactantProject/Sim2022/CCl4_Sims/DDC/DDC$i/DDC$i $j
-		
-		#this works
+		python Interface_Ionic_Analysis_Copy.py /Users/Shared/SurfactantProject/Sim2022/CCl4_Sims/DDC/DDC$i/DDC$i $j
+
 		# CCl4_Sims for DDS
-		#python Interface_Ionic_Analysis_Copy.py /Users/Shared/SurfactantProject/Sim2022/CCl4_Sims/DDS/DDS$i/DDS$i $j
+		python Interface_Ionic_Analysis_Copy.py /Users/Shared/SurfactantProject/Sim2022/CCl4_Sims/DDS/DDS$i/DDS$i $j
 		
-		#this does not work
 		# CCl4_Sims for DBC
-		#python Interface_Ionic_Analysis_Copy.py /Users/Shared/SurfactantProject/Sim2022/CCl4_Sims/DBC/DBC$i/DBC$i $j
+		python Interface_Ionic_Analysis_Copy.py /Users/Shared/SurfactantProject/Sim2022/CCl4_Sims/DBC/DBC$i/DBC$i $j
 		
-		#this does not work
 		# CCl4_Sims for DBS
-		#python Interface_Ionic_Analysis_Copy.py /Users/Shared/SurfactantProject/Sim2022/CCl4_Sims/DBS/DBS$i/DBS$i $j
-		
-		#this works
+		python Interface_Ionic_Analysis_Copy.py /Users/Shared/SurfactantProject/Sim2022/CCl4_Sims/DBS/DBS$i/DBS$i $j
+
 		# CCl4_SaltSims for NaCl DDC
-		#python Interface_Ionic_Analysis_Copy.py /Users/Shared/SurfactantProject/Sim2022/CCl4_SaltSims/NaCl_DDC/NaCl_DDC$i/NaCl_DDC$i $j
+		python Interface_Ionic_Analysis_Copy.py /Users/Shared/SurfactantProject/Sim2022/CCl4_SaltSims/NaCl_DDC/NaCl_DDC$i/NaCl_DDC$i $j
 		
-		#this works
 		# CCl4_SaltSims for NaCl DDS
 		python Interface_Ionic_Analysis_Copy.py /Users/Shared/SurfactantProject/Sim2022/CCl4_SaltSims/NaCl_DDS/NaCl_DDS$i/NaCl_DDS$i $j
 		
-		#this does not work
 		# CCl4_SaltSims for NaCl DBC
-		#python Interface_Ionic_Analysis_Copy.py /Users/Shared/SurfactantProject/Sim2022/CCl4_SaltSims/NaCl_DBC/NaCl_DBC$i/NaCl_DBC$i $j
+		python Interface_Ionic_Analysis_Copy.py /Users/Shared/SurfactantProject/Sim2022/CCl4_SaltSims/NaCl_DBC/NaCl_DBC$i/NaCl_DBC$i $j
 		
-		#this does not work
 		# CCl4_SaltSims for NaCl DBS
-		#python Interface_Ionic_Analysis_Copy.py /Users/Shared/SurfactantProject/Sim2022/CCl4_SaltSims/NaCl_DBS/NaCl_DBS$i/NaCl_DBS$i $j
-		
-	
+		python Interface_Ionic_Analysis_Copy.py /Users/Shared/SurfactantProject/Sim2022/CCl4_SaltSims/NaCl_DBS/NaCl_DBS$i/NaCl_DBS$i $j
 	done
 done

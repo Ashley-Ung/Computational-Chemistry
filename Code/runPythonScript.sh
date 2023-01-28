@@ -37,5 +37,17 @@ do
 		
 		# CCl4_SaltSims for NaCl DBS
 		python Interface_Ionic_Analysis_Copy.py /Users/Shared/SurfactantProject/Sim2022/CCl4_SaltSims/NaCl_DBS/NaCl_DBS$i/NaCl_DBS$i $j
+		
+		# Vacuum sims for Vac DBC
+		python Interface_Ionic_Analysis_Copy.py /Users/Shared/SurfactantProject/Sim2022/VacSims/Vac_DBC/Vac_DBC$i/Vac_DBC$i $j 
+		
+		# Vacuum sims for Vac DBS
+		python Interface_Ionic_Analysis_Copy.py /Users/Shared/SurfactantProject/Sim2022/VacSims/Vac_DBS/Vac_DBS$i/Vac_DBS$i $j 
+		
+		# Vacuum sims for Vac DDC
+		python Interface_Ionic_Analysis_Copy.py /Users/Shared/SurfactantProject/Sim2022/VacSims/Vac_DDC/Vac_DDC$i/Vac_DDC$i $j 
+		
+		# Vacuum sims for Vac DDS
+		python Interface_Ionic_Analysis_Copy.py /Users/Shared/SurfactantProject/Sim2022/VacSims/Vac_DDS/Vac_DDS$i/Vac_DDS$i $j 
 	done
 done

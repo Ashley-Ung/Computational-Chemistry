@@ -192,13 +192,13 @@ def main():
 		(b"DDS", b"C10"):(hydrophobicTypes.index ("DDS_Tail"), 3.820e-01 * adjust),
 		(b"DDS", b"H20"):(hydrophobicTypes.index ("DDS_Tail"), 2.980e-01 * adjust),
 		(b"DDS", b"H21"):(hydrophobicTypes.index ("DDS_Tail"), 2.980e-01 * adjust),
-		(b"DDS", b"C11"):(hydrophobicTypes.index ("DDS_Tail"), 0.382 * adjust),   # dont know the vdw value for C12 currentlying using 3031
+		(b"DDS", b"C11"):(hydrophobicTypes.index ("DDS_Tail"), 0.382 * adjust),
 		(b"DDS", b"H22"):(hydrophobicTypes.index ("DDS_Tail"), 2.980e-01 * adjust),
 		(b"DDS", b"H23"):(hydrophobicTypes.index ("DDS_Tail"), 2.980e-01 * adjust),
-		(b"DDS", b"H24"):(hydrophobicTypes.index ("DDS_Tail"), 2.980e-01 * adjust),					# is this correct vdw value ??? 
-		(b"DDS", b"H25"):(hydrophobicTypes.index ("DDS_Tail"), 2.980e-01 * adjust),					# is this correct vdw value ???
+		(b"DDS", b"H24"):(hydrophobicTypes.index ("DDS_Tail"), 2.980e-01 * adjust),
+		(b"DDS", b"H25"):(hydrophobicTypes.index ("DDS_Tail"), 2.980e-01 * adjust),
 		# Headgroups for Hydrophobic DDS
-		(b"DDS", b"C12"):(hydrophobicTypes.index ("DDS_HeadGroup"), 2.980e-01 * adjust), # dont know the vdw value for C12 currentlying using 3032
+		(b"DDS", b"C12"):(hydrophobicTypes.index ("DDS_HeadGroup"), 2.980e-01 * adjust),
 		(b"DDS", b"S1"):(hydrophobicTypes.index ("DDS_HeadGroup"), 0.391 * adjust),
 		(b"DDS", b"O1"):(hydrophobicTypes.index ("DDS_HeadGroup"), 0.351 * adjust),
 		(b"DDS", b"O2"):(hydrophobicTypes.index ("DDS_HeadGroup"), 0.351 * adjust),
@@ -239,8 +239,8 @@ def main():
 		(b"DBC", b"C11"):(hydrophobicTypes.index ("DBC_Tail"), 3.820e-01 * adjust),
 		(b"DBC", b"H22"):(hydrophobicTypes.index ("DBC_Tail"), 2.980e-01 * adjust),
 		(b"DBC", b"H23"):(hydrophobicTypes.index ("DBC_Tail"), 2.980e-01 * adjust),
-		(b"DBC", b"C12"):(hydrophobicTypes.index ("DBC_Tail"), 3.820e-01*adjust),	 # check vdw for C12 DBC
-		# Benzene Ring Headgroup DBC													#Check ring vdw values
+		(b"DBC", b"C12"):(hydrophobicTypes.index ("DBC_Tail"), 3.820e-01*adjust),
+		# Benzene Ring Headgroup DBC	
 		(b"DBC", b"C13"):(hydrophobicTypes.index ("DBC_Benzene"), 0.38*adjust),
 		(b"DBC", b"H24"):(hydrophobicTypes.index ("DBC_Benzene"), 0.298*adjust),  
 		(b"DBC", b"C14"):(hydrophobicTypes.index ("DBC_Benzene"), 0.38*adjust),
@@ -251,12 +251,12 @@ def main():
 		(b"DBC", b"H27"):(hydrophobicTypes.index ("DBC_Benzene"), 0.298*adjust),
 		(b"DBC", b"C17"):(hydrophobicTypes.index ("DBC_Benzene"), 0.38*adjust),
 		(b"DBC", b"H28"):(hydrophobicTypes.index ("DBC_Benzene"), 0.298*adjust),
-		(b"DBC", b"C18"):(hydrophobicTypes.index ("DBC_Benzene"), 0.38*adjust), #check vdw for C18 DBC
-		(b"DBC", b"H29"):(hydrophobicTypes.index ("DBC_Benzene"), 0.298*adjust),#check vdw for H29 DBC
+		(b"DBC", b"C18"):(hydrophobicTypes.index ("DBC_Benzene"), 0.38*adjust), 
+		(b"DBC", b"H29"):(hydrophobicTypes.index ("DBC_Benzene"), 0.298*adjust),
 		# Headgroups for Hydrophobic DBC
 		(b"DBC", b"O1"):(hydrophobicTypes.index ("DBC_HeadGroup"), 0.355*adjust),
 		(b"DBC", b"O2"):(hydrophobicTypes.index ("DBC_HeadGroup"), 0.355*adjust),
-		(b"DBC", b"C19"):(hydrophobicTypes.index ("DBC_HeadGroup"), 0.382*adjust), #check vdw for C19 DBC
+		(b"DBC", b"C19"):(hydrophobicTypes.index ("DBC_HeadGroup"), 0.382*adjust),
 																					
 		# Tailgroups for Hydrophobic DBS
 		(b"DBS", b"C1"):(hydrophobicTypes.index ("DBS_Tail"), 3.820e-01 * adjust),
@@ -293,9 +293,9 @@ def main():
 		(b"DBS", b"C11"):(hydrophobicTypes.index ("DBS_Tail"), 3.820e-01 * adjust),
 		(b"DBS", b"H22"):(hydrophobicTypes.index ("DBS_Tail"), 2.980e-01 * adjust),
 		(b"DBS", b"H23"):(hydrophobicTypes.index ("DBS_Tail"), 2.980e-01 * adjust),
-		(b"DBS", b"C12"):(hydrophobicTypes.index ("DBS_Tail"), 3.820e-01 * adjust),		#check vdw value for DBS_Tail c12
+		(b"DBS", b"C12"):(hydrophobicTypes.index ("DBS_Tail"), 3.820e-01 * adjust),
 		# Benzene Ring Headgroup DBS
-		(b"DBS", b"C13"):(hydrophobicTypes.index ("DBS_Benzene"), 0.38*adjust),   #check ring vdw values
+		(b"DBS", b"C13"):(hydrophobicTypes.index ("DBS_Benzene"), 0.38*adjust),
 		(b"DBS", b"H24"):(hydrophobicTypes.index ("DBS_Benzene"), 0.298*adjust),
 		(b"DBS", b"C14"):(hydrophobicTypes.index ("DBS_Benzene"), 0.38*adjust),
 		(b"DBS", b"H25"):(hydrophobicTypes.index ("DBS_Benzene"), 0.298*adjust),

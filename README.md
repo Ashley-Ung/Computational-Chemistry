@@ -1,6 +1,10 @@
 # Computational-Chemistry
 Ongoing research on how molecules behave on oil/water interfaces.
 
+Poster: 
+
+<img width="480" alt="Screen Shot 2023-04-16 at 11 53 15 AM" src="https://user-images.githubusercontent.com/62251927/232335270-b26efdd3-e19d-45cd-a7a6-7478369e508d.png">
+
 Oil-Water Interface: 
 
 ![Screen Shot 2022-09-06 at 3 21 02 PM](https://user-images.githubusercontent.com/62251927/188936627-eecb847b-01d1-4f29-892f-8a3e18c493bd.png)

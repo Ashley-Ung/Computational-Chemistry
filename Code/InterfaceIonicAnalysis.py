@@ -192,19 +192,19 @@ def main():
 		(b"DDS", b"C10"):(hydrophobicTypes.index ("DDS_Tail"), 3.820e-01 * adjust),
 		(b"DDS", b"H20"):(hydrophobicTypes.index ("DDS_Tail"), 2.980e-01 * adjust),
 		(b"DDS", b"H21"):(hydrophobicTypes.index ("DDS_Tail"), 2.980e-01 * adjust),
-		(b"DDS", b"C11"):(hydrophobicTypes.index ("DDS_Tail"), 0.382 * adjust),
+		(b"DDS", b"C11"):(hydrophobicTypes.index ("DDS_Tail"), 0.382 * adjust),  
 		(b"DDS", b"H22"):(hydrophobicTypes.index ("DDS_Tail"), 2.980e-01 * adjust),
 		(b"DDS", b"H23"):(hydrophobicTypes.index ("DDS_Tail"), 2.980e-01 * adjust),
-		(b"DDS", b"H24"):(hydrophobicTypes.index ("DDS_Tail"), 2.980e-01 * adjust),
-		(b"DDS", b"H25"):(hydrophobicTypes.index ("DDS_Tail"), 2.980e-01 * adjust),
+		(b"DDS", b"H24"):(hydrophobicTypes.index ("DDS_Tail"), 2.980e-01 * adjust),				
+		(b"DDS", b"H25"):(hydrophobicTypes.index ("DDS_Tail"), 2.980e-01 * adjust),					
 		# Headgroups for Hydrophobic DDS
-		(b"DDS", b"C12"):(hydrophobicTypes.index ("DDS_HeadGroup"), 2.980e-01 * adjust),
+		(b"DDS", b"C12"):(hydrophobicTypes.index ("DDS_HeadGroup"), 2.980e-01 * adjust), 
 		(b"DDS", b"S1"):(hydrophobicTypes.index ("DDS_HeadGroup"), 0.391 * adjust),
 		(b"DDS", b"O1"):(hydrophobicTypes.index ("DDS_HeadGroup"), 0.351 * adjust),
 		(b"DDS", b"O2"):(hydrophobicTypes.index ("DDS_HeadGroup"), 0.351 * adjust),
 		(b"DDS", b"O3"):(hydrophobicTypes.index ("DDS_HeadGroup"), 0.351 * adjust),
 		
-		# Tailgroups for Hydrophobic DBC 																			### not working DBC
+		# Tailgroups for Hydrophobic DBC 
 		(b"DBC", b"C1"):(hydrophobicTypes.index ("DBC_Tail"), 3.820e-01 * adjust),
 		(b"DBC", b"H1"):(hydrophobicTypes.index ("DBC_Tail"), 2.980e-01 * adjust),
 		(b"DBC", b"H2"):(hydrophobicTypes.index ("DBC_Tail"), 2.980e-01 * adjust),
@@ -239,10 +239,10 @@ def main():
 		(b"DBC", b"C11"):(hydrophobicTypes.index ("DBC_Tail"), 3.820e-01 * adjust),
 		(b"DBC", b"H22"):(hydrophobicTypes.index ("DBC_Tail"), 2.980e-01 * adjust),
 		(b"DBC", b"H23"):(hydrophobicTypes.index ("DBC_Tail"), 2.980e-01 * adjust),
-		(b"DBC", b"C12"):(hydrophobicTypes.index ("DBC_Tail"), 3.820e-01*adjust),
-		# Benzene Ring Headgroup DBC	
+		(b"DBC", b"C12"):(hydrophobicTypes.index ("DBC_Tail"), 3.820e-01*adjust), 
+		# Benzene Ring Headgroup DBC												
 		(b"DBC", b"C13"):(hydrophobicTypes.index ("DBC_Benzene"), 0.38*adjust),
-		(b"DBC", b"H24"):(hydrophobicTypes.index ("DBC_Benzene"), 0.298*adjust),  
+		(b"DBC", b"H24"):(hydrophobicTypes.index ("DBC_Benzene"), 0.298*adjust),
 		(b"DBC", b"C14"):(hydrophobicTypes.index ("DBC_Benzene"), 0.38*adjust),
 		(b"DBC", b"H25"):(hydrophobicTypes.index ("DBC_Benzene"), 0.298*adjust),
 		(b"DBC", b"C15"):(hydrophobicTypes.index ("DBC_Benzene"), 0.38*adjust),
@@ -251,7 +251,7 @@ def main():
 		(b"DBC", b"H27"):(hydrophobicTypes.index ("DBC_Benzene"), 0.298*adjust),
 		(b"DBC", b"C17"):(hydrophobicTypes.index ("DBC_Benzene"), 0.38*adjust),
 		(b"DBC", b"H28"):(hydrophobicTypes.index ("DBC_Benzene"), 0.298*adjust),
-		(b"DBC", b"C18"):(hydrophobicTypes.index ("DBC_Benzene"), 0.38*adjust), 
+		(b"DBC", b"C18"):(hydrophobicTypes.index ("DBC_Benzene"), 0.38*adjust),
 		(b"DBC", b"H29"):(hydrophobicTypes.index ("DBC_Benzene"), 0.298*adjust),
 		# Headgroups for Hydrophobic DBC
 		(b"DBC", b"O1"):(hydrophobicTypes.index ("DBC_HeadGroup"), 0.355*adjust),
@@ -339,8 +339,7 @@ def main():
 		else: 
 			sys.exit (1) # print atom number 
 		atom_type[atom] = interfaceData[(sim_data.atominfo[atom]['molecule'], sim_data.atominfo[atom]['type'])][0]
-		atom_radius[atom] = interfaceData[(sim_data.atominfo[atom]['molecule'], sim_data.atominfo[atom]['type'])][1]
-	print ("here") 																											# program breaks around here for DBC
+		atom_radius[atom] = interfaceData[(sim_data.atominfo[atom]['molecule'], sim_data.atominfo[atom]['type'])][1]																										
 	# Defines the range above and below the interface to test for surface atoms; in nm
 		#global interfaceBound
 		#interfaceBound = 2.0

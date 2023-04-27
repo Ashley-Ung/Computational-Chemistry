@@ -3,7 +3,8 @@ Ongoing research on how molecules behave on oil/water interfaces.
 
 Poster: 
 
-<img width="480" alt="Screen Shot 2023-04-16 at 11 53 15 AM" src="https://user-images.githubusercontent.com/62251927/232335270-b26efdd3-e19d-45cd-a7a6-7478369e508d.png">
+<img width="569" alt="Screen Shot 2023-04-26 at 9 59 58 PM" src="https://user-images.githubusercontent.com/62251927/234763472-8d9269b5-eda9-47ac-ae67-167f2a3779e5.png">
+
 
 Oil-Water Interface: 
 
